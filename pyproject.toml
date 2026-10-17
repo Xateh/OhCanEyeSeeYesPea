@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cs3263-surgery-benchmark"
+version = "0.1.0"
+description = "Abstract surgery-feasibility corpus and identical-text paired benchmark"
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.setuptools.packages.find]
+include = ["surgerybench*"]

@@ -1,0 +1,31 @@
+{
+  "base_commit": "d0be540314afdd28d3e10d3a509a8129b9c8c521",
+  "branch": "review/arrival-deadline-pilot-v1",
+  "independent_static_review": {
+    "checks": [
+      "README preserved",
+      "only documented helper imports changed",
+      "only three build-identity fields may differ on regeneration",
+      "no private host paths or source-derived fixtures",
+      "mock results not represented as LLM performance"
+    ],
+    "status": "no material issues"
+  },
+  "package_verification": {
+    "command": "python3 -m scripts.verify_package --out evidence/package-validation.json",
+    "exit_code": 0
+  },
+  "publication": "local only; no push or PR",
+  "staged_whitespace_check": "PASS",
+  "targeted_privacy_scan": {
+    "common_token_literal_patterns": 0,
+    "limitation": "targeted text scan plus explicit allowlist and human/source review, not a general secret-detection guarantee",
+    "private_key_headers": 0,
+    "private_paths": 0
+  },
+  "unit_tests": {
+    "command": "python3 -m unittest discover -s tests -v",
+    "exit_code": 0,
+    "passed": 34
+  }
+}
