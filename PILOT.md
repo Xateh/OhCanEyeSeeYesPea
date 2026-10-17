@@ -1,7 +1,8 @@
 # Original-synthetic arrival/deadline pilot
 
-This local review branch adds a self-contained 48-case CS3263 pilot. The original
-repository README and history are retained. Nothing has been pushed or published.
+This branch adds a self-contained 48-case CS3263 pilot, published for review in
+[draft PR #1](https://github.com/Xateh/OhCanEyeSeeYesPea/pull/1) in the private
+repository. The original README and history are retained; the PR is not merged.
 
 ## Run offline
 
@@ -26,11 +27,13 @@ Model revisions must be nonempty strings. Missing usage after a malformed respon
 or provider exception makes the aggregate unknown, rather than reporting a partial
 total as complete. Reported usage on a rejected extra tool call still counts.
 
-Final follow-up validation ran on Python 3.12.3. Earlier package validation also
-passed on 3.14.8, before these focused fixes; the updated revision has not been
-rerun on 3.14.8. The declared minimum Python 3.10 and optional wheel build remain
-untested. This is focused regression coverage, not exhaustive malformed-input
-fuzzing or a real-provider integration test. See the sanitized evidence files.
+GitHub Actions runs these same commands on Python 3.10, 3.11, 3.12, 3.13 and
+3.14 for pull requests to main. The workflow uses pinned official actions and
+read-only contents access. Tests install no dependencies and download no data or
+models; checkout and Python setup may access GitHub. See the PR checks for current
+results. Historical evidence retains the versions and local-only status at the
+time of those runs. Optional wheel builds, exhaustive malformed-input fuzzing and
+real-provider integration remain outside this validation.
 
 There are no runtime dependencies beyond the standard library and no installation
 step. `pyproject.toml` describes optional packaging; building a wheel additionally

@@ -1,10 +1,12 @@
-# Local review provenance
+# Pilot provenance
 
 Base repository: `https://github.com/Xateh/OhCanEyeSeeYesPea`
 
 Actual cloned main commit: `d0be540314afdd28d3e10d3a509a8129b9c8c521`.
 The base has one README and its original history. The review branch adds files
-without changing the README. No push, PR or remote publication is performed.
+without changing the README. It is published as `feat/arrival-deadline-pilot` in
+the private repository with [draft PR #1](https://github.com/Xateh/OhCanEyeSeeYesPea/pull/1).
+Historical local-only evidence describes the pre-publication validation stage.
 
 ## Included by explicit allowlist
 
