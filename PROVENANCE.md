@@ -12,10 +12,13 @@ without changing the README. No push, PR or remote publication is performed.
   modules, and temporal regression tests from the approved standalone pilot.
 - `common.py`: the existing standard-library serialization/hash/JSONL helpers
   extracted to avoid importing the larger corpus generator or original harness.
-  Only imports in `temporal_dataset.py` and `temporal_benchmark.py` change.
+  Initial packaging changed only imports in `temporal_dataset.py` and
+  `temporal_benchmark.py`. The focused follow-up also tightens model-revision
+  validation and incomplete-usage accounting in the latter.
 - All four files of the approved original-synthetic arrival/deadline pilot:
   model text, separate gold, summary and hash manifest.
-- New package-only tests, offline verification script, concise instructions,
+- New package-only and focused original-synthetic regression tests, offline
+  verification script, concise instructions,
   ignore rules, existing original-code/synthetic-data license and package metadata.
 - Sanitized original validation summary and original source hashes, plus the new
   package verification summary. No raw provider transcripts or terminal logs.
@@ -48,3 +51,8 @@ remain unchanged outside this checkout.
 The original MIT notice applies to the original code and original synthetic files;
 its exclusions for third-party data and evidence snapshots are retained. No extra
 redistribution permission for third-party materials is implied.
+
+The focused follow-up adds 40 tests (74 total), fixes revision validation and
+incomplete usage reporting, and refreshes sanitized validation evidence. Fixture
+bytes and original lineage remain unchanged; no new dataset cases or experiments
+are added. The updated code revision is recorded in package-validation.json.

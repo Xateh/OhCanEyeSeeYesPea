@@ -12,6 +12,26 @@ python3 -m unittest discover -s tests -v
 python3 -m scripts.verify_package
 ```
 
+The current suite has **74 test methods**: 28 original temporal tests, 6 package
+checks, and 40 focused checker/harness regressions. Subtest combinations are not
+counted as additional methods. The standalone 63-test suite also had 35 v1 tests;
+those v1 modules/data are not reintroduced. Relevant generic coverage was adapted
+using only original-synthetic fixtures. The initial package had 34 tests.
+
+Focused coverage includes malformed schedules/certificates, optional-job rules,
+positive-gap boundaries, complete/incomplete/invalid token usage, provider and
+tool failures, call-limit boundaries, same-model revision checks across arms and
+cases, hash integrity, forbidden gold fields and output overwrite protection.
+Model revisions must be nonempty strings. Missing usage after a malformed response
+or provider exception makes the aggregate unknown, rather than reporting a partial
+total as complete. Reported usage on a rejected extra tool call still counts.
+
+Final follow-up validation ran on Python 3.12.3. Earlier package validation also
+passed on 3.14.8, before these focused fixes; the updated revision has not been
+rerun on 3.14.8. The declared minimum Python 3.10 and optional wheel build remain
+untested. This is focused regression coverage, not exhaustive malformed-input
+fuzzing or a real-provider integration test. See the sanitized evidence files.
+
 There are no runtime dependencies beyond the standard library and no installation
 step. `pyproject.toml` describes optional packaging; building a wheel additionally
 needs setuptools. The verification command audits all fixtures, independently

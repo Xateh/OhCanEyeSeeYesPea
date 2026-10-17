@@ -33,15 +33,18 @@ def score(gold,output):
 def run_arm(provider,text,arm,adapter,max_calls=4):
     history=[]; responses=[]; usage=[]; errors=[]; output={'status':'UNKNOWN'}; started=time.perf_counter()
     for _ in range(max_calls+1):
+        received=False
         try:
             message=provider.next(text,list(history),[adapter.tool_definition] if arm=='csp' else [])
+            received=True
             responses.append(message)
+            usage.append(message.get('usage') if isinstance(message,dict) else None)
             if not isinstance(message,dict): raise ValueError('provider response must be an object')
-            usage.append(message.get('usage'))
             if message.get('type')=='final': output=message.get('output'); break
             if arm!='csp' or message.get('type')!='tool_call' or message.get('name')!='csp': raise ValueError('unavailable tool or invalid provider message')
             if len(history)>=max_calls: raise ValueError('tool call limit')
         except Exception as exc:
+            if not received: usage.append(None)
             errors.append({'stage':'provider_or_parse','error':f'{type(exc).__name__}: {exc}'}); break
         began=time.perf_counter()
         try: result=adapter.invoke(message.get('arguments'))
@@ -66,9 +69,11 @@ def run(model_path,gold_path,out,factory=MockProvider,adapter=None):
         if text_sha!=g['text_sha256'] or digest(g['instance'])!=g['instance_sha256']: raise ValueError('integrity mismatch')
         for arm in ('no_tools','csp'):
             provider=factory()
-            if not getattr(provider,'model_revision',None): raise ValueError('exact model revision required')
-            if model_revision is None: model_revision=provider.model_revision
-            if model_revision!=provider.model_revision: raise ValueError('same model required in both arms')
+            provider_revision=getattr(provider,'model_revision',None)
+            if not isinstance(provider_revision,str) or not provider_revision.strip():
+                raise ValueError('exact model revision required: nonempty string')
+            if model_revision is None: model_revision=provider_revision
+            if model_revision!=provider_revision: raise ValueError('same model required in both arms')
             r=run_arm(provider,m['text'],arm,adapter)
             r.update({'case_id':m['id'],'family':g['family'],'split':g['split'],'arm':arm,'text_sha256':text_sha,'model_revision':model_revision,'tool_revision':adapter.revision if arm=='csp' else None,'code_revision':code_revision,'dataset_revision':dataset_sha,'gold_revision':gold_sha,'python':platform.python_version(),'score':score(g,r['output'])})
             rows.append(r)

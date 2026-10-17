@@ -1,15 +1,16 @@
 {
   "base_commit": "d0be540314afdd28d3e10d3a509a8129b9c8c521",
   "branch": "review/arrival-deadline-pilot-v1",
+  "followup_parent_commit": "2f7bb5828c5193041f441357965f90bcd608d638",
   "independent_static_review": {
     "checks": [
-      "README preserved",
-      "only documented helper imports changed",
-      "only three build-identity fields may differ on regeneration",
-      "no private host paths or source-derived fixtures",
-      "mock results not represented as LLM performance"
+      "revision identifiers require nonempty strings",
+      "malformed-response and provider-exception usage remains unknown",
+      "reported limit-exceeding response usage still counted",
+      "new two-turn regressions reproduce accounting edge case",
+      "no restricted dataset dependencies introduced"
     ],
-    "status": "no material issues"
+    "status": "no remaining material issues after fixes"
   },
   "package_verification": {
     "command": "python3 -m scripts.verify_package --out evidence/package-validation.json",
@@ -26,6 +27,6 @@
   "unit_tests": {
     "command": "python3 -m unittest discover -s tests -v",
     "exit_code": 0,
-    "passed": 34
+    "passed": 74
   }
 }
