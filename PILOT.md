@@ -2,7 +2,8 @@
 
 This branch adds a self-contained 48-case CS3263 pilot, published for review in
 [draft PR #1](https://github.com/Xateh/OhCanEyeSeeYesPea/pull/1) in the private
-repository. The original README and history are retained; the PR is not merged.
+repository. The project README and component guides document this pilot; the PR
+remains unmerged. Original fixture provenance and repository history are retained.
 
 ## Run offline
 
@@ -97,8 +98,9 @@ No duplicate arrival/deadline fields are introduced.
 
 A mandatory surgery occurs exactly once; an optional surgery may be omitted and
 otherwise occurs at most once. Pilot surgeries are all mandatory. Fixed surgeon,
-nonpreemptive duration, eligible room, daily minute budgets, positive required gaps
-and resource availability apply. Entire half-open intervals `[start,end)` must fit
+nonpreemptive duration, eligible room, daily minute budgets, required gaps within
+each resource/day and resource availability apply. The shipped cases use zero gaps;
+positive gaps are covered by focused regression tests. Entire half-open intervals `[start,end)` must fit
 one availability window. Adjacent surgeries are allowed when the resource gap is
 zero. Splitting an operation is invalid. Emergency flags and priority are metadata
 with no unstated constraints. Daily budgets are not availability calendars.

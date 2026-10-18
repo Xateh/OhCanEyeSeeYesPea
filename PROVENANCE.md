@@ -3,8 +3,10 @@
 Base repository: `https://github.com/Xateh/OhCanEyeSeeYesPea`
 
 Actual cloned main commit: `d0be540314afdd28d3e10d3a509a8129b9c8c521`.
-The base has one README and its original history. The review branch adds files
-without changing the README. It is published as `feat/arrival-deadline-pilot` in
+The base has one README and its original history. The review branch initially
+added the pilot without changing that README; the documentation follow-up expands
+the README and adds component guides without changing code or fixture bytes.
+It is published as `feat/arrival-deadline-pilot` in
 the private repository with [draft PR #1](https://github.com/Xateh/OhCanEyeSeeYesPea/pull/1).
 Historical local-only evidence describes the pre-publication validation stage.
 
