@@ -70,6 +70,28 @@ class TemporalTests(unittest.TestCase):
         self.assertFalse(check_certificate(self.i,{'kind':'pair_order_impossible','patients':['A','E']}))
     def test_optional_not_required(self):
         self.i['patients'][1]['mandatory']=False; self.assertEqual(check_schedule(self.i,self.w[:1]),[])
+    def test_room_eligibility_container_rejected(self):
+        # Single-character IDs expose strings/dicts that otherwise behave like lists.
+        self.i['rooms'][0]['id']='r'
+        for p in self.i['patients']: p['eligible_rooms']=['r']
+        for row in self.w: row['room']='r'
+        certificate={'kind':'pair_order_impossible','patients':['A','E']}
+        for invalid in ('r', {'r': True}, None, 1, [['r']]):
+            with self.subTest(eligible_rooms=invalid):
+                i=copy.deepcopy(self.i)
+                i['patients'][0]['eligible_rooms']=invalid
+                self.assertTrue(schema_errors(i))
+                self.assertTrue(check_schedule(i,self.w))
+                i['patients'][1]['due']=7
+                self.assertFalse(check_certificate(i,certificate))
+    def test_single_character_room_list_remains_valid(self):
+        self.i['rooms'][0]['id']='r'
+        for p in self.i['patients']: p['eligible_rooms']=['r']
+        for row in self.w: row['room']='r'
+        self.assertEqual(schema_errors(self.i),[])
+        self.assertEqual(check_schedule(self.i,self.w),[])
+        self.i['patients'][1]['due']=7
+        self.assertTrue(check_certificate(self.i,{'kind':'pair_order_impossible','patients':['A','E']}))
     def test_translation_mistake_external_scoring(self):
         intended=tiny(); intended['patients'][1]['due']=7
         translated=tiny(); result=solve(translated)

@@ -18,6 +18,8 @@ def schema_errors(i):
             return ['expected temporal schema 1.1']
         errors = legacy.schema_errors(relaxed(i))
         for p in i['patients']:
+            if not isinstance(p['eligible_rooms'], list):
+                errors.append('room eligibility must be a list')
             if not all(legacy.integer(p[k]) for k in ('release', 'due')) or not 0 <= p['release'] <= p['due'] <= i['days'] * 1440:
                 errors.append('invalid absolute-minute release/completion deadline')
             if 'emergency' in p and type(p['emergency']) is not bool:
