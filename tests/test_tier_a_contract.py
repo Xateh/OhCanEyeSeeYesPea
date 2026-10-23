@@ -165,6 +165,36 @@ class TierAContractTests(unittest.TestCase):
                 self.assertTrue(row['output_error'])
                 self.assertEqual(row['receipt']['raw_output'], raw)
 
+    def test_non_json_normalized_containers_cannot_earn_success(self):
+        g = case('room-gap-5')
+        good = good_output(g)
+        tuple_schedule = deepcopy(good)
+        tuple_schedule['schedule'] = tuple(tuple_schedule['schedule'])
+        class Object(dict):
+            pass
+        for normalized in (tuple_schedule, Object(good)):
+            with self.subTest(normalized_type=type(normalized)):
+                r = receipt(g, good, normalized_output=normalized)
+                row = self.row(self.score([r]), g)
+                self.assertTrue(row['output_error'])
+                self.assertFalse(row['success'])
+                self.assertTrue(any('JSON' in s for s in row['diagnostics']))
+
+    def test_malformed_normalized_trees_keep_planned_denominators(self):
+        g = case('room-gap-5')
+        cycle = {}
+        cycle['self'] = cycle
+        for normalized in (cycle, {'status': float('nan')}, {'status': float('inf')},
+                           {1: 'FEASIBLE'}):
+            with self.subTest(normalized_type=type(normalized)):
+                r = receipt(g, good_output(g), normalized_output=normalized)
+                result = self.score([r])
+                row = self.row(result, g)
+                self.assertTrue(row['output_error'])
+                self.assertFalse(row['success'])
+                self.assertEqual(result['by_arm']['no_tools']['planned'], 9)
+                self.assertEqual(result['by_arm']['no_tools']['attempted'], 1)
+
     def test_unknown_abstention_and_operational_errors_are_retained(self):
         g = case('room-gap-5')
         for r in (receipt(g, {'status': 'UNKNOWN'}),

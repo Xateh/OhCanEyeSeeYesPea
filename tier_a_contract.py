@@ -35,6 +35,17 @@ def strict_json(text):
 
 
 def canonical(value):
+    def validate(node):
+        require(type(node) in (dict, list, str, int, float, bool, type(None)),
+                'normalized value must use JSON built-in types only')
+        if type(node) is dict:
+            require(all(type(key) is str for key in node), 'JSON object keys must be strings')
+            for item in node.values():
+                validate(item)
+        elif type(node) is list:
+            for item in node:
+                validate(item)
+    validate(value)
     return json.dumps(value, sort_keys=True, separators=(',', ':'), allow_nan=False)
 
 

@@ -38,6 +38,9 @@ match without numeric/string/boolean coercion. Normalization diagnostics must be
 a list of nonempty strings, and any diagnostic prevents evidence credit. Raw,
 normalized and diagnostics remain in each returned receipt. Malformed output
 remains an attempted row with output error; normalization cannot rescue it.
+Normalized trees must use exact JSON built-in types and string object keys;
+tuples and container subclasses are rejected rather than silently serialized as
+JSON lists/objects. Nonfinite numbers and cyclic structures are output errors.
 
 `provider_error` and `tool_error` are booleans and may overlap. Termination is
 `final`, `abstained`, `provider_error` or `tool_error`; operational termination
