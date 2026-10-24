@@ -63,6 +63,54 @@ class TierAContractTests(unittest.TestCase):
         self.assertEqual(len(result['by_family']), 8)
         self.assertEqual(len(result['validation_only_excluded']), 6)
 
+    def test_family_metrics_conserve_planned_arm_totals(self):
+        selected = [g for g in GOLD if g['certification'] != 'oracle_only']
+        receipts = []
+        for index, g in enumerate(selected):
+            for rep in range(2):
+                for arm in contract.ARMS:
+                    if arm == 'no_tools' and index == 8 and rep == 1:
+                        continue  # one planned certified-negative attempt missing
+                    output = {'status': 'UNKNOWN'} if arm == 'no_tools' and index % 3 == 0 else good_output(g)
+                    r = receipt(g, output, arm, rep)
+                    if arm == 'csp' and index == 4 and rep == 0:
+                        r.update(raw_output=None, normalized_output=None,
+                                 normalization_errors=['tool timeout'], tool_error=True,
+                                 termination='tool_error')
+                    receipts.append(r)
+        result = self.score(receipts, plan(2))
+        a, b = (result['by_arm'][arm] for arm in contract.ARMS)
+        self.assertEqual((a['planned'], a['attempted'], a['completed'], a['missing']), (18, 17, 17, 1))
+        self.assertEqual((b['planned'], b['attempted'], b['completed'], b['missing']), (18, 18, 17, 0))
+        self.assertEqual(a['feasible_schedule_success'], {'numerator': 8, 'denominator': 14})
+        self.assertEqual(b['feasible_schedule_success'], {'numerator': 14, 'denominator': 14})
+        for summary in (a, b):
+            self.assertEqual(summary['negative_certified_success'], {'numerator': 3, 'denominator': 4})
+            self.assertTrue(summary['incomplete'])
+        self.assertEqual(result['pairs'], dict(both_success=10, no_tools_only=0,
+                         csp_only=6, neither_success=0, incomplete=2))
+        for arm, total in result['by_arm'].items():
+            families = [family[arm] for family in result['by_family'].values()]
+            for key in ('planned', 'attempted', 'completed', 'missing'):
+                self.assertEqual(sum(f[key] for f in families), total[key])
+            for metric, value in total.items():
+                if type(value) is dict:
+                    for key in ('numerator', 'denominator'):
+                        self.assertEqual(sum(f[metric][key] for f in families), value[key])
+
+    def test_receipt_order_and_result_mutation_do_not_change_inputs(self):
+        selected = [g for g in GOLD if g['certification'] != 'oracle_only']
+        receipts = [receipt(g, good_output(g), arm) for g in selected for arm in contract.ARMS]
+        p = plan()
+        saved_receipts, saved_plan = deepcopy(receipts), deepcopy(p)
+        forward = self.score(receipts, p)
+        backward = self.score(list(reversed(receipts)), p)
+        self.assertEqual(forward, backward)
+        forward['rows'][0]['receipt']['normalized_output']['schedule'].clear()
+        forward['plan']['case_use'].clear()
+        self.assertEqual(receipts, saved_receipts)
+        self.assertEqual(p, saved_plan)
+
     def test_missing_slots_remain_in_planned_denominators(self):
         g = case('room-gap-5')
         result = self.score([receipt(g, good_output(g))], plan(2))

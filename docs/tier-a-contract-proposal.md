@@ -87,6 +87,11 @@ incomplete if either arm lacks completion; no complete-case-only primary metric
 or attempted-only comparison is emitted. Eight represented families get separate
 planned-denominator summaries, not independence/significance claims or a macro
 optimization score. Source and consumer hashes accompany results.
+Regression coverage also checks mixed UNKNOWN/tool-timeout/missing attempts:
+family numerator/denominator counts sum to arm totals, and paired missingness is
+retained. Receipt permutation leaves scores unchanged; returned plan/receipt
+snapshots do not mutate caller inputs. These are software invariants, not new
+protocol choices or evidence of model performance.
 
 Run bounded tests from the repository root with standard-library Python:
 
