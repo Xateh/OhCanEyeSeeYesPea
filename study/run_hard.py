@@ -17,7 +17,7 @@ from .prompts import prompt_sha256
 
 PROMPT = 'v3'
 RESULTS = Path('study/results')
-USAGE_LIMIT_WORDS = ('usage limit', 'rate limit', 'limit reached', "hit your limit")
+USAGE_LIMIT_WORDS = ('usage limit', 'rate limit', 'limit reached', 'hit your')
 
 
 def evaluate(case, gold):

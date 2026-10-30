@@ -1,0 +1,12 @@
+{
+  "budget_usd": 5.0,
+  "cost_usd": 0.668792,
+  "date": "2026-10-30",
+  "effort": "high",
+  "git_commit": "41e84ed3653b1b16b24d4205b3784e7f25e967c5",
+  "model": "claude-opus-5-5",
+  "prompt": "v3",
+  "prompt_sha256": "68909cb353e8",
+  "size": 40,
+  "skipped": 0
+}

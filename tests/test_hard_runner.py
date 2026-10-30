@@ -25,7 +25,7 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual((len(rows), skipped), (2, 4))
 
     def test_usage_limit_stops_new_work(self):
-        rows, skipped, _ = execute(CASES, GOLD, 2, 100, fake('RuntimeError: Usage limit reached'))
+        rows, skipped, _ = execute(CASES, GOLD, 2, 100, fake("RuntimeError: You've hit your 5-hour limit"))
         self.assertEqual((len(rows), skipped), (2, 4))
 
     def test_ordinary_errors_do_not_stop_the_run(self):
