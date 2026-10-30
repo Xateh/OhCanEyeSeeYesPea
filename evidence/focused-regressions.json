@@ -1,0 +1,41 @@
+{
+  "fixes": [
+    "Reject boolean, nonstring, empty and whitespace-only model revisions.",
+    "Mark aggregate usage unavailable when a later response or provider exception lacks usage."
+  ],
+  "fixtures_unchanged": true,
+  "independent_review": "Both fixes confirmed; no remaining material issues.",
+  "limitations": [
+    "Focused regression coverage, not exhaustive fuzzing.",
+    "Updated revision tested on Python 3.12.3; minimum 3.10 and optional wheel build untested.",
+    "No real-provider integration or performance claims."
+  ],
+  "package_code_revision": "b938ffbfc9a724f1635d819a5a5b3a01a64b0760710775bcf469f59e0216e223",
+  "python_version": "3.12.3",
+  "real_llm_runs": 0,
+  "source_kind": "original_synthetic",
+  "status": "PASS",
+  "tested_source_sha256": {
+    "scripts/verify_package.py": "3901078ed6722c852b1fb46997e5bc0488358ebe12aa56b6b12251873ef6451f",
+    "surgerybench/__init__.py": "94d3d611f10b485a9132900cbe8052db895eb8506b2be733347980942519d85a",
+    "surgerybench/checker.py": "c7382bf05f0487f36007de70ad834090fa06b38ec1e0269714e161f6332b6027",
+    "surgerybench/common.py": "7bc1c27c298bbe4045d61327889c51fb3c671459eebff63aa3009a6824b3770e",
+    "surgerybench/temporal_benchmark.py": "4ec0cd9e78f805c89a22fcdb6151ffa24836a7d67595930d968253e26f259bcd",
+    "surgerybench/temporal_check.py": "d8d1d3a2b78a218f027da305945edb39a5a8f68861587fcad1b98c10d75e3508",
+    "surgerybench/temporal_csp.py": "3b9e0d2e6c22a218763c35d69b909503e367130c497edaea19d7b728161ecacf",
+    "surgerybench/temporal_dataset.py": "384f5fd29ee3e81cd1e69f0afa93745b2fab1ed3d1e848707c2067814073bdf2",
+    "surgerybench/temporal_oracle.py": "bcb0e2c8f6afb585ae6383fae9192bca824a73b3dc81c70b733f4ef5d6a314d0",
+    "surgerybench/temporal_text.py": "76643db259e6b2a71655ec8fd50dfe9381d2ff924606a820afea0b9a898fddba",
+    "tests/test_package.py": "dc69fe4c769077d2c15c17b741ac6000e1ecadf9534b98381ed3050c447635f9",
+    "tests/test_regressions.py": "ce85c47344bdf9c3b0186e79af375f3202dc37294cd0963b4345613509271ea9",
+    "tests/test_temporal.py": "72251b9b50bf6b39bebd2f1293e2368ab7db3da97dc567cfc6a528c056b514b0"
+  },
+  "unit_tests": {
+    "exit_code": 0,
+    "focused_regressions": 40,
+    "original_temporal": 28,
+    "package_checks": 6,
+    "total": 74
+  },
+  "validation_note": "Initial tests exposed revision-type acceptance. An immediate rerun showed old behavior; cause not established. Final verification checked source hashes on the compute node and used an isolated bytecode cache."
+}

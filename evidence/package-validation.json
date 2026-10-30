@@ -1,0 +1,43 @@
+{
+  "current_build_replay_byte_identical": true,
+  "fixture_audit": {
+    "audit": "PASS",
+    "families": 24,
+    "independent_oracle_complete": 48,
+    "instances": 48
+  },
+  "fixture_bytes_preserved": true,
+  "fixture_manifest_sha256": "00f371ff5570ddf2e93983c1ccabe953882d8c93dfc74510a0a8e8c87d848812",
+  "generated_audit": {
+    "audit": "PASS",
+    "families": 24,
+    "independent_oracle_complete": 48,
+    "instances": 48
+  },
+  "minimal_counterfactual_pairs_checked": 24,
+  "optimized_corruption_rejected": true,
+  "package_code_revision": "b938ffbfc9a724f1635d819a5a5b3a01a64b0760710775bcf469f59e0216e223",
+  "python_version": "3.12.3",
+  "real_llm_runs": 0,
+  "regeneration_semantics_identical": true,
+  "regeneration_text_identical": true,
+  "replay_audit": {
+    "audit": "PASS",
+    "families": 24,
+    "independent_oracle_complete": 48,
+    "instances": 48
+  },
+  "smoke": {
+    "arm_runs": 96,
+    "csp_feasible_schedules": 24,
+    "csp_valid": 48,
+    "csp_verified_infeasible": 24,
+    "model_revision": "offline-controlled-language-translator-v1",
+    "no_tools_unknown": 48,
+    "pairs": 48,
+    "provider_parse_errors": 0,
+    "tool_calls": 48,
+    "tool_errors": 0
+  },
+  "status": "PASS"
+}

@@ -1,0 +1,53 @@
+{
+  "python_version": "3.12.3",
+  "smoke": {
+    "arm_runs": 96,
+    "cases": 48,
+    "code_revision": "e574b76347d76deb5fb1dda2bced0f79a03479bd56a4c54d760351f808001289",
+    "csp_feasible_schedule_success": 24,
+    "csp_infeasible_certified_success": 24,
+    "model_revision": "offline-controlled-language-translator-v1",
+    "no_tools_unknown": 48,
+    "paired_runs": 48,
+    "provider_parse_errors": 0,
+    "real_llm_runs": 0,
+    "tool_calls": 48,
+    "tool_errors": 0
+  },
+  "status": "PASS",
+  "steps": {
+    "deterministic_replay": "byte-identical",
+    "optimized_audit_rejects_corruption": "PASS",
+    "paired_minimality_and_split": "24 families PASS",
+    "pilot_audit": {
+      "audit": "PASS",
+      "families": 24,
+      "independent_oracle_complete": 48,
+      "instances": 48
+    },
+    "replay_audit": {
+      "audit": "PASS",
+      "families": 24,
+      "independent_oracle_complete": 48,
+      "instances": 48
+    },
+    "tests_exit_code": 0,
+    "v1_audit": {
+      "audit": "PASS",
+      "files_hashed": 5,
+      "scopes": [
+        "private",
+        "release"
+      ]
+    },
+    "v1_bytes_preserved": {
+      "equal": true,
+      "files": 6
+    },
+    "v1_source_preserved": {
+      "equal": true,
+      "files": 7
+    }
+  },
+  "tests_passed": 63
+}
