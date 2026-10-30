@@ -5,7 +5,8 @@ import unittest
 from pathlib import Path
 
 from study.claude_provider import ClaudeCodeProvider, extract_json, isolated_argv, parse_cli_reply
-from study.prompts import PROMPTS, prompt_sha256, user_message
+from surgerybench.temporal_check import schema_errors
+from study.prompts import FORMAT_EXAMPLE, PROMPTS, prompt_sha256, user_message
 
 MODEL = 'claude-opus-5-5'
 
@@ -103,6 +104,12 @@ class PromptTests(unittest.TestCase):
         tool = {'name': 'csp', 'description': 'd', 'parameters': {}}
         self.assertEqual(user_message('v1', 'x', [], []), user_message('v2', 'x', [], []))
         self.assertIn('must call csp', user_message('v2', 'x', [], [tool]))
+
+    def test_v3_format_example_is_a_valid_instance(self):
+        self.assertEqual(schema_errors(FORMAT_EXAMPLE), [])
+
+    def test_older_prompt_versions_keep_their_recorded_hashes(self):
+        self.assertEqual(prompt_sha256('v1'), 'e893b2189d64')
 
     def test_tool_history_is_replayed_to_the_model(self):
         tool = {'name': 'csp', 'description': 'd', 'parameters': {}}

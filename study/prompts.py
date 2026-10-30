@@ -16,8 +16,21 @@ REQUIRE_TOOL = ('You must call csp before giving a final answer. Translate every
                 'complete instance, then base your final answer only on the result: copy its schedule or '
                 'certificate exactly. If the tool reports an error, fix your instance and call it again.')
 
+FORMAT_EXAMPLE = {
+    'schema_version': '1.1', 'days': 1, 'day_minutes': 1440,
+    'surgeons': [{'id': 'sx', 'gap': 0, 'budgets': [50], 'calendar': [[[100, 150], [200, 250]]]}],
+    'rooms': [{'id': 'rx', 'gap': 0, 'budgets': [50], 'calendar': [[[100, 250]]]}],
+    'patients': [{'id': 'X', 'mandatory': True, 'surgeon': 'sx', 'duration': 10, 'release': 100, 'due': 150,
+                  'eligible_rooms': ['rx'], 'priority': 1, 'emergency': False}]}
+
+REQUIRE_TOOL_WITH_FORMAT = (REQUIRE_TOOL + ' Follow this format exactly. It is an unrelated example, not your problem. '
+                            'schema_version is required. calendar holds one list per day, and each day is a list of '
+                            '[start,end] windows, so one window on one day is [[[start,end]]]: '
+                            + json.dumps(FORMAT_EXAMPLE, sort_keys=True))
+
 PROMPTS = {'v1': {'system': SYSTEM_V1, 'tool_guidance': ''},
-           'v2': {'system': SYSTEM_V1, 'tool_guidance': REQUIRE_TOOL}}
+           'v2': {'system': SYSTEM_V1, 'tool_guidance': REQUIRE_TOOL},
+           'v3': {'system': SYSTEM_V1, 'tool_guidance': REQUIRE_TOOL_WITH_FORMAT}}
 
 
 def prompt_sha256(version):
