@@ -12,7 +12,12 @@ FINAL_SHAPE = ('When you have your answer, reply {"type":"final","output":OUTPUT
 TOOL_SHAPE = ('You have one tool. To call it reply {"type":"tool_call","name":"csp","arguments":{"instance":INSTANCE}}. '
               'Tool definition: ')
 
-PROMPTS = {'v1': {'system': SYSTEM_V1, 'tool_guidance': ''}}
+REQUIRE_TOOL = ('You must call csp before giving a final answer. Translate every fact in the problem into a '
+                'complete instance, then base your final answer only on the result: copy its schedule or '
+                'certificate exactly. If the tool reports an error, fix your instance and call it again.')
+
+PROMPTS = {'v1': {'system': SYSTEM_V1, 'tool_guidance': ''},
+           'v2': {'system': SYSTEM_V1, 'tool_guidance': REQUIRE_TOOL}}
 
 
 def prompt_sha256(version):

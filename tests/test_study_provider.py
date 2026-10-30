@@ -99,6 +99,11 @@ class PromptTests(unittest.TestCase):
         for version in PROMPTS:
             self.assertNotIn('csp', user_message(version, 'x', [], []))
 
+    def test_v2_changes_only_the_solver_arm(self):
+        tool = {'name': 'csp', 'description': 'd', 'parameters': {}}
+        self.assertEqual(user_message('v1', 'x', [], []), user_message('v2', 'x', [], []))
+        self.assertIn('must call csp', user_message('v2', 'x', [], [tool]))
+
     def test_tool_history_is_replayed_to_the_model(self):
         tool = {'name': 'csp', 'description': 'd', 'parameters': {}}
         history = [{'name': 'csp', 'arguments': {'instance': {}}, 'result': {'status': 'MARKER'}, 'latency_seconds': 1}]
