@@ -1,0 +1,707 @@
+{
+  "01-train-baseline-v1": {
+    "arms": {
+      "csp": {
+        "certified_success": [
+          16,
+          16,
+          0.8063865817272802,
+          1.0
+        ],
+        "cost_usd": 0.645524,
+        "decision_correct": [
+          16,
+          16,
+          0.8063865817272802,
+          1.0
+        ],
+        "failure_kinds": {
+          "success": 32
+        },
+        "feasible_success": [
+          16,
+          16,
+          0.8063865817272802,
+          1.0
+        ],
+        "median_latency_seconds": 4.478324312949553,
+        "overall_success": [
+          32,
+          32,
+          0.8928172849426366,
+          1.0
+        ],
+        "runs": 32,
+        "tokens_total": 74109,
+        "tool_errors": 0
+      },
+      "no_tools": {
+        "certified_success": [
+          16,
+          16,
+          0.8063865817272802,
+          1.0
+        ],
+        "cost_usd": 0.602156,
+        "decision_correct": [
+          16,
+          16,
+          0.8063865817272802,
+          1.0
+        ],
+        "failure_kinds": {
+          "success": 32
+        },
+        "feasible_success": [
+          16,
+          16,
+          0.8063865817272802,
+          1.0
+        ],
+        "median_latency_seconds": 4.514326374977827,
+        "overall_success": [
+          32,
+          32,
+          0.8928172849426366,
+          1.0
+        ],
+        "runs": 32,
+        "tokens_total": 64263,
+        "tool_errors": 0
+      }
+    },
+    "by_theme": {
+      "eligible_room_bottleneck": {
+        "csp": [
+          8,
+          8,
+          0.6755843804891231,
+          1.0
+        ],
+        "no_tools": [
+          8,
+          8,
+          0.6755843804891231,
+          1.0
+        ]
+      },
+      "fixed_surgeon_contention": {
+        "csp": [
+          8,
+          8,
+          0.6755843804891231,
+          1.0
+        ],
+        "no_tools": [
+          8,
+          8,
+          0.6755843804891231,
+          1.0
+        ]
+      },
+      "room_contention": {
+        "csp": [
+          8,
+          8,
+          0.6755843804891231,
+          1.0
+        ],
+        "no_tools": [
+          8,
+          8,
+          0.6755843804891231,
+          1.0
+        ]
+      },
+      "tight_windows": {
+        "csp": [
+          8,
+          8,
+          0.6755843804891231,
+          1.0
+        ],
+        "no_tools": [
+          8,
+          8,
+          0.6755843804891231,
+          1.0
+        ]
+      }
+    },
+    "mcnemar_p": 1.0,
+    "pairs": {
+      "both": 32,
+      "csp_only": 0,
+      "incomplete": 0,
+      "neither": 0,
+      "no_tools_only": 0
+    },
+    "translation": {
+      "no_tool_call": 32
+    }
+  },
+  "02-train-required-tool-v2": {
+    "arms": {
+      "csp": {
+        "certified_success": [
+          16,
+          16,
+          0.8063865817272802,
+          1.0
+        ],
+        "cost_usd": 2.395992,
+        "decision_correct": [
+          16,
+          16,
+          0.8063865817272802,
+          1.0
+        ],
+        "failure_kinds": {
+          "success": 32
+        },
+        "feasible_success": [
+          16,
+          16,
+          0.8063865817272802,
+          1.0
+        ],
+        "median_latency_seconds": 10.23859333404107,
+        "overall_success": [
+          32,
+          32,
+          0.8928172849426366,
+          1.0
+        ],
+        "runs": 32,
+        "tokens_total": 246155,
+        "tool_errors": 13
+      },
+      "no_tools": {
+        "certified_success": [
+          16,
+          16,
+          0.8063865817272802,
+          1.0
+        ],
+        "cost_usd": 0.278476,
+        "decision_correct": [
+          16,
+          16,
+          0.8063865817272802,
+          1.0
+        ],
+        "failure_kinds": {
+          "success": 32
+        },
+        "feasible_success": [
+          16,
+          16,
+          0.8063865817272802,
+          1.0
+        ],
+        "median_latency_seconds": 4.546912666002754,
+        "overall_success": [
+          32,
+          32,
+          0.8928172849426366,
+          1.0
+        ],
+        "runs": 32,
+        "tokens_total": 64231,
+        "tool_errors": 0
+      }
+    },
+    "by_theme": {
+      "eligible_room_bottleneck": {
+        "csp": [
+          8,
+          8,
+          0.6755843804891231,
+          1.0
+        ],
+        "no_tools": [
+          8,
+          8,
+          0.6755843804891231,
+          1.0
+        ]
+      },
+      "fixed_surgeon_contention": {
+        "csp": [
+          8,
+          8,
+          0.6755843804891231,
+          1.0
+        ],
+        "no_tools": [
+          8,
+          8,
+          0.6755843804891231,
+          1.0
+        ]
+      },
+      "room_contention": {
+        "csp": [
+          8,
+          8,
+          0.6755843804891231,
+          1.0
+        ],
+        "no_tools": [
+          8,
+          8,
+          0.6755843804891231,
+          1.0
+        ]
+      },
+      "tight_windows": {
+        "csp": [
+          8,
+          8,
+          0.6755843804891231,
+          1.0
+        ],
+        "no_tools": [
+          8,
+          8,
+          0.6755843804891231,
+          1.0
+        ]
+      }
+    },
+    "mcnemar_p": 1.0,
+    "pairs": {
+      "both": 32,
+      "csp_only": 0,
+      "incomplete": 0,
+      "neither": 0,
+      "no_tools_only": 0
+    },
+    "translation": {
+      "exact": 32
+    }
+  },
+  "03-train-format-example-v3": {
+    "arms": {
+      "csp": {
+        "certified_success": [
+          16,
+          16,
+          0.8063865817272802,
+          1.0
+        ],
+        "cost_usd": 1.758848,
+        "decision_correct": [
+          16,
+          16,
+          0.8063865817272802,
+          1.0
+        ],
+        "failure_kinds": {
+          "success": 32
+        },
+        "feasible_success": [
+          16,
+          16,
+          0.8063865817272802,
+          1.0
+        ],
+        "median_latency_seconds": 8.599242833559401,
+        "overall_success": [
+          32,
+          32,
+          0.8928172849426366,
+          1.0
+        ],
+        "runs": 32,
+        "tokens_total": 189308,
+        "tool_errors": 0
+      },
+      "no_tools": {
+        "certified_success": [
+          16,
+          16,
+          0.8063865817272802,
+          1.0
+        ],
+        "cost_usd": 0.276032,
+        "decision_correct": [
+          16,
+          16,
+          0.8063865817272802,
+          1.0
+        ],
+        "failure_kinds": {
+          "success": 32
+        },
+        "feasible_success": [
+          16,
+          16,
+          0.8063865817272802,
+          1.0
+        ],
+        "median_latency_seconds": 4.085180875030346,
+        "overall_success": [
+          32,
+          32,
+          0.8928172849426366,
+          1.0
+        ],
+        "runs": 32,
+        "tokens_total": 64104,
+        "tool_errors": 0
+      }
+    },
+    "by_theme": {
+      "eligible_room_bottleneck": {
+        "csp": [
+          8,
+          8,
+          0.6755843804891231,
+          1.0
+        ],
+        "no_tools": [
+          8,
+          8,
+          0.6755843804891231,
+          1.0
+        ]
+      },
+      "fixed_surgeon_contention": {
+        "csp": [
+          8,
+          8,
+          0.6755843804891231,
+          1.0
+        ],
+        "no_tools": [
+          8,
+          8,
+          0.6755843804891231,
+          1.0
+        ]
+      },
+      "room_contention": {
+        "csp": [
+          8,
+          8,
+          0.6755843804891231,
+          1.0
+        ],
+        "no_tools": [
+          8,
+          8,
+          0.6755843804891231,
+          1.0
+        ]
+      },
+      "tight_windows": {
+        "csp": [
+          8,
+          8,
+          0.6755843804891231,
+          1.0
+        ],
+        "no_tools": [
+          8,
+          8,
+          0.6755843804891231,
+          1.0
+        ]
+      }
+    },
+    "mcnemar_p": 1.0,
+    "pairs": {
+      "both": 32,
+      "csp_only": 0,
+      "incomplete": 0,
+      "neither": 0,
+      "no_tools_only": 0
+    },
+    "translation": {
+      "exact": 32
+    }
+  },
+  "04-validation-v3": {
+    "arms": {
+      "csp": {
+        "certified_success": [
+          4,
+          4,
+          0.5100999795960008,
+          1.0
+        ],
+        "cost_usd": 0.415168,
+        "decision_correct": [
+          4,
+          4,
+          0.5100999795960008,
+          1.0
+        ],
+        "failure_kinds": {
+          "success": 8
+        },
+        "feasible_success": [
+          4,
+          4,
+          0.5100999795960008,
+          1.0
+        ],
+        "median_latency_seconds": 8.131426937528886,
+        "overall_success": [
+          8,
+          8,
+          0.6755843804891231,
+          1.0
+        ],
+        "runs": 8,
+        "tokens_total": 45408,
+        "tool_errors": 0
+      },
+      "no_tools": {
+        "certified_success": [
+          4,
+          4,
+          0.5100999795960008,
+          1.0
+        ],
+        "cost_usd": 0.14114000000000002,
+        "decision_correct": [
+          4,
+          4,
+          0.5100999795960008,
+          1.0
+        ],
+        "failure_kinds": {
+          "success": 8
+        },
+        "feasible_success": [
+          4,
+          4,
+          0.5100999795960008,
+          1.0
+        ],
+        "median_latency_seconds": 3.889296125038527,
+        "overall_success": [
+          8,
+          8,
+          0.6755843804891231,
+          1.0
+        ],
+        "runs": 8,
+        "tokens_total": 15042,
+        "tool_errors": 0
+      }
+    },
+    "by_theme": {
+      "eligible_room_bottleneck": {
+        "csp": [
+          2,
+          2,
+          0.34237195288961925,
+          1.0
+        ],
+        "no_tools": [
+          2,
+          2,
+          0.34237195288961925,
+          1.0
+        ]
+      },
+      "fixed_surgeon_contention": {
+        "csp": [
+          2,
+          2,
+          0.34237195288961925,
+          1.0
+        ],
+        "no_tools": [
+          2,
+          2,
+          0.34237195288961925,
+          1.0
+        ]
+      },
+      "room_contention": {
+        "csp": [
+          2,
+          2,
+          0.34237195288961925,
+          1.0
+        ],
+        "no_tools": [
+          2,
+          2,
+          0.34237195288961925,
+          1.0
+        ]
+      },
+      "tight_windows": {
+        "csp": [
+          2,
+          2,
+          0.34237195288961925,
+          1.0
+        ],
+        "no_tools": [
+          2,
+          2,
+          0.34237195288961925,
+          1.0
+        ]
+      }
+    },
+    "mcnemar_p": 1.0,
+    "pairs": {
+      "both": 8,
+      "csp_only": 0,
+      "incomplete": 0,
+      "neither": 0,
+      "no_tools_only": 0
+    },
+    "translation": {
+      "exact": 8
+    }
+  },
+  "05-test-v3": {
+    "arms": {
+      "csp": {
+        "certified_success": [
+          12,
+          12,
+          0.7574992425007574,
+          1.0
+        ],
+        "cost_usd": 0.8070624,
+        "decision_correct": [
+          12,
+          12,
+          0.7574992425007574,
+          1.0
+        ],
+        "failure_kinds": {
+          "success": 24
+        },
+        "feasible_success": [
+          12,
+          12,
+          0.7574992425007574,
+          1.0
+        ],
+        "median_latency_seconds": 9.724409249960445,
+        "overall_success": [
+          24,
+          24,
+          0.8620194241710247,
+          1.0
+        ],
+        "runs": 24,
+        "tokens_total": 147810,
+        "tool_errors": 0
+      },
+      "no_tools": {
+        "certified_success": [
+          12,
+          12,
+          0.7574992425007574,
+          1.0
+        ],
+        "cost_usd": 0.326224,
+        "decision_correct": [
+          12,
+          12,
+          0.7574992425007574,
+          1.0
+        ],
+        "failure_kinds": {
+          "success": 24
+        },
+        "feasible_success": [
+          12,
+          12,
+          0.7574992425007574,
+          1.0
+        ],
+        "median_latency_seconds": 4.785378562461119,
+        "overall_success": [
+          24,
+          24,
+          0.8620194241710247,
+          1.0
+        ],
+        "runs": 24,
+        "tokens_total": 51116,
+        "tool_errors": 0
+      }
+    },
+    "by_theme": {
+      "eligible_room_bottleneck": {
+        "csp": [
+          6,
+          6,
+          0.6096569663469354,
+          1.0
+        ],
+        "no_tools": [
+          6,
+          6,
+          0.6096569663469354,
+          1.0
+        ]
+      },
+      "fixed_surgeon_contention": {
+        "csp": [
+          6,
+          6,
+          0.6096569663469354,
+          1.0
+        ],
+        "no_tools": [
+          6,
+          6,
+          0.6096569663469354,
+          1.0
+        ]
+      },
+      "room_contention": {
+        "csp": [
+          6,
+          6,
+          0.6096569663469354,
+          1.0
+        ],
+        "no_tools": [
+          6,
+          6,
+          0.6096569663469354,
+          1.0
+        ]
+      },
+      "tight_windows": {
+        "csp": [
+          6,
+          6,
+          0.6096569663469354,
+          1.0
+        ],
+        "no_tools": [
+          6,
+          6,
+          0.6096569663469354,
+          1.0
+        ]
+      }
+    },
+    "mcnemar_p": 1.0,
+    "pairs": {
+      "both": 24,
+      "csp_only": 0,
+      "incomplete": 0,
+      "neither": 0,
+      "no_tools_only": 0
+    },
+    "translation": {
+      "exact": 24
+    }
+  }
+}
