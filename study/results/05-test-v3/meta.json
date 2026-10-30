@@ -1,0 +1,15 @@
+{
+  "budget_usd": 5.0,
+  "claude_cli": "2.1.314 (Claude Code)",
+  "cost_usd": 1.1332864,
+  "date": "2026-10-30",
+  "effort": "high",
+  "git_commit": "38169971184ed5930f6fdf4f861ebf52faa551a3",
+  "iteration": "05-test-v3",
+  "model": "claude-opus-5-5",
+  "prompt": "v3",
+  "prompt_sha256": "68909cb353e8",
+  "repetitions": 3,
+  "skipped_for_budget": 0,
+  "split": "test"
+}
