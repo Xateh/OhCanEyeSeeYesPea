@@ -36,6 +36,10 @@ def load_iterations():
     return loaded
 
 
+def exact_text(exact, stats):
+    return 'n/a' if exact is None else f"{exact}/{stats['runs']}"
+
+
 def overview_table(iterations):
     lines = ['| Iteration | Arm | Runs | Correct | Solver calls per run | Solver errors | Exact translations | Median time (s) | Tokens per run |',
              '|---|---|--:|---|--:|--:|---|--:|--:|']
@@ -47,7 +51,7 @@ def overview_table(iterations):
             errors = sum(1 for r in arm_rows for e in r['errors'] if e['stage'] == 'tool')
             exact = data['summary']['translation'].get('exact', 0) if arm == 'csp' else None
             lines.append(f"| {LABELS[name]} | {ARM_NAMES[arm]} | {stats['runs']} | {percent(stats['overall_success'])} "
-                         f"| {calls:.2f} | {errors} | {'n/a' if exact is None else f'{exact}/{stats['runs']}'} "
+                         f"| {calls:.2f} | {errors} | {exact_text(exact, stats)} "
                          f"| {stats['median_latency_seconds']:.1f} | {per_run(stats, stats['tokens_total']):,.0f} |")
     return '\n'.join(lines)
 
