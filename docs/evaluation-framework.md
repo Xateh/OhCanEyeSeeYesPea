@@ -1,12 +1,10 @@
-# Shared evaluation framework (draft for team freeze)
+# Shared evaluation framework
 
 **To:** Xu An, Allan, Benjamin (CS3263 Group 7)  
 **From:** Benjamin (prompting / experiments / scoring)  
-**Status:** draft for agreement. Not a provider choice, spend approval, or authorization to run paid models.  
+**Status:** team-agreed scoring freeze. Not a provider choice, spend approval, or authorization to run paid models.  
 **Builds on:** merged `main` (PRs #1, #15–#18), especially `docs/benchmarking.md` and `tier_a_contract.py`.  
 **Related issues:** [#7](https://github.com/Xateh/OhCanEyeSeeYesPea/issues/7) freeze protocol; [#9](https://github.com/Xateh/OhCanEyeSeeYesPea/issues/9) aggregation (Xu An after this freeze).
-
-Please reply **yes / change X** to the four freeze questions in §8. The rest of this note is the proposed scoring rule for the report.
 
 ---
 
@@ -139,16 +137,12 @@ Do not tune prompts or metrics on the test split.
 
 ---
 
-## 8. Please confirm (freeze)
-
-Reply yes or propose a change:
+## 8. Frozen decisions
 
 1. Main comparison is **LLM-only vs LLM+CSP**. **CSP-on-gold** is an optional baseline, not a competing NLP method.
 2. Headline numbers are **evidence-backed success**, **runtime**, and **tokens**.
 3. UNKNOWN / timeout / bad JSON count as **not-success** and stay in the denominator.
 4. **No soft-preference score** in v1 (optional coverage / priority / makespan are out until we define them in data).
-
-Also say if the first real scored run should be the **48-case pilot**, **Tier A’s 9 eligible cases**, or wait for the expanded set.
 
 ---
 
@@ -159,6 +153,7 @@ Still needed after this agreement (issue #7 remainder):
 - shared system / output instructions; arm-specific tool exposure; identical case text
 - token, wall-clock, tool-call, retry limits; temperature / seed; number of repeats
 - whether we include a second prompt style (basic vs structured)
+- which corpus to use for the first real scored run (48-case pilot, Tier A’s 9 eligible cases, or the expanded set)
 
 Then: Xu An implements aggregation against **these names** (#9). Allan’s OR-Tools adapter stays independent of scoring (#5). Real model + spend is a separate team decision (#8, #10).
 
