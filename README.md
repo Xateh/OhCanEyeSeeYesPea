@@ -42,6 +42,7 @@ The mock no-tools arm deliberately returns UNKNOWN. Its assisted arm exercises t
 - [Architecture and code-module map](docs/architecture.md)
 - [Dataset, schema and scheduling semantics](docs/data-and-semantics.md)
 - [Provider/tool contracts, scoring and experiment workflow](docs/benchmarking.md)
+- [Shared evaluation framework](docs/evaluation-framework.md)
 - [Roadmap and team review gates](docs/roadmap.md)
 - [Provenance and publication exclusions](PROVENANCE.md)
 - [Open work](https://github.com/Xateh/OhCanEyeSeeYesPea/issues)
