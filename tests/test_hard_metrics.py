@@ -28,6 +28,7 @@ class OutcomeTests(unittest.TestCase):
 
     def test_violations_drop_the_surgery_id(self):
         self.assertEqual(violation_kind('P123: completes after deadline'), 'completes after deadline')
+        self.assertEqual(violation_kind('surgeons/s00/day1: clash or required gap'), 'clash or required gap')
         self.assertEqual(violation_kind('missing mandatory patient P1'), 'missing mandatory patient')
 
 

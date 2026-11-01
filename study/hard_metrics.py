@@ -28,7 +28,7 @@ def outcome(row):
 
 
 def violation_kind(text):
-    return re.sub(r'^\w+: |\s+P\d+$', '', text)
+    return re.sub(r'^[\w/]+: |\s+P\d+$', '', text)
 
 
 def summarize_size(rows):
