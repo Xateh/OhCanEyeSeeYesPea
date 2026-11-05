@@ -8,6 +8,7 @@ from surgerybench.temporal_csp import CSPAdapter
 
 from .hard_metrics import outcome
 from .metrics import row_cost, succeeded, translation_status
+from .accounting import cost_summary
 
 CLAIMS = ('FEASIBLE', 'INFEASIBLE')
 BAD_OUTPUT = 'unreadable_reply'
@@ -17,9 +18,33 @@ def status_of(row):
     return row['output'].get('status') if isinstance(row['output'], dict) else None
 
 
-def require_planned(rows, planned):
+def expected_slots(ids, arms, repetitions):
+    if (type(repetitions) is not int or repetitions < 1
+            or not ids or any(type(i) is not str or not i for i in ids)
+            or len(set(ids)) != len(ids) or not arms
+            or any(type(a) is not str or a not in ('no_tools', 'csp') for a in arms)
+            or len(set(arms)) != len(arms)):
+        raise ValueError('explicit unique cases/arms and positive repetitions required')
+    return {(case, rep, arm) for case in ids for rep in range(repetitions) for arm in arms}
+
+
+def require_planned(rows, planned, expected=None):
     if len(rows) != planned:
         raise ValueError(f'planned {planned}, found {len(rows)}: every planned run must stay in the denominator')
+    # Older hard-run receipts have implicit no_tools / repetition 0 only.
+    implicit_arm = 'no_tools' if expected and {x[2] for x in expected} == {'no_tools'} else None
+    implicit_rep = 0 if expected and {x[1] for x in expected} == {0} else None
+    slots = []
+    for row in rows:
+        case, rep, arm = row.get('case_id'), row.get('repetition', implicit_rep), row.get('arm', implicit_arm)
+        if (type(case) is not str or not case or type(rep) is not int or rep < 0
+                or type(arm) is not str or arm not in ('no_tools', 'csp')):
+            raise ValueError('invalid planned receipt routing')
+        slots.append((case, rep, arm))
+    if len(set(slots)) != len(slots):
+        raise ValueError('duplicate planned receipt slot')
+    if expected is not None and (len(expected) != planned or set(slots) != set(expected)):
+        raise ValueError('missing or unplanned case/arm/repetition slot')
     return rows
 
 
@@ -84,7 +109,8 @@ def cost(rows):
             'median_seconds': median(r['latency_seconds'] for r in rows),
             'mean_csp_calls': mean(r['tool_call_count'] for r in rows),
             'mean_solver_seconds': mean(map(solver_seconds, rows)),
-            'estimated_cost_usd': sum(map(row_cost, rows))}
+            'estimated_cost_usd': cost_summary(rows)['cost_usd'],
+            **cost_summary(rows)}
 
 
 def summarize(rows):
@@ -117,5 +143,6 @@ def csp_on_gold(gold_rows, adapter=None):
         rows.append({'case_id': gold['id'], 'label': gold['label'], 'output': output, 'score': score(gold, output),
                      'errors': [], 'parsing_or_provider_error': False, 'tool_error': False, 'latency_seconds': seconds,
                      'token_usage': {'input_tokens': 0, 'output_tokens': 0}, 'responses': [],
-                     'tool_calls': [{'latency_seconds': seconds}], 'tool_call_count': 1})
+                     'tool_calls': [{'latency_seconds': seconds}], 'tool_call_count': 1,
+                     'call_accounting': [dict(usage=dict(input_tokens=0,output_tokens=0,cost_usd=0),reason='CSP-on-gold; no model calls')]})
     return rows

@@ -13,6 +13,7 @@ from surgerybench.temporal_benchmark import run
 
 from .claude_provider import EFFORT, MODEL, ClaudeCodeProvider
 from .metrics import row_cost
+from .accounting import attach, validate_budget, cost_summary
 from .prompts import PROMPTS, prompt_sha256
 
 DATA = Path('fixtures/arrival-deadline-v1')
@@ -24,8 +25,13 @@ def run_one(case, gold_row, repetition, factory, scratch):
     model_path, gold_path = folder / 'model.jsonl', folder / 'gold.jsonl'
     model_path.write_text(canonical(case) + '\n')
     gold_path.write_text(canonical(gold_row) + '\n')
-    rows = run(model_path, gold_path, folder / 'out.jsonl', factory)
-    return [{**row, 'repetition': repetition} for row in rows]
+    providers=[]
+    def observed_factory():
+        provider=factory(); providers.append(provider); return provider
+    rows = run(model_path, gold_path, folder / 'out.jsonl', observed_factory)
+    if len(rows) != len(providers):
+        raise ValueError('harness provider/row cardinality mismatch; no rows may be dropped')
+    return [{**attach(row,provider), 'repetition': repetition} for row,provider in zip(rows,providers)]
 
 
 def select_cases(split, limit):
@@ -36,10 +42,11 @@ def select_cases(split, limit):
 
 def execute(work, gold, factory, scratch, workers, budget_usd):
     """Return finished rows plus the planned runs skipped because the budget ran out."""
-    rows, pending, queue, spent = [], set(), list(work), 0.0
+    validate_budget(budget_usd,workers)
+    rows, pending, queue, spent, uncertain = [], set(), list(work), 0.0, False
     with ThreadPoolExecutor(workers) as pool:
         while queue or pending:
-            while queue and len(pending) < workers and spent < budget_usd:
+            while queue and len(pending) < workers and spent < budget_usd and not uncertain:
                 case, repetition = queue.pop(0)
                 pending.add(pool.submit(run_one, case, gold[case['id']], repetition, factory, scratch))
             if not pending:
@@ -48,9 +55,11 @@ def execute(work, gold, factory, scratch, workers, budget_usd):
             for future in finished:
                 new_rows = future.result()
                 rows += new_rows
-                spent += sum(map(row_cost, new_rows))
-                print(f'{len(rows)} arm runs done, ${spent:.2f} spent', flush=True)
-    return rows, len(queue), spent
+                costs=[row_cost(r) for r in new_rows]
+                uncertain = uncertain or any(c is None for c in costs)
+                spent += sum(c for c in costs if c is not None)
+                print(f'{len(rows)} arm runs done; cost complete={not uncertain}', flush=True)
+    return rows, len(queue), None if uncertain else spent
 
 
 def metadata(args, skipped, spent):
@@ -58,7 +67,7 @@ def metadata(args, skipped, spent):
     return {'iteration': args.iteration, 'split': args.split, 'prompt': args.prompt,
             'prompt_sha256': prompt_sha256(args.prompt), 'model': MODEL, 'effort': EFFORT,
             'repetitions': args.repetitions, 'skipped_for_budget': skipped, 'cost_usd': spent,
-            'budget_usd': args.budget, 'git_commit': command('git', 'rev-parse', 'HEAD'),
+            'budget_usd': args.budget, 'cost_complete': spent is not None, 'git_commit': command('git', 'rev-parse', 'HEAD'),
             'claude_cli': command('claude', '--version'), 'date': date.today().isoformat()}
 
 
@@ -83,8 +92,9 @@ def main():
     out.mkdir(parents=True)
     ordered = sorted(rows, key=lambda r: (r['case_id'], r['repetition'], r['arm']))
     (out / 'runs.jsonl').write_text(''.join(canonical(r) + '\n' for r in ordered))
-    (out / 'meta.json').write_text(json.dumps(metadata(args, skipped, spent), indent=2, sort_keys=True) + '\n')
-    print(f'wrote {out}: {len(rows)} arm runs, {skipped} skipped, ${spent:.2f}')
+    (out / 'meta.json').write_text(json.dumps({**metadata(args, skipped, spent), **cost_summary(rows)}, indent=2, sort_keys=True,allow_nan=False) + '\n')
+    cost_label = 'UNKNOWN; scheduling stopped' if spent is None else f'${spent:.2f}'
+    print(f"wrote {out}: {len(rows)} arm runs, {skipped} skipped, cost={cost_label}")
 
 
 if __name__ == '__main__':

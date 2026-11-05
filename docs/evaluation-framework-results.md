@@ -1,7 +1,7 @@
 # Claude scored under the shared evaluation framework
 
-**Status:** preliminary, for team review. These numbers re-score runs recorded before the framework was agreed. No new model calls were made.  
-**Rulebook:** [`evaluation-framework.md`](evaluation-framework.md).  
+**Status:** preliminary, for team review. These numbers re-score runs recorded before the framework was agreed. No new model calls were made.
+**Rulebook:** [`evaluation-framework.md`](evaluation-framework.md).
 **Rerun:** `python3 -m study.framework_report` (needs matplotlib, makes no model calls).
 
 ## The short answer
@@ -69,26 +69,32 @@ Reliability did depend on the prompt. All of these are LLM+CSP on the train spli
 
 With v1, Claude skipped the optional solver every time, so those runs say nothing about the solver. With v2, 13 runs hit at least one tool error and recovered. Showing the format in v3 removed those errors.
 
-## Harder dataset: Claude alone
+## Harder dataset: first recorded planned attempts
 
-This covers `hard-synthetic-v1`: 100 problems, half solvable and half impossible, each run once. It's reported separately because the framework says not to mix datasets. LLM+CSP and CSP-on-gold weren't run here, because solver work belongs to the teammates.
+Reporting revision 2 retains the first recorded 20-case attempt at every size, including operational failures. This is a correction of stored-receipt accounting under the frozen denominator rule, not a new model run or approval of the historical study protocol. Initial size40/size80 metadata records skipped=0 and each folder contains every expected case. Reruns are separate attempts, never replacement primary rows.
 
-| Surgeries | Evidence-backed success | Feasible-schedule | Certified-infeasible | Status agreement | UNKNOWN | Parse errors | Timeouts | Seconds per case (mean) | Tokens per case (mean) |
-|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| 5 | 20/20 | 10/10 | 10/10 | 20/20 | 0/20 | 0/20 | 0/20 | 8.8 | 2,676 |
-| 10 | 20/20 | 10/10 | 10/10 | 20/20 | 0/20 | 0/20 | 0/20 | 14.4 | 3,777 |
-| 20 | 20/20 | 10/10 | 10/10 | 20/20 | 0/20 | 0/20 | 0/20 | 30.3 | 6,753 |
-| 40 | 19/20 | 9/10 | 10/10 | 20/20 | 0/20 | 0/20 | 0/20 | 57.0 | 12,278 |
-| 80 | 19/20 | 9/10 | 10/10 | 19/20 | 1/20 | 0/20 | 1/20 | 142.7 | 25,479 |
-| All | 98/100 | 48/50 | 50/50 | 99/100 | 1/100 | 0/100 | 1/100 | 50.6 | 10,038 |
+| Surgeries | Evidence-backed success | Feasible schedule | Certified negative | Provider failures | UNKNOWN |
+|--:|--:|--:|--:|--:|--:|
+| 5 | 20/20 | 10/10 | 10/10 | 0/20 | 0/20 |
+| 10 | 20/20 | 10/10 | 10/10 | 0/20 | 0/20 |
+| 20 | 20/20 | 10/10 | 10/10 | 0/20 | 0/20 |
+| 40, initial | 4/20 | 2/10 | 2/10 | 16/20 | 16/20 |
+| 80, initial | 0/20 | 0/10 | 0/10 | 20/20 | 20/20 |
+| First attempts | 64/100 | 32/50 | 32/50 | 36/100 | 36/100 |
 
-Other framework measures on these 100 runs:
+Operational failures are not wrong mathematical answers, but remain not-success in the planned denominator. These counts describe stored attempts, not100 independent samples or a general model-accuracy claim.
 
-- **F1:** 0.985. Only evidence-backed answers count as correct positives. Precision is 98/99 answered, and recall is 98/100 planned.
-- **Precision of FEASIBLE claims:** 48/49, because one schedule Claude called valid was not.
-- **Infeasible decision:** 50/50.
+### Separate exploratory reruns
 
-The gap between status agreement and evidence-backed success is the most useful result here. At 40 surgeries Claude scored 20/20 on the yes/no answer but only 19/20 on evidence, because it said "solvable" and gave a schedule that double-booked a surgeon. Scoring only yes/no would have missed that.
+| Repeated cases | Evidence-backed success | Feasible schedule | Certified negative | Timeout |
+|--:|--:|--:|--:|--:|
+| 40 surgeries | 19/20 | 9/10 | 10/10 | 0/20 |
+| 80 surgeries | 19/20 | 9/10 | 10/10 | 1/20 |
+| Reruns only | 38/40 | 18/20 | 20/20 | 1/40 |
+
+These40 attempts repeat original cases. The former98/100 table combined60 first-attempt outcomes with40 reruns; its original generated JSON/charts are preserved as historical exploratory artifacts, not the primary failure-retaining cohort. No retry policy is retrospectively approved here.
+
+Saved-cost coverage is64/100 first attempts (known subtotal USD4.060184), and39/40 reruns (known subtotal USD10.764208). Complete costs remain unknown. No missing charge is replaced with zero. See [correction scope and limitations](pr21-reporting-corrections.md).
 
 ## Limits to keep in mind
 
@@ -96,16 +102,9 @@ The gap between status agreement and evidence-backed success is the most useful 
 - **No winner yet:** on the pilot both approaches hit the ceiling. On the harder set only Claude alone ran. The framework's question, whether a solver helps, stays open until LLM+CSP runs there with the team's solver.
 - **Few independent cases:** the 24 test runs come from 8 problems, and problems in a family are related. So this report gives counts only, without p-values, as the framework asks. The p-value in the first study report shouldn't go in the final report.
 - **F1 is our reading:** the framework names the positive class but not the exact formula. We treated any FEASIBLE or INFEASIBLE reply as a positive claim and every planned run as a positive case. The team should confirm that.
-- **Tokens at 80 surgeries are understated:** the timed-out run reported none, so the token means cover 99 of 100 runs. Its 300 seconds are included in the time means, and the estimated cost of $14.16 leaves out whatever that run used.
+- **Historical usage is incomplete:** provider failures and one rerun timeout lack saved complete usage. Report known subtotals and coverage, not a fabricated complete bill.
 - **Close to best-case conditions:** regular wording, one kind of impossibility, feasibility only and one attempt per harder problem, as described in [`hard-dataset-study.md`](hard-dataset-study.md).
 
-## Runs that were replaced
+## Attempt provenance retained
 
-The framework says provider errors must stay in the denominator. Two recorded attempts hit the account's 5-hour usage limit and were rerun in full, so the tables above use only the complete reruns:
-
-| Attempt | Valid answers | Failed on usage limit | Folder |
-|---|--:|--:|---|
-| 40 surgeries, first attempt | 4/20 | 16/20 | `study/results/hard-n40-partial-usage-limit/` |
-| 80 surgeries, first attempt | 0/20 | 20/20 | `study/results/hard-n80-all-usage-limit-failures/` |
-
-These failures came from an account limit, not from Claude's answers, and the 40 reruns repeat the same problems, so a full rerun is a reasonable response. It's still a departure from the framework's wording that the team should agree to and disclose. Counting all 140 attempts would give 102 valid answers, but that isn't a fair accuracy figure, because 36 of those runs never reached the model and 40 repeat problems already counted.
+The canonical loader pins first-attempt folders in HARD_PRIMARY and later folders in HARD_RERUNS, validates exact case membership and keeps them separate. Original raw receipts and prior report artifacts remain unchanged. The team still needs a prospective retry/stopping protocol; retaining initial failures is the conservative frozen-rule default, not retrospective permission for these historical runs.
