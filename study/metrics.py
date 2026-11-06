@@ -3,6 +3,7 @@ from collections import Counter
 import json
 from math import comb, sqrt
 from statistics import median
+from .accounting import row_cost, cost_summary
 
 ARMS = ('no_tools', 'csp')
 Z_95 = 1.96
@@ -79,11 +80,6 @@ def count(rows, field):
     return rate(sum(map(bool, scored)), len(scored))
 
 
-def row_cost(row):
-    usages = [m.get('usage') for m in row['responses'] if isinstance(m, dict)]
-    return sum(u.get('cost_usd', 0) for u in usages if isinstance(u, dict))
-
-
 def summarize_arm(rows):
     usage = [r['token_usage'] for r in rows]
     known = bool(usage) and all(u is not None for u in usage)
@@ -95,14 +91,21 @@ def summarize_arm(rows):
             'tool_errors': sum(r['tool_error'] for r in rows),
             'median_latency_seconds': median(r['latency_seconds'] for r in rows) if rows else None,
             'tokens_total': sum(u['input_tokens'] + u['output_tokens'] for u in usage) if known else None,
-            'cost_usd': sum(map(row_cost, rows))}
+            **cost_summary(rows)}
 
 
-def paired_buckets(rows):
+def paired_buckets(rows, expected_pairs=None):
+    if any(type(r.get('case_id')) is not str or type(r.get('repetition')) is not int or r['repetition']<0 or type(r.get('arm')) is not str or r['arm'] not in ARMS for r in rows):
+        raise ValueError('invalid paired receipt routing')
+    slots=[(r['case_id'],r['repetition'],r['arm']) for r in rows]
+    if len(set(slots))!=len(slots):raise ValueError('duplicate paired receipt slot')
     pairs = {}
     for r in rows:
         key = (r['case_id'], r['repetition'])
         pairs[key] = {**pairs.get(key, {}), r['arm']: succeeded(r)}
+    if expected_pairs is not None:
+        if not set(pairs)<=set(expected_pairs):raise ValueError('unplanned pair')
+        for key in expected_pairs:pairs.setdefault(key,{})
     buckets = Counter(both=0, no_tools_only=0, csp_only=0, neither=0, incomplete=0)
     for pair in pairs.values():
         if set(pair) != set(ARMS):

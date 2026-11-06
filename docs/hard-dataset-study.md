@@ -1,5 +1,7 @@
 # Claude alone on harder surgery problems
 
+> Historical exploratory selected-rerun view. For failure-retaining first-attempt accounting and separate rerun cohorts, use [the corrected framework report](evaluation-framework-results.md) and [correction scope](pr21-reporting-corrections.md). Original recorded results below are preserved.
+
 **Date:** 1 November 2026. **Model:** `claude-opus-5-5` at `high` effort, using the prompt from the first study. **No tools or solver were used.** The solver comparison is being handled by other team members.
 
 **Status:** preliminary. The team has not yet reviewed this dataset or setup.

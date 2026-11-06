@@ -5,6 +5,7 @@ import subprocess
 import tempfile
 
 from .prompts import PROMPTS, prompt_sha256, user_message
+from .accounting import envelope_usage
 
 MODEL = 'claude-opus-5-5'
 EFFORT = 'high'
@@ -40,22 +41,22 @@ def extract_json(text):
 
 
 def parse_cli_reply(stdout, model):
-    envelope = json.loads(stdout)
-    if envelope.get('is_error'):
-        raise RuntimeError(f"claude reported an error: {str(envelope.get('result'))[:300]}")
-    used = set(envelope.get('modelUsage', {}))
-    if used != {model}:
-        raise RuntimeError(f'requested {model} but claude used {sorted(used)}')
-    usage = envelope['usage']
-    tokens_in = sum(usage.get(k, 0) for k in
-                    ('input_tokens', 'cache_creation_input_tokens', 'cache_read_input_tokens'))
-    text = envelope['result']
-    message = extract_json(text)
-    if message.get('type') not in ('final', 'tool_call'):
-        raise ValueError('model reply needs type final or tool_call')
-    return {**message, 'raw_text': text,
-            'usage': {'input_tokens': tokens_in, 'output_tokens': usage['output_tokens'],
-                      'cost_usd': envelope['total_cost_usd']}}
+    observed = None
+    try:
+        envelope = json.loads(stdout)
+        observed = envelope_usage(envelope)
+        if envelope.get('is_error'):
+            raise RuntimeError(f"claude reported an error: {str(envelope.get('result'))[:300]}")
+        used = set(envelope.get('modelUsage', {}))
+        if used != {model}:
+            raise RuntimeError(f'requested {model} but claude used {sorted(used)}')
+        message = extract_json(envelope['result'])
+        if message.get('type') not in ('final', 'tool_call'):
+            raise ValueError('model reply needs type final or tool_call')
+        return {**message, 'raw_text': envelope['result'], 'usage': observed}
+    except Exception as error:
+        error.observed_usage = observed
+        raise
 
 
 class ClaudeCodeProvider:
@@ -63,6 +64,7 @@ class ClaudeCodeProvider:
         if prompt_version not in PROMPTS:
             raise ValueError(f'unknown prompt version: {prompt_version}')
         self.prompt_version, self.model, self.effort, self.runner = prompt_version, model, effort, runner
+        self.attempt_accounting = []
 
     @property
     def model_revision(self):
@@ -71,6 +73,12 @@ class ClaudeCodeProvider:
     def next(self, text, history, tools):
         argv = isolated_argv(self.model, self.effort, PROMPTS[self.prompt_version]['system'])
         message = user_message(self.prompt_version, text, history, tools)
-        with tempfile.TemporaryDirectory(prefix='claude-study-') as empty:
-            stdout = self.runner(argv, message, empty)
-        return parse_cli_reply(stdout, self.model)
+        try:
+            with tempfile.TemporaryDirectory(prefix='claude-study-') as empty:
+                stdout = self.runner(argv, message, empty)
+            reply = parse_cli_reply(stdout, self.model)
+        except Exception as error:
+            self.attempt_accounting.append(dict(usage=getattr(error, 'observed_usage', None), reason=type(error).__name__))
+            raise
+        self.attempt_accounting.append(dict(usage=reply['usage'], reason='CLI envelope observed'))
+        return reply
