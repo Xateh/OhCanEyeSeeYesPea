@@ -1,0 +1,1073 @@
+{
+  "hard": {
+    "10": {
+      "certified_infeasible_success": [
+        10,
+        10
+      ],
+      "estimated_cost_usd": 0.940052,
+      "evidence_backed_success": [
+        20,
+        20
+      ],
+      "evidence_precision": [
+        20,
+        20
+      ],
+      "f1": 1.0,
+      "feasible_claim_precision": [
+        10,
+        10
+      ],
+      "feasible_schedule_success": [
+        10,
+        10
+      ],
+      "infeasible_decision": [
+        10,
+        10
+      ],
+      "mean_csp_calls": 0,
+      "mean_input_tokens": 2377.45,
+      "mean_output_tokens": 1399.55,
+      "mean_seconds": 14.431352993758628,
+      "mean_solver_seconds": 0,
+      "mean_tokens": 3777,
+      "median_seconds": 15.052742436993867,
+      "outcomes": {
+        "correct": 20
+      },
+      "parse_errors": [
+        0,
+        20
+      ],
+      "provider_errors": [
+        0,
+        20
+      ],
+      "runs_with_tokens": 20,
+      "status_agreement": [
+        20,
+        20
+      ],
+      "timeouts": [
+        0,
+        20
+      ],
+      "tool_errors": [
+        0,
+        20
+      ],
+      "unknown": [
+        0,
+        20
+      ]
+    },
+    "20": {
+      "certified_infeasible_success": [
+        10,
+        10
+      ],
+      "estimated_cost_usd": 1.840708,
+      "evidence_backed_success": [
+        20,
+        20
+      ],
+      "evidence_precision": [
+        20,
+        20
+      ],
+      "f1": 1.0,
+      "feasible_claim_precision": [
+        10,
+        10
+      ],
+      "feasible_schedule_success": [
+        10,
+        10
+      ],
+      "infeasible_decision": [
+        10,
+        10
+      ],
+      "mean_csp_calls": 0,
+      "mean_input_tokens": 3584.05,
+      "mean_output_tokens": 3168.55,
+      "mean_seconds": 30.306505291594657,
+      "mean_solver_seconds": 0,
+      "mean_tokens": 6752.6,
+      "median_seconds": 30.091942479019053,
+      "outcomes": {
+        "correct": 20
+      },
+      "parse_errors": [
+        0,
+        20
+      ],
+      "provider_errors": [
+        0,
+        20
+      ],
+      "runs_with_tokens": 20,
+      "status_agreement": [
+        20,
+        20
+      ],
+      "timeouts": [
+        0,
+        20
+      ],
+      "tool_errors": [
+        0,
+        20
+      ],
+      "unknown": [
+        0,
+        20
+      ]
+    },
+    "40": {
+      "certified_infeasible_success": [
+        10,
+        10
+      ],
+      "estimated_cost_usd": 3.48336,
+      "evidence_backed_success": [
+        19,
+        20
+      ],
+      "evidence_precision": [
+        19,
+        20
+      ],
+      "f1": 0.95,
+      "feasible_claim_precision": [
+        9,
+        10
+      ],
+      "feasible_schedule_success": [
+        9,
+        10
+      ],
+      "infeasible_decision": [
+        10,
+        10
+      ],
+      "mean_csp_calls": 0,
+      "mean_input_tokens": 5948.5,
+      "mean_output_tokens": 6329.4,
+      "mean_seconds": 57.04027080419473,
+      "mean_solver_seconds": 0,
+      "mean_tokens": 12277.9,
+      "median_seconds": 57.292049021460116,
+      "outcomes": {
+        "broken_schedule": 1,
+        "correct": 19
+      },
+      "parse_errors": [
+        0,
+        20
+      ],
+      "provider_errors": [
+        0,
+        20
+      ],
+      "runs_with_tokens": 20,
+      "status_agreement": [
+        20,
+        20
+      ],
+      "timeouts": [
+        0,
+        20
+      ],
+      "tool_errors": [
+        0,
+        20
+      ],
+      "unknown": [
+        0,
+        20
+      ]
+    },
+    "5": {
+      "certified_infeasible_success": [
+        10,
+        10
+      ],
+      "estimated_cost_usd": 0.6106320000000001,
+      "evidence_backed_success": [
+        20,
+        20
+      ],
+      "evidence_precision": [
+        20,
+        20
+      ],
+      "f1": 1.0,
+      "feasible_claim_precision": [
+        10,
+        10
+      ],
+      "feasible_schedule_success": [
+        10,
+        10
+      ],
+      "infeasible_decision": [
+        10,
+        10
+      ],
+      "mean_csp_calls": 0,
+      "mean_input_tokens": 1914.2,
+      "mean_output_tokens": 761.3,
+      "mean_seconds": 8.798286227113568,
+      "mean_solver_seconds": 0,
+      "mean_tokens": 2675.5,
+      "median_seconds": 8.139965208538342,
+      "outcomes": {
+        "correct": 20
+      },
+      "parse_errors": [
+        0,
+        20
+      ],
+      "provider_errors": [
+        0,
+        20
+      ],
+      "runs_with_tokens": 20,
+      "status_agreement": [
+        20,
+        20
+      ],
+      "timeouts": [
+        0,
+        20
+      ],
+      "tool_errors": [
+        0,
+        20
+      ],
+      "unknown": [
+        0,
+        20
+      ]
+    },
+    "80": {
+      "certified_infeasible_success": [
+        10,
+        10
+      ],
+      "estimated_cost_usd": 7.280848,
+      "evidence_backed_success": [
+        19,
+        20
+      ],
+      "evidence_precision": [
+        19,
+        19
+      ],
+      "f1": 0.9743589743589743,
+      "feasible_claim_precision": [
+        9,
+        9
+      ],
+      "feasible_schedule_success": [
+        9,
+        10
+      ],
+      "infeasible_decision": [
+        10,
+        10
+      ],
+      "mean_csp_calls": 0,
+      "mean_input_tokens": 10530.263157894737,
+      "mean_output_tokens": 14948.421052631578,
+      "mean_seconds": 142.67227777704247,
+      "mean_solver_seconds": 0,
+      "mean_tokens": 25478.684210526317,
+      "median_seconds": 163.64587220794056,
+      "outcomes": {
+        "correct": 19,
+        "timed_out": 1
+      },
+      "parse_errors": [
+        0,
+        20
+      ],
+      "provider_errors": [
+        0,
+        20
+      ],
+      "runs_with_tokens": 19,
+      "status_agreement": [
+        19,
+        20
+      ],
+      "timeouts": [
+        1,
+        20
+      ],
+      "tool_errors": [
+        0,
+        20
+      ],
+      "unknown": [
+        1,
+        20
+      ]
+    },
+    "all": {
+      "certified_infeasible_success": [
+        50,
+        50
+      ],
+      "estimated_cost_usd": 14.1556,
+      "evidence_backed_success": [
+        98,
+        100
+      ],
+      "evidence_precision": [
+        98,
+        99
+      ],
+      "f1": 0.9849246231155779,
+      "feasible_claim_precision": [
+        48,
+        49
+      ],
+      "feasible_schedule_success": [
+        48,
+        50
+      ],
+      "infeasible_decision": [
+        50,
+        50
+      ],
+      "mean_csp_calls": 0,
+      "mean_input_tokens": 4813.727272727273,
+      "mean_output_tokens": 5224.20202020202,
+      "mean_seconds": 50.64973861874081,
+      "mean_solver_seconds": 0,
+      "mean_tokens": 10037.929292929293,
+      "median_seconds": 20.33666181244189,
+      "outcomes": {
+        "broken_schedule": 1,
+        "correct": 98,
+        "timed_out": 1
+      },
+      "parse_errors": [
+        0,
+        100
+      ],
+      "provider_errors": [
+        0,
+        100
+      ],
+      "runs_with_tokens": 99,
+      "status_agreement": [
+        99,
+        100
+      ],
+      "timeouts": [
+        1,
+        100
+      ],
+      "tool_errors": [
+        0,
+        100
+      ],
+      "unknown": [
+        1,
+        100
+      ]
+    }
+  },
+  "pilot_all_gold_csp": {
+    "certified_infeasible_success": [
+      24,
+      24
+    ],
+    "estimated_cost_usd": 0,
+    "evidence_backed_success": [
+      48,
+      48
+    ],
+    "evidence_precision": [
+      48,
+      48
+    ],
+    "f1": 1.0,
+    "feasible_claim_precision": [
+      24,
+      24
+    ],
+    "feasible_schedule_success": [
+      24,
+      24
+    ],
+    "infeasible_decision": [
+      24,
+      24
+    ],
+    "mean_csp_calls": 1,
+    "mean_input_tokens": 0,
+    "mean_output_tokens": 0,
+    "mean_seconds": 0.0001312021073924067,
+    "mean_solver_seconds": 0.0001312021073924067,
+    "mean_tokens": 0,
+    "median_seconds": 0.00010720803402364254,
+    "outcomes": {
+      "correct": 48
+    },
+    "parse_errors": [
+      0,
+      48
+    ],
+    "provider_errors": [
+      0,
+      48
+    ],
+    "runs_with_tokens": 48,
+    "status_agreement": [
+      48,
+      48
+    ],
+    "timeouts": [
+      0,
+      48
+    ],
+    "tool_errors": [
+      0,
+      48
+    ],
+    "unknown": [
+      0,
+      48
+    ]
+  },
+  "pilot_splits": {
+    "test": {
+      "LLM+CSP": {
+        "certified_infeasible_success": [
+          12,
+          12
+        ],
+        "estimated_cost_usd": 0.8070624,
+        "evidence_backed_success": [
+          24,
+          24
+        ],
+        "evidence_precision": [
+          24,
+          24
+        ],
+        "f1": 1.0,
+        "feasible_claim_precision": [
+          12,
+          12
+        ],
+        "feasible_schedule_success": [
+          12,
+          12
+        ],
+        "infeasible_decision": [
+          12,
+          12
+        ],
+        "mean_csp_calls": 1,
+        "mean_input_tokens": 5421.791666666667,
+        "mean_output_tokens": 736.9583333333334,
+        "mean_seconds": 9.696333284722641,
+        "mean_solver_seconds": 0.0003837587040228148,
+        "mean_tokens": 6158.75,
+        "median_seconds": 9.724409249960445,
+        "outcomes": {
+          "correct": 24
+        },
+        "parse_errors": [
+          0,
+          24
+        ],
+        "provider_errors": [
+          0,
+          24
+        ],
+        "runs_with_tokens": 24,
+        "status_agreement": [
+          24,
+          24
+        ],
+        "timeouts": [
+          0,
+          24
+        ],
+        "tool_errors": [
+          0,
+          24
+        ],
+        "unknown": [
+          0,
+          24
+        ]
+      },
+      "LLM-only": {
+        "certified_infeasible_success": [
+          12,
+          12
+        ],
+        "estimated_cost_usd": 0.326224,
+        "evidence_backed_success": [
+          24,
+          24
+        ],
+        "evidence_precision": [
+          24,
+          24
+        ],
+        "f1": 1.0,
+        "feasible_claim_precision": [
+          12,
+          12
+        ],
+        "feasible_schedule_success": [
+          12,
+          12
+        ],
+        "infeasible_decision": [
+          12,
+          12
+        ],
+        "mean_csp_calls": 0,
+        "mean_input_tokens": 1793.9583333333333,
+        "mean_output_tokens": 335.875,
+        "mean_seconds": 4.92861321879415,
+        "mean_solver_seconds": 0,
+        "mean_tokens": 2129.8333333333335,
+        "median_seconds": 4.785378562461119,
+        "outcomes": {
+          "correct": 24
+        },
+        "parse_errors": [
+          0,
+          24
+        ],
+        "provider_errors": [
+          0,
+          24
+        ],
+        "runs_with_tokens": 24,
+        "status_agreement": [
+          24,
+          24
+        ],
+        "timeouts": [
+          0,
+          24
+        ],
+        "tool_errors": [
+          0,
+          24
+        ],
+        "unknown": [
+          0,
+          24
+        ]
+      }
+    },
+    "train": {
+      "LLM+CSP": {
+        "certified_infeasible_success": [
+          16,
+          16
+        ],
+        "estimated_cost_usd": 1.758848,
+        "evidence_backed_success": [
+          32,
+          32
+        ],
+        "evidence_precision": [
+          32,
+          32
+        ],
+        "f1": 1.0,
+        "feasible_claim_precision": [
+          16,
+          16
+        ],
+        "feasible_schedule_success": [
+          16,
+          16
+        ],
+        "infeasible_decision": [
+          16,
+          16
+        ],
+        "mean_csp_calls": 1,
+        "mean_input_tokens": 5278.125,
+        "mean_output_tokens": 637.75,
+        "mean_seconds": 8.615758726609783,
+        "mean_solver_seconds": 0.0003465325935394503,
+        "mean_tokens": 5915.875,
+        "median_seconds": 8.599242833559401,
+        "outcomes": {
+          "correct": 32
+        },
+        "parse_errors": [
+          0,
+          32
+        ],
+        "provider_errors": [
+          0,
+          32
+        ],
+        "runs_with_tokens": 32,
+        "status_agreement": [
+          32,
+          32
+        ],
+        "timeouts": [
+          0,
+          32
+        ],
+        "tool_errors": [
+          0,
+          32
+        ],
+        "unknown": [
+          0,
+          32
+        ]
+      },
+      "LLM-only": {
+        "certified_infeasible_success": [
+          16,
+          16
+        ],
+        "estimated_cost_usd": 0.276032,
+        "evidence_backed_success": [
+          32,
+          32
+        ],
+        "evidence_precision": [
+          32,
+          32
+        ],
+        "f1": 1.0,
+        "feasible_claim_precision": [
+          16,
+          16
+        ],
+        "feasible_schedule_success": [
+          16,
+          16
+        ],
+        "infeasible_decision": [
+          16,
+          16
+        ],
+        "mean_csp_calls": 0,
+        "mean_input_tokens": 1728.34375,
+        "mean_output_tokens": 274.90625,
+        "mean_seconds": 4.32298573053049,
+        "mean_solver_seconds": 0,
+        "mean_tokens": 2003.25,
+        "median_seconds": 4.085180875030346,
+        "outcomes": {
+          "correct": 32
+        },
+        "parse_errors": [
+          0,
+          32
+        ],
+        "provider_errors": [
+          0,
+          32
+        ],
+        "runs_with_tokens": 32,
+        "status_agreement": [
+          32,
+          32
+        ],
+        "timeouts": [
+          0,
+          32
+        ],
+        "tool_errors": [
+          0,
+          32
+        ],
+        "unknown": [
+          0,
+          32
+        ]
+      }
+    },
+    "validation": {
+      "LLM+CSP": {
+        "certified_infeasible_success": [
+          4,
+          4
+        ],
+        "estimated_cost_usd": 0.415168,
+        "evidence_backed_success": [
+          8,
+          8
+        ],
+        "evidence_precision": [
+          8,
+          8
+        ],
+        "f1": 1.0,
+        "feasible_claim_precision": [
+          4,
+          4
+        ],
+        "feasible_schedule_success": [
+          4,
+          4
+        ],
+        "infeasible_decision": [
+          4,
+          4
+        ],
+        "mean_csp_calls": 1,
+        "mean_input_tokens": 5134,
+        "mean_output_tokens": 542,
+        "mean_seconds": 8.006957395773497,
+        "mean_solver_seconds": 0.0009543177584419027,
+        "mean_tokens": 5676,
+        "median_seconds": 8.131426937528886,
+        "outcomes": {
+          "correct": 8
+        },
+        "parse_errors": [
+          0,
+          8
+        ],
+        "provider_errors": [
+          0,
+          8
+        ],
+        "runs_with_tokens": 8,
+        "status_agreement": [
+          8,
+          8
+        ],
+        "timeouts": [
+          0,
+          8
+        ],
+        "tool_errors": [
+          0,
+          8
+        ],
+        "unknown": [
+          0,
+          8
+        ]
+      },
+      "LLM-only": {
+        "certified_infeasible_success": [
+          4,
+          4
+        ],
+        "estimated_cost_usd": 0.14114000000000002,
+        "evidence_backed_success": [
+          8,
+          8
+        ],
+        "evidence_precision": [
+          8,
+          8
+        ],
+        "f1": 1.0,
+        "feasible_claim_precision": [
+          4,
+          4
+        ],
+        "feasible_schedule_success": [
+          4,
+          4
+        ],
+        "infeasible_decision": [
+          4,
+          4
+        ],
+        "mean_csp_calls": 0,
+        "mean_input_tokens": 1662.875,
+        "mean_output_tokens": 217.375,
+        "mean_seconds": 3.8479034428746672,
+        "mean_solver_seconds": 0,
+        "mean_tokens": 1880.25,
+        "median_seconds": 3.889296125038527,
+        "outcomes": {
+          "correct": 8
+        },
+        "parse_errors": [
+          0,
+          8
+        ],
+        "provider_errors": [
+          0,
+          8
+        ],
+        "runs_with_tokens": 8,
+        "status_agreement": [
+          8,
+          8
+        ],
+        "timeouts": [
+          0,
+          8
+        ],
+        "tool_errors": [
+          0,
+          8
+        ],
+        "unknown": [
+          0,
+          8
+        ]
+      }
+    }
+  },
+  "pilot_test": {
+    "CSP-on-gold": {
+      "certified_infeasible_success": [
+        4,
+        4
+      ],
+      "estimated_cost_usd": 0,
+      "evidence_backed_success": [
+        8,
+        8
+      ],
+      "evidence_precision": [
+        8,
+        8
+      ],
+      "f1": 1.0,
+      "feasible_claim_precision": [
+        4,
+        4
+      ],
+      "feasible_schedule_success": [
+        4,
+        4
+      ],
+      "infeasible_decision": [
+        4,
+        4
+      ],
+      "mean_csp_calls": 1,
+      "mean_input_tokens": 0,
+      "mean_output_tokens": 0,
+      "mean_seconds": 0.00014585410826839507,
+      "mean_solver_seconds": 0.00014585410826839507,
+      "mean_tokens": 0,
+      "median_seconds": 0.00012620846973732114,
+      "outcomes": {
+        "correct": 8
+      },
+      "parse_errors": [
+        0,
+        8
+      ],
+      "provider_errors": [
+        0,
+        8
+      ],
+      "runs_with_tokens": 8,
+      "status_agreement": [
+        8,
+        8
+      ],
+      "timeouts": [
+        0,
+        8
+      ],
+      "tool_errors": [
+        0,
+        8
+      ],
+      "unknown": [
+        0,
+        8
+      ]
+    },
+    "LLM+CSP": {
+      "certified_infeasible_success": [
+        12,
+        12
+      ],
+      "estimated_cost_usd": 0.8070624,
+      "evidence_backed_success": [
+        24,
+        24
+      ],
+      "evidence_precision": [
+        24,
+        24
+      ],
+      "f1": 1.0,
+      "feasible_claim_precision": [
+        12,
+        12
+      ],
+      "feasible_schedule_success": [
+        12,
+        12
+      ],
+      "infeasible_decision": [
+        12,
+        12
+      ],
+      "mean_csp_calls": 1,
+      "mean_input_tokens": 5421.791666666667,
+      "mean_output_tokens": 736.9583333333334,
+      "mean_seconds": 9.696333284722641,
+      "mean_solver_seconds": 0.0003837587040228148,
+      "mean_tokens": 6158.75,
+      "median_seconds": 9.724409249960445,
+      "outcomes": {
+        "correct": 24
+      },
+      "parse_errors": [
+        0,
+        24
+      ],
+      "provider_errors": [
+        0,
+        24
+      ],
+      "runs_with_tokens": 24,
+      "status_agreement": [
+        24,
+        24
+      ],
+      "timeouts": [
+        0,
+        24
+      ],
+      "tool_errors": [
+        0,
+        24
+      ],
+      "unknown": [
+        0,
+        24
+      ]
+    },
+    "LLM-only": {
+      "certified_infeasible_success": [
+        12,
+        12
+      ],
+      "estimated_cost_usd": 0.326224,
+      "evidence_backed_success": [
+        24,
+        24
+      ],
+      "evidence_precision": [
+        24,
+        24
+      ],
+      "f1": 1.0,
+      "feasible_claim_precision": [
+        12,
+        12
+      ],
+      "feasible_schedule_success": [
+        12,
+        12
+      ],
+      "infeasible_decision": [
+        12,
+        12
+      ],
+      "mean_csp_calls": 0,
+      "mean_input_tokens": 1793.9583333333333,
+      "mean_output_tokens": 335.875,
+      "mean_seconds": 4.92861321879415,
+      "mean_solver_seconds": 0,
+      "mean_tokens": 2129.8333333333335,
+      "median_seconds": 4.785378562461119,
+      "outcomes": {
+        "correct": 24
+      },
+      "parse_errors": [
+        0,
+        24
+      ],
+      "provider_errors": [
+        0,
+        24
+      ],
+      "runs_with_tokens": 24,
+      "status_agreement": [
+        24,
+        24
+      ],
+      "timeouts": [
+        0,
+        24
+      ],
+      "tool_errors": [
+        0,
+        24
+      ],
+      "unknown": [
+        0,
+        24
+      ]
+    }
+  },
+  "test_by_theme": {
+    "eligible_room_bottleneck": {
+      "LLM+CSP": [
+        6,
+        6
+      ],
+      "LLM-only": [
+        6,
+        6
+      ]
+    },
+    "fixed_surgeon_contention": {
+      "LLM+CSP": [
+        6,
+        6
+      ],
+      "LLM-only": [
+        6,
+        6
+      ]
+    },
+    "room_contention": {
+      "LLM+CSP": [
+        6,
+        6
+      ],
+      "LLM-only": [
+        6,
+        6
+      ]
+    },
+    "tight_windows": {
+      "LLM+CSP": [
+        6,
+        6
+      ],
+      "LLM-only": [
+        6,
+        6
+      ]
+    }
+  },
+  "test_csp_failure_split": {
+    "bad_output": 0,
+    "solver_unknown": 0,
+    "translation_error": 0
+  }
+}

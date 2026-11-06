@@ -1,0 +1,16 @@
+{
+  "files": {
+    "gold.jsonl": "f44eb57fe385325eff5a9a31bf058f65c7b5198fdbde2bdae30cebbaf7a48a0a",
+    "model.jsonl": "7b81e4d90d4733d26edfab8d40a7b429488305b6d6089d90ad2799e23f3aba34"
+  },
+  "pairs_per_size": 10,
+  "problems": 100,
+  "sizes": [
+    5,
+    10,
+    20,
+    40,
+    80
+  ],
+  "version": "hard-synthetic-v1"
+}

@@ -1,0 +1,176 @@
+{
+  "10": {
+    "decision_correct": [
+      20,
+      20,
+      0.8388698745050667,
+      1.0
+    ],
+    "fully_correct": [
+      20,
+      20,
+      0.8388698745050667,
+      1.0
+    ],
+    "median_output_tokens": 1441.0,
+    "median_seconds": 15.052742436993867,
+    "outcomes": {
+      "correct": 20
+    },
+    "problems": 20,
+    "proof_success": [
+      10,
+      10,
+      0.7224598312333834,
+      1.0
+    ],
+    "schedule_success": [
+      10,
+      10,
+      0.7224598312333834,
+      1.0
+    ],
+    "system_failures": 0,
+    "violations": {}
+  },
+  "20": {
+    "decision_correct": [
+      20,
+      20,
+      0.8388698745050667,
+      1.0
+    ],
+    "fully_correct": [
+      20,
+      20,
+      0.8388698745050667,
+      1.0
+    ],
+    "median_output_tokens": 3314.5,
+    "median_seconds": 30.091942479019053,
+    "outcomes": {
+      "correct": 20
+    },
+    "problems": 20,
+    "proof_success": [
+      10,
+      10,
+      0.7224598312333834,
+      1.0
+    ],
+    "schedule_success": [
+      10,
+      10,
+      0.7224598312333834,
+      1.0
+    ],
+    "system_failures": 0,
+    "violations": {}
+  },
+  "40": {
+    "decision_correct": [
+      20,
+      20,
+      0.8388698745050667,
+      1.0
+    ],
+    "fully_correct": [
+      19,
+      20,
+      0.7638641064874331,
+      0.9911187805671268
+    ],
+    "median_output_tokens": 6476.5,
+    "median_seconds": 57.292049021460116,
+    "outcomes": {
+      "broken_schedule": 1,
+      "correct": 19
+    },
+    "problems": 20,
+    "proof_success": [
+      10,
+      10,
+      0.7224598312333834,
+      1.0
+    ],
+    "schedule_success": [
+      9,
+      10,
+      0.5958436145024278,
+      0.9821242504842788
+    ],
+    "system_failures": 0,
+    "violations": {
+      "clash or required gap": 1
+    }
+  },
+  "5": {
+    "decision_correct": [
+      20,
+      20,
+      0.8388698745050667,
+      1.0
+    ],
+    "fully_correct": [
+      20,
+      20,
+      0.8388698745050667,
+      1.0
+    ],
+    "median_output_tokens": 731.5,
+    "median_seconds": 8.139965208538342,
+    "outcomes": {
+      "correct": 20
+    },
+    "problems": 20,
+    "proof_success": [
+      10,
+      10,
+      0.7224598312333834,
+      1.0
+    ],
+    "schedule_success": [
+      10,
+      10,
+      0.7224598312333834,
+      1.0
+    ],
+    "system_failures": 0,
+    "violations": {}
+  },
+  "80": {
+    "decision_correct": [
+      19,
+      20,
+      0.7638641064874331,
+      0.9911187805671268
+    ],
+    "fully_correct": [
+      19,
+      20,
+      0.7638641064874331,
+      0.9911187805671268
+    ],
+    "median_output_tokens": 15779,
+    "median_seconds": 163.64587220794056,
+    "outcomes": {
+      "correct": 19,
+      "timed_out": 1
+    },
+    "problems": 20,
+    "proof_success": [
+      10,
+      10,
+      0.7224598312333834,
+      1.0
+    ],
+    "schedule_success": [
+      9,
+      10,
+      0.5958436145024278,
+      0.9821242504842788
+    ],
+    "system_failures": 0,
+    "violations": {}
+  }
+}
