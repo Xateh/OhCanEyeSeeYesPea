@@ -22,9 +22,11 @@ def isolated_argv(model, effort, system_prompt):
             '--output-format', 'json', '--system-prompt', system_prompt]
 
 
-def run_cli(argv, stdin, cwd):
+def run_cli(argv, stdin, cwd, timeout_seconds=CALL_TIMEOUT_SECONDS, status_observer=None):
     done = subprocess.run(argv, input=stdin, cwd=cwd, capture_output=True, text=True,
-                          timeout=CALL_TIMEOUT_SECONDS)
+                          timeout=timeout_seconds)
+    if status_observer is not None:
+        status_observer(done.returncode)
     if done.returncode != 0 and not done.stdout.strip():
         raise RuntimeError(f'claude exited {done.returncode}: {done.stderr[-300:]}')
     return done.stdout
