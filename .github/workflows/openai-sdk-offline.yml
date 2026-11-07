@@ -17,7 +17,8 @@ jobs:
           python-version: '3.12'
           check-latest: false
       - name: Install hash-pinned optional SDK
-        run: python -m pip --isolated install --index-url https://pypi.org/simple --only-binary=:all: --require-hashes -r requirements-openai-sdk.lock
+        run: |
+          python -m pip --isolated install --index-url https://pypi.org/simple --only-binary=:all: --require-hashes -r requirements-openai-sdk.lock
       - name: Require pinned SDK imports (no skipped coverage)
         run: python -c "import openai,httpx2; from openai_sdk_client import sdk_runtime; sdk_runtime()"
       - name: SDK regressions with network blocked
