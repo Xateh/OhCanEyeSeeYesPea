@@ -215,9 +215,6 @@ def summarize(plan,cases,receipts):
  by_arm={a:dict(**group([r for r in rows if r['arm']==a]),**cost_summary([r for r in receipts if r['arm']==a],planned_runs=sum(r['arm']==a for r in rows))) for a in ('no_tools','csp')}
  for a in by_arm:
   received=[r for r in receipts if r['arm']==a]
-  missing=by_arm[a]['planned']-len(received)
-  by_arm[a]['cost_estimate_coverage'][1]=by_arm[a]['planned'];by_arm[a]['unknown_cost_estimate_runs']+=missing
-  if missing:by_arm[a]['cost_estimate_usd']=None
   known=[r['token_usage'] for r in received if r['token_usage'] is not None]
   by_arm[a].update(token_coverage=[len(known),by_arm[a]['planned']],known_tokens=sum(sum(x.values()) for x in known),tokens_total=sum(sum(x.values()) for x in known) if len(known)==by_arm[a]['planned'] else None,observed_elapsed_seconds=sum(r['elapsed_seconds'] for r in received),tool_calls=sum(len(r['tool_calls']) for r in received),solver_elapsed_seconds=sum(e['elapsed_seconds'] for r in received for e in r['solver_events']),provider_errors=sum(r['provider_error'] for r in received),tool_errors=sum(r['tool_error'] for r in received))
  return dict(version=VERSION,status='mock_responses_not_model_results' if c['execution_mode']=='responses_mock' else 'responses_receipts_not_research_acceptance',cost_basis='estimate_from_pinned_rates_not_billing',billed_cost_usd=None,by_arm=by_arm,pairs=pairs,by_family={f:{a:group([r for r in rows if r['family']==f and r['arm']==a]) for a in ('no_tools','csp')} for f in sorted({r['family'] for r in rows})},rows=rows)

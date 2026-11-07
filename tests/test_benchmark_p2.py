@@ -240,3 +240,43 @@ class DescriptorBoundTests(unittest.TestCase):
             with patch.object(audit.os,'read',read):
                 with self.assertRaises(ValueError):audit._read_blobs(d,names,16)
             self.assertEqual(sum(size for _,size in seen),17);self.assertTrue(all(n<=17 for n,_ in seen))
+
+class PlannedUnknownCountTests(unittest.TestCase):
+    def test_all_eight_summaries_count_each_planned_unknown_once(self):
+        import json
+        import test_responses_calibration as calibration
+        import test_responses_runner as helpers
+        names=['responses_runner','responses_mandatory_runner','responses_phase_runner','responses_structured_runner','responses_astra_runner','responses_calibration_runner','responses_handoff_runner','responses_sdk_runner']
+        for name in names:
+            r=importlib.import_module(name)
+            api=importlib.import_module('responses_transport' if name in names[:2] else 'responses_calibration_transport' if name=='responses_handoff_runner' else name.replace('_runner','_transport'))
+            c=calibration.config() if name in names[5:] else helpers.config([fixture.cid('optional-forced'),fixture.cid('pair-deadline')])
+            specs=calibration.specs() if name in names[5:] else fixture.spec()
+            rates=dict(input_per_million=2,cached_input_per_million=.1,output_per_million=10,source='synthetic')
+            if name in names[4:]:rates.update(cache_write_30m_per_million=2.5,cache_write_12h_per_million=5)
+            c.update(version=r.VERSION,provider_revision=api.VERSION,execution_mode='responses_mock',provider_binding=api.binding('mock-model','mock-model','mock-responses-v1','high',100,2,1,rates),tool_call_limit=1)
+            with self.subTest(runner=name):
+                plan,cases=r.make_plan(specs,c)
+                # Empty-plan assessment is the original regression, independent of provider.
+                empty=r.summarize(plan,cases,[])
+                for arm in empty['by_arm'].values():self.assertEqual(arm['unknown_cost_estimate_runs'],arm['planned'])
+                for rows,planned,known,subtotal in [([],2,0,0),([{'call_accounting':[{'usage':{'cost_estimate_usd':.25}}]}],2,1,.25),([{'call_accounting':[{'usage':None}]}],2,0,0),([{'call_accounting':[{'usage':{'cost_estimate_usd':.25}}]}]*2,2,2,.5)]:
+                    value=r.cost_summary(rows,planned_runs=planned)
+                    self.assertEqual(value['unknown_cost_estimate_runs'],planned-known);self.assertEqual(value['cost_estimate_coverage'],[known,planned]);self.assertEqual(value['known_cost_estimate_usd'],subtotal)
+                    self.assertEqual(value['cost_estimate_usd'],subtotal if known==planned else None)
+
+                # Synthetic terminal error receipts exercise the public aggregate path;
+                # no provider responses, network, solver or semantic success are fabricated.
+                def receipt(slot,known):
+                    observed={'input_tokens':1,'output_tokens':1,'cost_estimate_usd':.25} if known else None
+                    return dict(**slot,raw_output=None,normalized_output=None,normalization_errors=[],provider_error=True,tool_error=False,termination='provider_error',elapsed_seconds=0,token_usage={'input_tokens':1,'output_tokens':1} if known else None,token_usage_reason='synthetic accounting regression',call_accounting=[{'usage':observed,'reason':'synthetic accounting regression'}],tool_calls=[],solver_events=[],provider_calls=[],resource_error=None,retained_evidence=None)
+                for scenario in ['zero','partial','unknown_received','full']:
+                    slots=plan['slots'] if scenario in ['full','unknown_received'] else plan['slots'][:1] if scenario=='partial' else []
+                    receipts=[receipt(slot,scenario!='unknown_received') for slot in slots]
+                    summary=r.summarize(plan,cases,receipts)
+                    for arm_name,arm in summary['by_arm'].items():
+                        known=sum(x['arm']==arm_name for x in receipts) if scenario!='unknown_received' else 0
+                        self.assertEqual(arm['unknown_cost_estimate_runs'],arm['planned']-known,(name,scenario,arm_name))
+                        self.assertEqual(arm['cost_estimate_coverage'],[known,arm['planned']])
+                        self.assertEqual(arm['known_cost_estimate_usd'],known*.25)
+                        self.assertEqual(arm['cost_estimate_usd'],known*.25 if known==arm['planned'] else None)
