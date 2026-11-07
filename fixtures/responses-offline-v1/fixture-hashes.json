@@ -1,0 +1,15 @@
+{
+  "settings.json": "a2cbacedb7757674196f10f6981c5ee26cfd79ff36a229f67bb0ffb7f389579a",
+  "settings-final.json": "e576327c537e0e016f4f4553077ccc67cd6c276ea49aec45861b977630d32e16",
+  "handoff-request-projection.jsonl": "d74350d06df8baadf7d81b2c432acc22db10a280c70193c7ad7916731079db02",
+  "frozen-cli-v3-prompts.txt": "b9bdc650dc8c884a34366ab9ce8bf5065e45b583e94752832972e5c20bde92e2",
+  "README.md": "466a4775014ee5ad33979a431278c044c3142015632b5702e7861d0e9621a1b1",
+  "datasets.json": "983bd1870ebf716438307196d8c8008d2ac4501b30e0154e08be3885b86e36e3",
+  "abstention-projection.jsonl": "229b8fee273f758e07a5538495637ca9f0bd26fc003054572e8b1a84934c8750",
+  "seeded-v2/model.jsonl": "f08e9ed872e6f39b6c2fb19dac867fb267f6915272612b51aec212e36c01eec1",
+  "seeded-v2/manifest.json": "d2c880f50dad90ce0593ce03c44e0650a1b7231d89c2ba71c6a529c4cc13af44",
+  "seeded-v2/receipts.jsonl": "fd3bc0d6cdda69de41d85b6bddb5c56348a80f1f4936bbd38b0d1c7118c83dc3",
+  "seeded-v2/diagnostics.jsonl": "da172fc434176b087129d1041ec5ef18b857d9c91bb6ae0c9a1a5f4197c69c1c",
+  "seeded-v2/gold.jsonl": "65de46b71aed96579b289c0df25fc20e6d60d8355ff0c1c4606d9722be6d9ebc",
+  "seeded-v2/coverage.json": "9776ca50c3b21bb4260f80e072fb68fff6fe05610d440c2e61f38636c5c7383c"
+}

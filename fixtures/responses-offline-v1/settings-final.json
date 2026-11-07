@@ -1,0 +1,77 @@
+{
+  "version": "responses-balanced-calibration-runner-v1",
+  "provider_revision": "openai-responses-balanced-calibration-v1",
+  "case_ids": [
+    "4110d965feeb8e31e4e94144",
+    "53760c24e8a90fdcf4ad402f",
+    "b2fe2af990bb7590f6631281",
+    "146c9dd291b62b6143c8a656"
+  ],
+  "repetitions": 1,
+  "seed": 20261107,
+  "shuffle_cases": true,
+  "order": "counterbalanced_pairs",
+  "token_limit": 12000,
+  "wall_seconds": 45,
+  "tool_call_limit": 1,
+  "retry_limit": 0,
+  "currency": "USD",
+  "solver_revision": "temporal-minute-dfs-v1",
+  "solver_limits": {
+    "max_nodes": 100000,
+    "seconds": 2
+  },
+  "estimated_cost_ceiling_usd": 2.5,
+  "execution_mode": "responses_live",
+  "provider_binding": {
+    "version": "openai-responses-balanced-calibration-v1",
+    "endpoint": "https://api.openai.com/v1/responses",
+    "model": "gpt-6-astra",
+    "expected_model": "gpt-6-astra",
+    "profile": "gpt-6-astra-high-standard-v1",
+    "reasoning_effort": "high",
+    "max_output_tokens": 2000,
+    "call_wall_seconds": 20,
+    "call_budget_usd": 0.2,
+    "rates": {
+      "input_per_million": 10,
+      "cached_input_per_million": 1,
+      "cache_write_30m_per_million": 12.5,
+      "cache_write_12h_per_million": 25,
+      "output_per_million": 50,
+      "source": "https://developers.openai.com/api/docs/pricing Standard short context, verified 2026-11-07"
+    },
+    "serialization": "responses-phase-text-structured-final-v1",
+    "final_schema_sha256": "2c3d0455befcec0ec3f873fd2a3b2dac9240313229b38f9f682b6a8ec9ded31c",
+    "format_policy": "same_strict_final_both_arms_translation_unchanged",
+    "service_tier": "default",
+    "cache_ttl": "30m",
+    "request_bytes_cap": 7500,
+    "transport_retries": 0,
+    "model_fallback": false,
+    "runtime": {
+      "implementation": "cpython",
+      "version": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]"
+    },
+    "retention_policy": {
+      "version": "paired-receipt-retention-v1",
+      "line_bytes": 8388608,
+      "evidence_bytes": 67108864,
+      "request_bytes": 1048576,
+      "envelope_bytes": 1048576
+    },
+    "source_sha256": {
+      "responses_calibration_transport.py": "d16dc3b712f73f5145d51a39ad054fb7bff386e44804bd896662e9c7510dc2eb",
+      "responses_astra_transport.py": "4e5cfb051117ac29c6859b68679f1441a966774b3c70d3df2ee5c233f222fa10",
+      "responses_structured_transport.py": "3fb76a2ad196b714025621bf06497d04c9f1ef990553cf26b400880958c4bef6",
+      "responses_final_schema.py": "6b79063ad3c7257d3ece602a4801740bf3e0fc8614a2620e60044168a3e9986f",
+      "responses_phase_transport.py": "d745ec84297fafe4cb7a14184d42bdba949b2312eb690dec91f6768c4a445112",
+      "responses_transport.py": "aac6b44b5bb5cc66a992dda5acde0dc94945f1abaf7c89fcb82ff9978b2ec7ee",
+      "responses_credentials.py": "ef2e100f9ddc673523608e2f38642e8e59edbcfece4450969ba9b2bb91bccf07",
+      "study/prompts.py": "b9bdc650dc8c884a34366ab9ce8bf5065e45b583e94752832972e5c20bde92e2",
+      "tier_a_contract.py": "eb4c465c09ff7e81356101eec96823e94793a58e2db00d786955df83276f8d1c",
+      "study/accounting.py": "22eb1978bcc3340f076b836897e93b09bf19e34fd2008d63565a4e393a8cd313",
+      "paired_receipts.py": "7cfc42db31b283a4be927f6bd9fc6f57355041ce8d36fb570c9e5b3140d7e993"
+    }
+  }
+}

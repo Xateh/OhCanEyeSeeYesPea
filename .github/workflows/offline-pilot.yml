@@ -32,6 +32,6 @@ jobs:
           python-version: ${{ matrix.python-version }}
           check-latest: false
       - name: Run unit tests
-        run: python -m unittest discover -s tests -v
+        run: python tools/run_offline_suite.py
       - name: Verify fixtures, regeneration and mock arms
-        run: python -m scripts.verify_package
+        run: python tools/run_offline_suite.py --verify-package

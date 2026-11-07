@@ -2,9 +2,13 @@
 
 CS3263 Group 7 research prototype: compare the **same language model on identical surgery-scheduling text**, without tools versus with a CSP tool that receives the model's translated constraints. An independent checker scores the intended instance outside both arms.
 
-## Current status
+## Current reviewed integration (7 November 2026)
 
-This branch contains an **original-synthetic, offline proof pilot**, under review in [draft PR #1](https://github.com/Xateh/OhCanEyeSeeYesPea/pull/1). It is not a clinical system or a completed real-model study.
+The current addition provides an official OpenAI Python SDK path for model-alone versus mandatory model-plus-CSP calibration. See the [SDK usage guide](docs/openai-sdk-integration-v1.md) and [paired-runner integration guide](docs/paired-runner-integration.md). SDK v2 has offline/mock verification only: 434 distinct tests passed normally and the same 434 under optimized Python in a clean copy, including 13 SDK tests. Live SDK behavior is not yet validated. The SDK entry point currently retains the four-case calibration guard and pinned CPython 3.12/Linux environment; it does not provide arbitrary-cohort execution or optimality scoring. Historical raw-HTTP development pilots and protocols remain separate and unchanged.
+
+## Original proof-pilot status (historical)
+
+This branch contains an **original-synthetic, offline proof pilot**, originally proposed in [PR #1](https://github.com/Xateh/OhCanEyeSeeYesPea/pull/1). It is not a clinical system or a completed real-model study.
 
 - 48 controlled-language cases in 24 paired families: 24 feasible and 24 certified infeasible; 2–3 mandatory surgeries per case.
 - Family-disjoint train/validation/test splits of 32/8/8 cases, with deliberate parameter ordering rather than random IID sampling.

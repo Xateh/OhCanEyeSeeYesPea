@@ -1,0 +1,26 @@
+name: OpenAI SDK offline
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  sdk:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.12'
+          check-latest: false
+      - name: Install hash-pinned optional SDK
+        run: python -m pip --isolated install --index-url https://pypi.org/simple --only-binary=:all: --require-hashes -r requirements-openai-sdk.lock
+      - name: Require pinned SDK imports (no skipped coverage)
+        run: python -c "import openai,httpx2; from openai_sdk_client import sdk_runtime; sdk_runtime()"
+      - name: SDK regressions with network blocked
+        run: python tools/run_offline_suite.py test_responses_sdk.py
+      - name: SDK optimized regressions with network blocked
+        run: python -O tools/run_offline_suite.py test_responses_sdk.py

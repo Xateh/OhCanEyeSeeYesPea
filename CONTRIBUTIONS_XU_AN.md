@@ -39,3 +39,20 @@ This revision has no live provider validation, prompt transmission, credential u
 ### Provider correctness follow-up
 
 AI-assisted offline regressions reproduced a missed per-call cost overrun and a mismatch between emitted and assessable receipt sizes. The local correction adds per-call observation/allocation joins, explicit overrun failures and shared bounded receipt/archive handling. Original raw/error/usage evidence is retained; oversized unparsed evidence is explicitly marked opaque and cannot be treated as successful evidence. Accounting, strict JSON, retention code and runtime identities are pinned. This remains AI-assisted software validation with no live calls, human sign-off or publication. Earlier test counts belong to their recorded revisions; the follow-up has its own evidence record.
+
+
+## Direct API format and counterbalanced ordering
+
+Following Xu An's approved format change, AI assistance implemented a separate direct OpenAI Responses transport, versioned paired runner, counterbalanced arm ordering, key-free environment template and explicit future key-file loader. The API preserves the shared case text and application-owned JSON CSP protocol, frozen intended-instance evidence scoring and every planned failure/missing slot. It reuses the merged checker, CSP and shared text formatter; Allan's historic CLI experiments remain a separate protocol. Original runner/source dependencies and trial artifacts are preserved.
+
+Code/tests/docs in this revision are substantially AI-assisted and require human/team review. Verification uses synthetic HTTP responses and synthetic test keys only; no real credential is read, no entitlement or billing is verified, and no live API/model call or paid trial is run. Dollar fields are estimates from pinned rates, not confirmed charges. Existing ChatGPT plan/API-credit possibilities remain unconfigured. The supplied .env.example is empty; persistent credential setup and real execution need separate authority. This record does not claim personal sole authorship, human sign-off, research acceptance or new model results.
+
+
+## 7 November: SDK migration and recorded development checks
+
+Under Xu An's direction, AI assistance prepared a separate official OpenAI Python SDK transport, dependency lock, request/response parity tests and protected local execution boundary. Historic HTTP protocols and outcomes remain intact; the SDK itself has only offline/mock validation. This is substantial AI-authored integration/testing work, not independent human sign-off or solver authorship.
+
+The preceding HTTP implementation did complete separately approved development pilots, including a selected four-case Astra comparison and final-handoff/schema diagnostics. Those measurements and corrected usage estimates are preserved in versioned xlogin evidence; earlier paragraphs saying no live API calls describe their own revision, not the later record. Selected repeated development cases do not establish general accuracy, a holdout, optimality or a CLI/API causal effect. Benjamin retains protocol/analysis ownership, Allan solver ownership, and Xu An dataset/validation/harness integration. Any broader run or publication needs its own applicable approval.
+
+
+The SDK review repair adds bounded partial-response retention, distinct streaming-timeout outcomes, explicit encoding rejection, checked-in synthetic regression fixtures and a dedicated optional-SDK CI job. AI assistance implemented and tested this work; coordinating code review is complete and PR publication is separately authorized. This does not claim independent human/team sign-off. No further model calls or new research outcomes were produced.
