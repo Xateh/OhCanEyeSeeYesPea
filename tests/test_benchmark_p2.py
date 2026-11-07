@@ -283,3 +283,52 @@ class PlannedUnknownCountTests(unittest.TestCase):
                         self.assertEqual(arm['cost_estimate_coverage'],[known,arm['planned']])
                         self.assertEqual(arm['known_cost_estimate_usd'],known*.25)
                         self.assertEqual(arm['cost_estimate_usd'],known*.25 if known==arm['planned'] else None)
+
+class CurrentExampleTests(unittest.TestCase):
+    def test_current_template_accepts_filled_intentional_placeholders(self):
+        import json
+        path=Path(__file__).resolve().parents[1]/'docs/paired-runner-config.example.json'
+        example=json.loads(path.read_text());values=fixture.config()
+        filled={k:values[k] if v is None and k!='provider_binding' else v for k,v in example.items()}
+        self.assertEqual(paired.config(filled)['version'],paired.VERSION)
+
+class TrailerTerminationTests(unittest.TestCase):
+    response=RealHTTPFramingTests.response
+    invoke=RealHTTPFramingTests.invoke
+    def test_real_chunk_trailer_terminator_is_required(self):
+        for name in TRANSPORTS:
+            for ending in [b'0\r\n',b'0\r\nX-Test: synthetic\r\n',b'0\r\nX-Test: synthetic',b'0\r\n\n']:
+                with self.subTest(transport=name,ending=ending):
+                    result=self.invoke(importlib.import_module(name),self.response(b'2\r\n{}\r\n'+ending,chunked=True))
+                    self.assertFalse(result[3]);self.assertEqual(result[5]['read_error'],'read_failure');self.assertEqual(result[2],b'{}')
+    def test_real_terminated_trailers_and_boundary_redaction(self):
+        for name in TRANSPORTS:
+            module=importlib.import_module(name)
+            good=self.invoke(module,self.response(b'2\r\n{}\r\n0\r\nX-Test: synthetic\r\n\r\n',chunked=True));self.assertTrue(good[3]);self.assertEqual(good[2],b'{}')
+            body=b'echo:'+KEY[:14].encode();wire=hex(len(body))[2:].encode()+b'\r\n'+body+b'\r\n0\r\n'
+            bad=self.invoke(module,self.response(wire,chunked=True));self.assertFalse(bad[3]);self.assertNotIn(KEY[:14].encode(),bad[2]);self.assertTrue(bad[4])
+    def test_unterminated_trailer_never_scores_complete_json_prefix(self):
+        import json
+        body=json.dumps(dict(model='mock-model',status='completed',service_tier='default',output=[dict(type='message',role='assistant',content=[dict(type='output_text',text='{"type":"final","output":{"status":"UNKNOWN"}}')])],usage=dict(input_tokens=1,output_tokens=1,total_tokens=2,input_tokens_details=dict(cached_tokens=0,cache_write_tokens=0),output_tokens_details=dict(reasoning_tokens=0)))).encode()
+        wire=hex(len(body))[2:].encode()+b'\r\n'+body+b'\r\n0\r\n'
+        for name in TRANSPORTS:
+            module=importlib.import_module(name);rates=dict(input_per_million=2,cached_input_per_million=.1,output_per_million=10,source='synthetic')
+            if name in ['responses_astra_transport','responses_calibration_transport']:rates.update(cache_write_30m_per_million=2.5,cache_write_12h_per_million=5)
+            binding=module.binding('mock-model','mock-model','mock-responses-v1','low',100,2,1,rates)
+            adapter=module.ResponsesAdapter(binding,transport=lambda *a:self.invoke(module,self.response(wire,chunked=True)))
+            with self.assertRaises(ValueError):adapter.respond([{'role':'system','content':'shared'},{'role':'user','content':'same case'}],[],dict(token_limit=1000,wall_seconds=2,spending_remaining_usd=1))
+            record=adapter.calls[0];self.assertIsNone(record['raw_model_text']);self.assertIsNone(record['observed_usage']);self.assertFalse(record['response_complete']);self.assertEqual(record['raw_response'],body.decode());module.validate_record(record,binding)
+    def test_trailer_bound_and_timeout_keep_received_body(self):
+        import responses_http_v2 as reader
+        class Opener:
+            def open(inner,*a,**k):return response
+        response=self.response(b'2\r\n{}\r\n0\r\nX-Test: '+b'x'*40+b'\r\n\r\n',chunked=True)
+        with patch('urllib.request.build_opener',return_value=Opener()):result=reader.once('https://api.openai.com/v1/responses',b'{}',2,KEY,importlib.import_module('responses_transport').NoRedirect,32)
+        self.assertFalse(result[3]);self.assertEqual(result[2],b'{}');self.assertEqual(result[5]['read_error'],'read_failure')
+        response=self.response(b'2\r\n{}\r\n0\r\n\r\n',chunked=True);original=response.fp.readline
+        def readline(*a):
+            if response.chunk_left==0 and response.fp.tell()>0 and response.fp.getvalue()[response.fp.tell():]==b'\r\n':raise TimeoutError('synthetic')
+            return original(*a)
+        response.fp.readline=readline
+        with patch('urllib.request.build_opener',return_value=Opener()):result=reader.once('https://api.openai.com/v1/responses',b'{}',2,KEY,importlib.import_module('responses_transport').NoRedirect,32)
+        self.assertFalse(result[3]);self.assertEqual(result[2],b'{}');self.assertEqual(result[5]['read_error'],'timeout')

@@ -33,3 +33,14 @@ Descriptor tests observe os.read directly and cover replacement before/after ope
 and growth before/after fstat. An already opened regular inode stays pinned after
 path replacement. EOF-delimited responses without declared framing cannot expose
 an undeclared intended length; no remote cancellation is promised.
+
+Trailer review correction: stdlib HTTPResponse tolerates EOF in its trailer reader.
+The legacy helper now replaces only that per-response trailer-discard hook with a
+bounded terminator check, retaining stdlib chunk decoding. Completion requires an
+observed CRLF blank line after the zero chunk and any trailer lines. EOF, a missing
+terminator, trailer timeout or more than min(body limit, 65,536) trailer bytes stays
+incomplete, with retained body/redaction and unknown usage. This relies on the
+CPython HTTPResponse trailer hook; absent/unsupported hooks fail closed. It does
+not parse trailer fields into model evidence or increase body/call/time limits.
+Source pins change explicitly; historical source identities/results are retained.
+The current paired config template now names v4; frozen historical plans are untouched.

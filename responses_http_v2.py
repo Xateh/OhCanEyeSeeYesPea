@@ -24,10 +24,28 @@ def once(endpoint,data,timeout,key,redirect_handler,limit):
         headers={k:response.headers.get(k) for k in ('x-request-id','openai-processing-ms','retry-after') if response.headers.get(k) is not None}
         code=response.status if hasattr(response,'status') else response.code
         reader=getattr(response,'read1',response.read)
-        chunked=getattr(response,'chunked',False)
+        framed=response.fp if isinstance(response,urllib.error.HTTPError) else response
+        chunked=getattr(framed,'chunked',False)
+        trailer_complete=False
+        if chunked:
+            # Keep stdlib chunk decoding; tighten only its EOF-tolerant trailer hook.
+            def checked_trailer():
+                nonlocal trailer_complete
+                remaining=min(limit,65536)
+                while remaining>0:
+                    line=framed.fp.readline(remaining+1)
+                    remaining-=len(line)
+                    if remaining<0 or not line.endswith(b'\r\n'):
+                        raise http.client.IncompleteRead(b'')
+                    if line==b'\r\n':
+                        trailer_complete=True;return
+                raise http.client.IncompleteRead(b'')
+            if isinstance(framed,http.client.HTTPResponse) and callable(getattr(framed,'_read_and_discard_trailer',None)):
+                framed._read_and_discard_trailer=checked_trailer
+            else:read_error='read_failure'
         declared=response.headers.get('Content-Length')
         declared=int(declared) if not chunked and isinstance(declared,str) and declared.isascii() and declared.isdecimal() else None
-        while size<limit+1:
+        while read_error is None and size<limit+1:
             try:
                 piece=reader(min(65536,limit+1-size))
                 if not isinstance(piece,bytes):raise ValueError('HTTP bytes required')
@@ -36,7 +54,7 @@ def once(endpoint,data,timeout,key,redirect_handler,limit):
                     remaining=getattr(response,'length',None)
                     if (isinstance(remaining,int) and remaining>0) or (declared is not None and size<declared):
                         read_error='read_failure'
-                    elif chunked and (getattr(response,'chunk_left',None) is not None or not response.isclosed()):
+                    elif chunked and (not trailer_complete or getattr(framed,'chunk_left',None) is not None or not framed.isclosed()):
                         read_error='read_failure'
                     break
                 piece=piece[:limit+1-size];chunks.append(piece);size+=len(piece)
