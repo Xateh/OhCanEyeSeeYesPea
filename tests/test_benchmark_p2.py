@@ -242,7 +242,10 @@ class DescriptorBoundTests(unittest.TestCase):
             self.assertEqual(sum(size for _,size in seen),17);self.assertTrue(all(n<=17 for n,_ in seen))
 
 class PlannedUnknownCountTests(unittest.TestCase):
-    def test_all_eight_summaries_count_each_planned_unknown_once(self):
+    # Pure summary accounting needs an identity, not an installed SDK runtime.
+    # Real SDK/runtime contracts remain in the dedicated optional-SDK suite.
+    @patch('responses_sdk_transport.sdk_runtime',return_value={'test_only':'accounting_no_sdk_integration'})
+    def test_all_eight_summaries_count_each_planned_unknown_once(self,_sdk_runtime):
         import json
         import test_responses_calibration as calibration
         import test_responses_runner as helpers
