@@ -1,0 +1,633 @@
+{
+  "version": "tier-a-relative-review-v1",
+  "baseline": "3f20017148b3290c518483b60afc7c4a75971a9e",
+  "status": "dataset_owner_review_not_research_split",
+  "families": [
+    {
+      "family": "room-gap",
+      "case_ids": [
+        "room-gap-5-82b58812c0b0",
+        "room-gap-4-15577ceb17aa"
+      ],
+      "analytical_relationship": "exact_instance_match",
+      "analytical_refs": [
+        {
+          "file": "tests/test_tier_a_semantics.py",
+          "symbol": "TierASemanticsTests.test_g1_room_gap_boundary"
+        },
+        {
+          "file": "tests/test_tier_a_semantics.py",
+          "symbol": "TierASemanticsTests.test_g2_gap_only_contradiction"
+        }
+      ],
+      "source_ref": {
+        "file": "surgerybench/tier_a_dataset.py",
+        "symbol": "cases"
+      },
+      "derivation": "package documented as reusing analytical regressions; no per-case historical parent recorded",
+      "pilot_relationship": "shared scheduling motif only; no documented case parent",
+      "pilot_theme_candidates": [
+        "tight_windows",
+        "room_contention",
+        "fixed_surgeon_contention",
+        "eligible_room_bottleneck"
+      ]
+    },
+    {
+      "family": "surgeon-gap",
+      "case_ids": [
+        "surgeon-gap-df19b33e3093"
+      ],
+      "analytical_relationship": "exact_instance_match",
+      "analytical_refs": [
+        {
+          "file": "tests/test_tier_a_semantics.py",
+          "symbol": "TierASemanticsTests.test_g3_surgeon_gap_boundary"
+        }
+      ],
+      "source_ref": {
+        "file": "surgerybench/tier_a_dataset.py",
+        "symbol": "cases"
+      },
+      "derivation": "package documented as reusing analytical regressions; no per-case historical parent recorded",
+      "pilot_relationship": "shared scheduling motif only; no documented case parent",
+      "pilot_theme_candidates": [
+        "fixed_surgeon_contention"
+      ]
+    },
+    {
+      "family": "fragmented-room",
+      "case_ids": [
+        "fragmented-3-57e39df57447",
+        "fragmented-2-00b3f769bb8d"
+      ],
+      "analytical_relationship": "exact_instance_match",
+      "analytical_refs": [
+        {
+          "file": "tests/test_tier_a_semantics.py",
+          "symbol": "TierASemanticsTests.test_c1_fragmented_room_cannot_fit_three"
+        },
+        {
+          "file": "tests/test_tier_a_semantics.py",
+          "symbol": "TierASemanticsTests.test_c3_exact_calendar_windows"
+        }
+      ],
+      "source_ref": {
+        "file": "surgerybench/tier_a_dataset.py",
+        "symbol": "cases"
+      },
+      "derivation": "package documented as reusing analytical regressions; no per-case historical parent recorded",
+      "pilot_relationship": "shared scheduling motif only; no documented case parent",
+      "pilot_theme_candidates": [
+        "tight_windows",
+        "room_contention",
+        "fixed_surgeon_contention",
+        "eligible_room_bottleneck"
+      ]
+    },
+    {
+      "family": "calendar-intersection",
+      "case_ids": [
+        "calendar-intersection-dc3025ff7a6c"
+      ],
+      "analytical_relationship": "exact_instance_match",
+      "analytical_refs": [
+        {
+          "file": "tests/test_tier_a_semantics.py",
+          "symbol": "TierASemanticsTests.test_c2_resource_intersection_too_short"
+        }
+      ],
+      "source_ref": {
+        "file": "surgerybench/tier_a_dataset.py",
+        "symbol": "cases"
+      },
+      "derivation": "package documented as reusing analytical regressions; no per-case historical parent recorded",
+      "pilot_relationship": "shared scheduling motif only; no documented case parent",
+      "pilot_theme_candidates": [
+        "tight_windows",
+        "room_contention",
+        "fixed_surgeon_contention",
+        "eligible_room_bottleneck"
+      ]
+    },
+    {
+      "family": "optional-load",
+      "case_ids": [
+        "optional-omitted-038f3b9a3ca9",
+        "optional-forced-04039d3b61c3"
+      ],
+      "analytical_relationship": "exact_instance_match",
+      "analytical_refs": [
+        {
+          "file": "tests/test_tier_a_semantics.py",
+          "symbol": "TierASemanticsTests.test_o1_optional_omission_and_mandatory_counterpart"
+        }
+      ],
+      "source_ref": {
+        "file": "surgerybench/tier_a_dataset.py",
+        "symbol": "cases"
+      },
+      "derivation": "package documented as reusing analytical regressions; no per-case historical parent recorded",
+      "pilot_relationship": "shared scheduling motif only; no documented case parent",
+      "pilot_theme_candidates": [
+        "tight_windows",
+        "room_contention",
+        "fixed_surgeon_contention",
+        "eligible_room_bottleneck"
+      ]
+    },
+    {
+      "family": "optional-adjacent",
+      "case_ids": [
+        "optional-adjacent-98e3b4b53e70"
+      ],
+      "analytical_relationship": "exact_instance_match",
+      "analytical_refs": [
+        {
+          "file": "tests/test_tier_a_semantics.py",
+          "symbol": "TierASemanticsTests.test_o2_optional_present_and_absent"
+        }
+      ],
+      "source_ref": {
+        "file": "surgerybench/tier_a_dataset.py",
+        "symbol": "cases"
+      },
+      "derivation": "package documented as reusing analytical regressions; no per-case historical parent recorded",
+      "pilot_relationship": "shared scheduling motif only; no documented case parent",
+      "pilot_theme_candidates": [
+        "tight_windows",
+        "room_contention",
+        "fixed_surgeon_contention",
+        "eligible_room_bottleneck"
+      ]
+    },
+    {
+      "family": "room-budget",
+      "case_ids": [
+        "room-budget-0e896ff410f0"
+      ],
+      "analytical_relationship": "exact_instance_match",
+      "analytical_refs": [
+        {
+          "file": "tests/test_tier_a_semantics.py",
+          "symbol": "TierASemanticsTests.test_b1_budget_only_contradiction"
+        }
+      ],
+      "source_ref": {
+        "file": "surgerybench/tier_a_dataset.py",
+        "symbol": "cases"
+      },
+      "derivation": "package documented as reusing analytical regressions; no per-case historical parent recorded",
+      "pilot_relationship": "shared scheduling motif only; no documented case parent",
+      "pilot_theme_candidates": [
+        "tight_windows",
+        "room_contention",
+        "fixed_surgeon_contention",
+        "eligible_room_bottleneck"
+      ]
+    },
+    {
+      "family": "eligibility-budget",
+      "case_ids": [
+        "eligibility-budget-flex-64b10656bca4",
+        "eligibility-budget-fixed-8f10e018de00"
+      ],
+      "analytical_relationship": "shared_construction_motif",
+      "analytical_refs": [
+        {
+          "file": "tests/test_temporal.py",
+          "symbol": "TemporalTests.test_ineligible_room"
+        },
+        {
+          "file": "tests/test_temporal.py",
+          "symbol": "TemporalTests.test_daily_budget"
+        }
+      ],
+      "source_ref": {
+        "file": "surgerybench/tier_a_dataset.py",
+        "symbol": "cases"
+      },
+      "derivation": "package documented as reusing analytical regressions; no per-case historical parent recorded",
+      "pilot_relationship": "shared scheduling motif only; no documented case parent",
+      "pilot_theme_candidates": [
+        "eligible_room_bottleneck",
+        "room_contention"
+      ]
+    },
+    {
+      "family": "eligibility-window",
+      "case_ids": [
+        "eligibility-window-fixed-5c90aa8c7b35",
+        "eligibility-window-flex-e20506805164"
+      ],
+      "analytical_relationship": "shared_construction_motif",
+      "analytical_refs": [
+        {
+          "file": "tests/test_temporal.py",
+          "symbol": "TemporalTests.test_ineligible_room"
+        },
+        {
+          "file": "tests/test_temporal.py",
+          "symbol": "TemporalTests.test_break_whole_interval"
+        }
+      ],
+      "source_ref": {
+        "file": "surgerybench/tier_a_dataset.py",
+        "symbol": "cases"
+      },
+      "derivation": "package documented as reusing analytical regressions; no per-case historical parent recorded",
+      "pilot_relationship": "shared scheduling motif only; no documented case parent",
+      "pilot_theme_candidates": [
+        "eligible_room_bottleneck",
+        "room_contention"
+      ]
+    },
+    {
+      "family": "pair-deadline",
+      "case_ids": [
+        "pair-deadline-ea20865f1702"
+      ],
+      "analytical_relationship": "exact_instance_match",
+      "analytical_refs": [
+        {
+          "file": "tests/test_tier_a_semantics.py",
+          "symbol": "TierASemanticsTests.test_p1_relaxed_pair_proof_survives_extra_gap"
+        }
+      ],
+      "source_ref": {
+        "file": "surgerybench/tier_a_dataset.py",
+        "symbol": "cases"
+      },
+      "derivation": "package documented as reusing analytical regressions; no per-case historical parent recorded",
+      "pilot_relationship": "shared scheduling motif only; no documented case parent",
+      "pilot_theme_candidates": [
+        "tight_windows",
+        "room_contention",
+        "fixed_surgeon_contention",
+        "eligible_room_bottleneck"
+      ]
+    }
+  ],
+  "pilot_index": [
+    {
+      "case_id": "ffa0fa1b0cbede20c5435c3a",
+      "family": "arrival-deadline-pilot-v1-tight_windows-00",
+      "theme": "tight_windows",
+      "variant": "feasible",
+      "parent_instance_sha256": "dad2cf6867997ce98b7df96e2a5e04f944be362386780070adf508fde2a20083"
+    },
+    {
+      "case_id": "901f7792489d948b2b291bce",
+      "family": "arrival-deadline-pilot-v1-tight_windows-00",
+      "theme": "tight_windows",
+      "variant": "deadline_minus_one",
+      "parent_instance_sha256": "dad2cf6867997ce98b7df96e2a5e04f944be362386780070adf508fde2a20083"
+    },
+    {
+      "case_id": "882bad83db1b4c75e9f80680",
+      "family": "arrival-deadline-pilot-v1-tight_windows-01",
+      "theme": "tight_windows",
+      "variant": "feasible",
+      "parent_instance_sha256": "b28096ad0601b19fee4cbea06f9db3bc43fdc0209ba8eb9558e4e1e5b779a276"
+    },
+    {
+      "case_id": "dad7ce1c1c818fa97b4a5a67",
+      "family": "arrival-deadline-pilot-v1-tight_windows-01",
+      "theme": "tight_windows",
+      "variant": "deadline_minus_one",
+      "parent_instance_sha256": "b28096ad0601b19fee4cbea06f9db3bc43fdc0209ba8eb9558e4e1e5b779a276"
+    },
+    {
+      "case_id": "a0bf97cf9c5f51170e67524c",
+      "family": "arrival-deadline-pilot-v1-tight_windows-02",
+      "theme": "tight_windows",
+      "variant": "feasible",
+      "parent_instance_sha256": "a82d3ed0cd11ba906f85c3d958af9f5d5eeb3d45252f2f97d4ce0eb5eeefcd18"
+    },
+    {
+      "case_id": "8d450a8ad57079b43d6ed47f",
+      "family": "arrival-deadline-pilot-v1-tight_windows-02",
+      "theme": "tight_windows",
+      "variant": "deadline_minus_one",
+      "parent_instance_sha256": "a82d3ed0cd11ba906f85c3d958af9f5d5eeb3d45252f2f97d4ce0eb5eeefcd18"
+    },
+    {
+      "case_id": "1e889043de8fdc34c51fa859",
+      "family": "arrival-deadline-pilot-v1-tight_windows-03",
+      "theme": "tight_windows",
+      "variant": "feasible",
+      "parent_instance_sha256": "b3ec31bef5cdd0637341558ea4723e5ec98c56011418a7d5ece3a2bd1a1978da"
+    },
+    {
+      "case_id": "b496e566277965e4c38ae81a",
+      "family": "arrival-deadline-pilot-v1-tight_windows-03",
+      "theme": "tight_windows",
+      "variant": "deadline_minus_one",
+      "parent_instance_sha256": "b3ec31bef5cdd0637341558ea4723e5ec98c56011418a7d5ece3a2bd1a1978da"
+    },
+    {
+      "case_id": "ac9487973e44d8bfcc29f7b9",
+      "family": "arrival-deadline-pilot-v1-tight_windows-04",
+      "theme": "tight_windows",
+      "variant": "feasible",
+      "parent_instance_sha256": "2aa4be69a68f42a0ba9773f7b096e3fb223870527a130cad326f2ad763e32f79"
+    },
+    {
+      "case_id": "19b18cbff3d601f774c79228",
+      "family": "arrival-deadline-pilot-v1-tight_windows-04",
+      "theme": "tight_windows",
+      "variant": "deadline_minus_one",
+      "parent_instance_sha256": "2aa4be69a68f42a0ba9773f7b096e3fb223870527a130cad326f2ad763e32f79"
+    },
+    {
+      "case_id": "dccdcbbc08b7cb293b2d1f01",
+      "family": "arrival-deadline-pilot-v1-tight_windows-05",
+      "theme": "tight_windows",
+      "variant": "feasible",
+      "parent_instance_sha256": "476161bc93ae5773ee64e5d3238e040b02b8c1b1568522b60e7947824508ded4"
+    },
+    {
+      "case_id": "2416b7db233c7d8a20742416",
+      "family": "arrival-deadline-pilot-v1-tight_windows-05",
+      "theme": "tight_windows",
+      "variant": "deadline_minus_one",
+      "parent_instance_sha256": "476161bc93ae5773ee64e5d3238e040b02b8c1b1568522b60e7947824508ded4"
+    },
+    {
+      "case_id": "725df19a4d48cfbddd470fca",
+      "family": "arrival-deadline-pilot-v1-room_contention-00",
+      "theme": "room_contention",
+      "variant": "feasible",
+      "parent_instance_sha256": "b26d3d722728f97f1f9d4b2c4131e3e06642245a74b04d44254ead2c4df2360c"
+    },
+    {
+      "case_id": "ac781eb06e3d06c7da2353c6",
+      "family": "arrival-deadline-pilot-v1-room_contention-00",
+      "theme": "room_contention",
+      "variant": "deadline_minus_one",
+      "parent_instance_sha256": "b26d3d722728f97f1f9d4b2c4131e3e06642245a74b04d44254ead2c4df2360c"
+    },
+    {
+      "case_id": "cbae3c411b46b2b95a2a4485",
+      "family": "arrival-deadline-pilot-v1-room_contention-01",
+      "theme": "room_contention",
+      "variant": "feasible",
+      "parent_instance_sha256": "b2a0fc266f04be6886228e96f601d4699d97a8389fd21ee39d86876290139c5c"
+    },
+    {
+      "case_id": "772d781b891ff9627102caa7",
+      "family": "arrival-deadline-pilot-v1-room_contention-01",
+      "theme": "room_contention",
+      "variant": "deadline_minus_one",
+      "parent_instance_sha256": "b2a0fc266f04be6886228e96f601d4699d97a8389fd21ee39d86876290139c5c"
+    },
+    {
+      "case_id": "b6686d9e1a8cec574c54a92c",
+      "family": "arrival-deadline-pilot-v1-room_contention-02",
+      "theme": "room_contention",
+      "variant": "feasible",
+      "parent_instance_sha256": "bfc3f9aa18a9b87bce09f041ae5ec72a85e79887014d4b70f91d4d07625e680d"
+    },
+    {
+      "case_id": "0eec2436cc4eb1c4615eaadb",
+      "family": "arrival-deadline-pilot-v1-room_contention-02",
+      "theme": "room_contention",
+      "variant": "deadline_minus_one",
+      "parent_instance_sha256": "bfc3f9aa18a9b87bce09f041ae5ec72a85e79887014d4b70f91d4d07625e680d"
+    },
+    {
+      "case_id": "a93ef2ff251b04db457c5d96",
+      "family": "arrival-deadline-pilot-v1-room_contention-03",
+      "theme": "room_contention",
+      "variant": "feasible",
+      "parent_instance_sha256": "bbf232cfcb26a409213a01b23b8ee1a4265e33a031ebd9f98a24cbfaf51c6a79"
+    },
+    {
+      "case_id": "a81b006660ab77853ce11aef",
+      "family": "arrival-deadline-pilot-v1-room_contention-03",
+      "theme": "room_contention",
+      "variant": "deadline_minus_one",
+      "parent_instance_sha256": "bbf232cfcb26a409213a01b23b8ee1a4265e33a031ebd9f98a24cbfaf51c6a79"
+    },
+    {
+      "case_id": "f95a3d1f37a8240cab01adcc",
+      "family": "arrival-deadline-pilot-v1-room_contention-04",
+      "theme": "room_contention",
+      "variant": "feasible",
+      "parent_instance_sha256": "95e020908696acbf01de5869011b809b88c11b62afbba7490c135c86588a2e01"
+    },
+    {
+      "case_id": "44484e7e83445303b2f9d858",
+      "family": "arrival-deadline-pilot-v1-room_contention-04",
+      "theme": "room_contention",
+      "variant": "deadline_minus_one",
+      "parent_instance_sha256": "95e020908696acbf01de5869011b809b88c11b62afbba7490c135c86588a2e01"
+    },
+    {
+      "case_id": "24065c1d04874a3af2900327",
+      "family": "arrival-deadline-pilot-v1-room_contention-05",
+      "theme": "room_contention",
+      "variant": "feasible",
+      "parent_instance_sha256": "691719335e3cf66050fe9d45952bcdb226758a91a00c7d88d704baa88576c3cf"
+    },
+    {
+      "case_id": "3758f67868dfa75f6cd7ca37",
+      "family": "arrival-deadline-pilot-v1-room_contention-05",
+      "theme": "room_contention",
+      "variant": "deadline_minus_one",
+      "parent_instance_sha256": "691719335e3cf66050fe9d45952bcdb226758a91a00c7d88d704baa88576c3cf"
+    },
+    {
+      "case_id": "f6909a8343fa9696c4fbe09a",
+      "family": "arrival-deadline-pilot-v1-fixed_surgeon_contention-00",
+      "theme": "fixed_surgeon_contention",
+      "variant": "feasible",
+      "parent_instance_sha256": "1461d6fb39fafd2b65cbe9753185fe9bf891d1c7ccc01f4b60cc7566e6c17cc5"
+    },
+    {
+      "case_id": "35c7ba3ab7c708e854bd55f8",
+      "family": "arrival-deadline-pilot-v1-fixed_surgeon_contention-00",
+      "theme": "fixed_surgeon_contention",
+      "variant": "deadline_minus_one",
+      "parent_instance_sha256": "1461d6fb39fafd2b65cbe9753185fe9bf891d1c7ccc01f4b60cc7566e6c17cc5"
+    },
+    {
+      "case_id": "d4cac5789ad453a8408f355b",
+      "family": "arrival-deadline-pilot-v1-fixed_surgeon_contention-01",
+      "theme": "fixed_surgeon_contention",
+      "variant": "feasible",
+      "parent_instance_sha256": "4227f4e3012883efd79a57a2b39773f628b22aac63ffe43ca0bde51b8d3bdc30"
+    },
+    {
+      "case_id": "6b1112494e816b2a4a467abd",
+      "family": "arrival-deadline-pilot-v1-fixed_surgeon_contention-01",
+      "theme": "fixed_surgeon_contention",
+      "variant": "deadline_minus_one",
+      "parent_instance_sha256": "4227f4e3012883efd79a57a2b39773f628b22aac63ffe43ca0bde51b8d3bdc30"
+    },
+    {
+      "case_id": "65aaae7fda1a54329aace7bf",
+      "family": "arrival-deadline-pilot-v1-fixed_surgeon_contention-02",
+      "theme": "fixed_surgeon_contention",
+      "variant": "feasible",
+      "parent_instance_sha256": "c71b48a5ba85cc23bd730e5b981a3c8ed1346e14d48d943ed91ad28864cf43b2"
+    },
+    {
+      "case_id": "443c1f014f7f8af3e074c71a",
+      "family": "arrival-deadline-pilot-v1-fixed_surgeon_contention-02",
+      "theme": "fixed_surgeon_contention",
+      "variant": "deadline_minus_one",
+      "parent_instance_sha256": "c71b48a5ba85cc23bd730e5b981a3c8ed1346e14d48d943ed91ad28864cf43b2"
+    },
+    {
+      "case_id": "22448b064f8d9f771d025dd7",
+      "family": "arrival-deadline-pilot-v1-fixed_surgeon_contention-03",
+      "theme": "fixed_surgeon_contention",
+      "variant": "feasible",
+      "parent_instance_sha256": "eff9ed3f3665746c1a3b651e38506deade0485a6e0e6b5e63550caa05b8e41eb"
+    },
+    {
+      "case_id": "1174031ab1e8eeee0b7841bc",
+      "family": "arrival-deadline-pilot-v1-fixed_surgeon_contention-03",
+      "theme": "fixed_surgeon_contention",
+      "variant": "deadline_minus_one",
+      "parent_instance_sha256": "eff9ed3f3665746c1a3b651e38506deade0485a6e0e6b5e63550caa05b8e41eb"
+    },
+    {
+      "case_id": "facc08b0d2777c1b3eb1a85b",
+      "family": "arrival-deadline-pilot-v1-fixed_surgeon_contention-04",
+      "theme": "fixed_surgeon_contention",
+      "variant": "feasible",
+      "parent_instance_sha256": "e1d284d08b6935152d732159e3308a65617e56b03397530159c9f7ae332d9906"
+    },
+    {
+      "case_id": "6d19c8302222b4dbfee98aed",
+      "family": "arrival-deadline-pilot-v1-fixed_surgeon_contention-04",
+      "theme": "fixed_surgeon_contention",
+      "variant": "deadline_minus_one",
+      "parent_instance_sha256": "e1d284d08b6935152d732159e3308a65617e56b03397530159c9f7ae332d9906"
+    },
+    {
+      "case_id": "ac6472154ac54f9ae08ee125",
+      "family": "arrival-deadline-pilot-v1-fixed_surgeon_contention-05",
+      "theme": "fixed_surgeon_contention",
+      "variant": "feasible",
+      "parent_instance_sha256": "2f18151bcbe7a625748b713ce1f9161218bedc843e74e777f65cc4bf076453f5"
+    },
+    {
+      "case_id": "a7c22136dc4daf18ad97941e",
+      "family": "arrival-deadline-pilot-v1-fixed_surgeon_contention-05",
+      "theme": "fixed_surgeon_contention",
+      "variant": "deadline_minus_one",
+      "parent_instance_sha256": "2f18151bcbe7a625748b713ce1f9161218bedc843e74e777f65cc4bf076453f5"
+    },
+    {
+      "case_id": "a48ad1d3f57cade1e5ac29f4",
+      "family": "arrival-deadline-pilot-v1-eligible_room_bottleneck-00",
+      "theme": "eligible_room_bottleneck",
+      "variant": "feasible",
+      "parent_instance_sha256": "73fd3a95ab566862ef12297b22a863e7e4b6612f3461e25f06158858a03b0847"
+    },
+    {
+      "case_id": "7d9c260e5bf87d42d6fb416a",
+      "family": "arrival-deadline-pilot-v1-eligible_room_bottleneck-00",
+      "theme": "eligible_room_bottleneck",
+      "variant": "deadline_minus_one",
+      "parent_instance_sha256": "73fd3a95ab566862ef12297b22a863e7e4b6612f3461e25f06158858a03b0847"
+    },
+    {
+      "case_id": "5e5d8580095c86877d5a1459",
+      "family": "arrival-deadline-pilot-v1-eligible_room_bottleneck-01",
+      "theme": "eligible_room_bottleneck",
+      "variant": "feasible",
+      "parent_instance_sha256": "352f2484f660725501e5bdaf1270d4b748f9eb36578d66772a651c2d4f86b752"
+    },
+    {
+      "case_id": "65dcf3fdc31dd040482ff203",
+      "family": "arrival-deadline-pilot-v1-eligible_room_bottleneck-01",
+      "theme": "eligible_room_bottleneck",
+      "variant": "deadline_minus_one",
+      "parent_instance_sha256": "352f2484f660725501e5bdaf1270d4b748f9eb36578d66772a651c2d4f86b752"
+    },
+    {
+      "case_id": "06361b87389201a2e18d9e52",
+      "family": "arrival-deadline-pilot-v1-eligible_room_bottleneck-02",
+      "theme": "eligible_room_bottleneck",
+      "variant": "feasible",
+      "parent_instance_sha256": "39a85d998ac8ddb9130d91d55a1dda8276593165690817048a93be9f0c003123"
+    },
+    {
+      "case_id": "a973a3a16ce6b50b41364309",
+      "family": "arrival-deadline-pilot-v1-eligible_room_bottleneck-02",
+      "theme": "eligible_room_bottleneck",
+      "variant": "deadline_minus_one",
+      "parent_instance_sha256": "39a85d998ac8ddb9130d91d55a1dda8276593165690817048a93be9f0c003123"
+    },
+    {
+      "case_id": "b7fc84edd87b3294eaf79cc0",
+      "family": "arrival-deadline-pilot-v1-eligible_room_bottleneck-03",
+      "theme": "eligible_room_bottleneck",
+      "variant": "feasible",
+      "parent_instance_sha256": "f643433947e2fe0c90d6d8baae84b335275125c8697bc6c280ad19c5a0f488a8"
+    },
+    {
+      "case_id": "9c8b05e9935f812b53e7f62e",
+      "family": "arrival-deadline-pilot-v1-eligible_room_bottleneck-03",
+      "theme": "eligible_room_bottleneck",
+      "variant": "deadline_minus_one",
+      "parent_instance_sha256": "f643433947e2fe0c90d6d8baae84b335275125c8697bc6c280ad19c5a0f488a8"
+    },
+    {
+      "case_id": "53a7cbf50dc3e694cd678669",
+      "family": "arrival-deadline-pilot-v1-eligible_room_bottleneck-04",
+      "theme": "eligible_room_bottleneck",
+      "variant": "feasible",
+      "parent_instance_sha256": "0696ae72a082acae6e9602636604f2e20304315cba612326ca29f09889656da6"
+    },
+    {
+      "case_id": "4d14c6c2b4327c47920a33ae",
+      "family": "arrival-deadline-pilot-v1-eligible_room_bottleneck-04",
+      "theme": "eligible_room_bottleneck",
+      "variant": "deadline_minus_one",
+      "parent_instance_sha256": "0696ae72a082acae6e9602636604f2e20304315cba612326ca29f09889656da6"
+    },
+    {
+      "case_id": "7e4ff65cc67da9d31d19773f",
+      "family": "arrival-deadline-pilot-v1-eligible_room_bottleneck-05",
+      "theme": "eligible_room_bottleneck",
+      "variant": "feasible",
+      "parent_instance_sha256": "d869aad61818a16ef316d6d76fb955cbaa2407a752c64c07d126db7752a25682"
+    },
+    {
+      "case_id": "376cd8012c02d13369ae75ae",
+      "family": "arrival-deadline-pilot-v1-eligible_room_bottleneck-05",
+      "theme": "eligible_room_bottleneck",
+      "variant": "deadline_minus_one",
+      "parent_instance_sha256": "d869aad61818a16ef316d6d76fb955cbaa2407a752c64c07d126db7752a25682"
+    }
+  ],
+  "pilot_source_refs": [
+    {
+      "file": "surgerybench/temporal_dataset.py",
+      "symbol": "fixture"
+    },
+    {
+      "file": "surgerybench/temporal_dataset.py",
+      "symbol": "records"
+    }
+  ],
+  "documented_reuse_ref": "docs/tier-a-v1.md",
+  "conservative_split_group": "all 15 Tier A cases, all 48 pilot cases and referenced analytical anchors: one development-related block until finer provenance review",
+  "unresolved": [
+    "No case-specific historical derivation to pilot or tests is recorded.",
+    "Eligibility/budget and eligibility/window have motif links, not asserted exact test-instance parents.",
+    "Different family names do not establish independence; candidate pilot themes are non-exhaustive, not exclusions."
+  ],
+  "comparison_findings": {
+    "exact_analytical_cases": 11,
+    "motif_only_analytical_cases": 4,
+    "exact_pilot_matches": 0,
+    "limited_normalized_pilot_matches": 0,
+    "normalization": "Remove priority/emergency; subtract minimum release from absolute job/calendar times; drop inactive days and their budgets. Preserve IDs, ordering, duration units, gaps, budgets, eligibility and all other schema fields. Not full isomorphism or proof of unrelatedness."
+  }
+}

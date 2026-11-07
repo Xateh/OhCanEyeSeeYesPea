@@ -1,0 +1,20 @@
+{
+  "case_ids": null,
+  "currency": null,
+  "order": null,
+  "provider_revision": null,
+  "repetitions": null,
+  "retry_limit": null,
+  "seed": null,
+  "shuffle_cases": null,
+  "solver_limits": {
+    "max_nodes": 100000,
+    "seconds": 2
+  },
+  "solver_revision": "temporal-minute-dfs-v1",
+  "spending_ceiling": null,
+  "token_limit": null,
+  "tool_call_limit": null,
+  "version": "paired-offline-runner-v1",
+  "wall_seconds": null
+}

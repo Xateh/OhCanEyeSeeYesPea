@@ -1,0 +1,29 @@
+[
+  {
+    "directory": "/home/t/tehxa/cs3263-review/seeded-development-v2-96-20261105",
+    "kind": "seeded-v2",
+    "plan": {
+      "arms": [
+        "no_tools",
+        "csp"
+      ],
+      "consumer_sha256": "dc922c9fe5aae3ca19f267b66922930995b24ee26f6e4184d1d3fe3eaeb720e8",
+      "corpus_version": "seeded-development-suites-v2",
+      "input_view_version": "tier-a-shared-input-view-draft-v2",
+      "instruction_sha256": {
+        "csp": "2ee1d46d025e9ffe55eb62010cfa41b89f0eee40a1409d6aaeebcc8a41c622f7",
+        "no_tools": "abde28249da491b784902101fb7288a1dabb42f7657b6f96e85652afd7237248",
+        "shared": "06baf360578c2910dedd6c900da851b2d2bc93d4740e7fe0a835ab064f9c5302"
+      },
+      "manifest_sha256": "d2c880f50dad90ce0593ce03c44e0650a1b7231d89c2ba71c6a529c4cc13af44",
+      "planned_case_ids": [
+        "4110d965feeb8e31e4e94144",
+        "53760c24e8a90fdcf4ad402f",
+        "b2fe2af990bb7590f6631281",
+        "146c9dd291b62b6143c8a656"
+      ],
+      "registration_version": "development-registration-draft-v1",
+      "repetitions": 1
+    }
+  }
+]

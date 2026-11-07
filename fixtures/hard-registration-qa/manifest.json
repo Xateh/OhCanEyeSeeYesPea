@@ -1,0 +1,31 @@
+{
+  "admission": "checked-authored-proof-and-actual-tool-supported-evidence-v1",
+  "count": 100,
+  "files": {
+    "gold.jsonl": "f44eb57fe385325eff5a9a31bf058f65c7b5198fdbde2bdae30cebbaf7a48a0a",
+    "model.jsonl": "7b81e4d90d4733d26edfab8d40a7b429488305b6d6089d90ad2799e23f3aba34",
+    "tool-receipts.jsonl": "cdce6e680cf040f8f1b4205a22c1e9191f6e33e32d19d9a2892a86afdfb01ad7"
+  },
+  "input_view": "hard-actual-id-view-v1",
+  "instruction_sha256": "6ce058b94f7242b665690997241e2afd2d6e5067f2ac412e8e71ab5c3748be8e",
+  "source_head": "a9217a0cd8ee24ad6614dab9b2dba4aafc951431",
+  "sources": {
+    "fixtures/hard-synthetic-v1/gold.jsonl": "f44eb57fe385325eff5a9a31bf058f65c7b5198fdbde2bdae30cebbaf7a48a0a",
+    "fixtures/hard-synthetic-v1/manifest.json": "a4835fc0817ac9237224adec93bf5392249f33669e2036f09cc4208dfd8766d8",
+    "fixtures/hard-synthetic-v1/model.jsonl": "7b81e4d90d4733d26edfab8d40a7b429488305b6d6089d90ad2799e23f3aba34",
+    "study/hard_dataset.py": "36abce646be21279c0e7a4bb57867ff32b1219a3421c483fb0fb3133785c383a",
+    "surgerybench/__init__.py": "94d3d611f10b485a9132900cbe8052db895eb8506b2be733347980942519d85a",
+    "surgerybench/checker.py": "c7382bf05f0487f36007de70ad834090fa06b38ec1e0269714e161f6332b6027",
+    "surgerybench/common.py": "7bc1c27c298bbe4045d61327889c51fb3c671459eebff63aa3009a6824b3770e",
+    "surgerybench/temporal_benchmark.py": "4ec0cd9e78f805c89a22fcdb6151ffa24836a7d67595930d968253e26f259bcd",
+    "surgerybench/temporal_check.py": "fc12e3ce7c8bf99abfadf7510629d54233def322f0c9b4f1d202cb29eab72b96",
+    "surgerybench/temporal_csp.py": "3b9e0d2e6c22a218763c35d69b909503e367130c497edaea19d7b728161ecacf",
+    "surgerybench/temporal_dataset.py": "384f5fd29ee3e81cd1e69f0afa93745b2fab1ed3d1e848707c2067814073bdf2",
+    "surgerybench/temporal_oracle.py": "bcb0e2c8f6afb585ae6383fae9192bca824a73b3dc81c70b733f4ef5d6a314d0",
+    "surgerybench/temporal_text.py": "76643db259e6b2a71655ec8fd50dfe9381d2ff924606a820afea0b9a898fddba",
+    "surgerybench/tier_a_audit.py": "a2c52687bf0059daf878482878a02636259205abd3da5db57be50748164bf68b",
+    "surgerybench/tier_a_dataset.py": "bdeaa6c2b2b55fd7914cc7407b295d6f29cb72f631f5f00e1d5666096ba0e999",
+    "tier_a_contract.py": "eb4c465c09ff7e81356101eec96823e94793a58e2db00d786955df83276f8d1c"
+  },
+  "version": "allan-hard-offline-registration-proposal-v1"
+}

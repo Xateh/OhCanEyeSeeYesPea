@@ -1,0 +1,19 @@
+{
+  "provider_revision": null,
+  "case_ids": null,
+  "repetitions": null,
+  "seed": null,
+  "shuffle_cases": null,
+  "order": null,
+  "token_limit": null,
+  "wall_seconds": null,
+  "tool_call_limit": null,
+  "retry_limit": null,
+  "spending_ceiling": null,
+  "currency": null,
+  "solver_revision": null,
+  "solver_limits": null,
+  "provider_binding": null,
+  "version": "paired-development-runner-v3",
+  "execution_mode": "fixture"
+}

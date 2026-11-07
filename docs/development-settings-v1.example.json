@@ -1,0 +1,18 @@
+{
+  "version": "development-comparison-settings-v2",
+  "provider": null,
+  "model_revision": null,
+  "corpus_version": null,
+  "manifest_sha256": null,
+  "case_ids": null,
+  "repetitions": null,
+  "spending_ceiling": null,
+  "token_limit": null,
+  "wall_seconds": null,
+  "tool_call_limit": null,
+  "retry_limit": null,
+  "order": null,
+  "seed": null,
+  "currency": null,
+  "spending_scope": null
+}

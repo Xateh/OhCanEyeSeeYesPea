@@ -1,0 +1,5 @@
+# Structured final v1
+
+Only change from phase-specific v1: same strict case-independent final schema via Responses text.format for both arms final turns. Translation requests/phase text unchanged; no native tools or translation schema. Full original semantic checks remain independent. Four slots,maxsix HTTP/two solver calls,no retries,gpt-6.1-sol low,2000output/call,20s socket,45s/12000tokens per attempt,USD0.08 call allocation,USD0.30 intended ceiling. ExpectedUSD0.02-0.05 from priorUSD0.016538 plus schema overhead. Nominal envelope at12000input+2000output each for six calls isUSD0.264, not guaranteed billing/cancellation cap. Schema size 1227 bytes, independent of case answers. Stop on schema/model rejection or unknown spending, retain all slots.
+
+Source: responses_final_schema.py,responses_structured_transport.py,responses_structured_runner.py. Tests: tests/test_responses_structured.py. Live receipts/results: /home/t/tehxa/cs3263-review/structured-final-pilot-20261107-u_rik2b9/. Substantial AI-assisted implementation/validation; not human/team approval. Native tools remain empty,translation unconstrained,final scoring independent.
