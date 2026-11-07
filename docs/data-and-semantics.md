@@ -42,6 +42,10 @@ A resource has:
 
 A patient/surgery has `id`, boolean `mandatory`, fixed existing `surgeon`, integer `duration` (1–1440), integer absolute-minute `release` and `due`, unique existing `eligible_rooms`, nonnegative integer `priority`, and optional boolean `emergency`. Temporal bounds require `0 <= release <= due <= days*1440`. Python booleans are rejected where integers are required.
 
+For new registrations explicitly selecting `temporal_validation_v2` (`temporal-strict-validation-v2`), the top-level `surgeons`, `rooms` and `patients` containers must be JSON arrays. Resources and patients must be JSON objects with exactly the documented fields (only patient `emergency` is optional). Budgets, calendars, each calendar day, eligibility and each two-element calendar window must be arrays. Unknown or misspelled fields fail closed instead of silently dropping an unsupported constraint. Empty top-level arrays and empty day-window arrays remain structurally valid; existing reference, horizon and mandatory-scheduling checks still apply.
+
+`temporal_validation_v2.normalize_instance` returns a validated deep copy and supplies only an omitted `emergency: false`. Rendering uses this normalization without mutating the caller. Thus `parse(render(instance)) == normalize_instance(instance)`; exact equality to a non-normalized instance is not promised. Existing explicitly populated instances retain the same text bytes. Priority/emergency remain metadata with no scheduling effect. No unknown field or scheduling constraint is normalized away.
+
 Schedule rows must contain **exactly** `patient`, `day`, `start`, `room`; day is zero-based and start is an integer minute after midnight. The surgeon and end are derived from the instance, never reassigned by output.
 
 ## Hard constraints
@@ -72,3 +76,15 @@ One room available [0,10), distinct surgeons, A arriving 0 with duration 4/deadl
 ## Before expanding the dataset
 
 Agree target scale, constraint coverage, difficult/ambiguous language cases and difficulty evidence; keep development/test families separated and audit transformations. Clinical realism, unrestricted language understanding, broad optional-surgery optimization and statistical generalization have not been established. Any adaptation must preserve traceable source/synthetic fields and independently validate new labels; published original-problem scores are not optimal scores for a changed problem.
+
+## Offline boundary follow-up (local, 7 November 2026)
+
+`tests/test_temporal_boundaries.py` checks schema/text/parser/checker boundaries, absolute minutes 1439/1440, exact horizon completion, whole-surgery midnight rejection, per-day budget/gap rules, empty/all-optional workloads, resource/job/identifier/metadata invariance and intended-instance scoring. Its tiny exhaustive-oracle checks are offline software regressions, not new corpus admissions or model experiments. Historical datasets, texts and results are preserved.
+
+Four oracle-proven infeasible constructions (deadline, calendar, budget and gap) deliberately lack a supported pair certificate. They remain a separate validation stratum with expected solver UNKNOWN: 4 planned, 4 oracle INFEASIBLE, 4 solver UNKNOWN, 0 certified successes. A search-exhaustion diagnostic does not become a supported final certificate, and these cases must not disappear from denominators.
+
+Optimality is not implemented. The current prompt defines no optimization objective, priority/emergency are metadata, optional surgery may be omitted, and the tiny oracle enumerates mandatory-only feasibility. Before an optimality extension the team must specify the objective function, direction, optional-job treatment, weights/units, tie-breaking or tolerance and independently verifiable optimal-reference/bound policy. Feasibility, certified infeasibility and abstention remain the present evaluation contract.
+
+The stricter boundary is an additive root module because historical packages bind every original `surgerybench` source hash. Those source files, legacy acceptance behavior and all old corpus/protocol hashes remain unchanged. New consumers must explicitly import `temporal_validation_v2` for schema validation, rendering/parsing, intended-instance checking/scoring and checked solver dispatch, and record its revision/source hash with a new registration. The existing PR23/SDK runner does not silently adopt this revision; its four-case guard and old plan assessability remain intact. A new module cannot enforce adoption by an arbitrary caller still using the frozen legacy entry points.
+
+The [strict offline consumer](strict-temporal-consumer-v1.md) now adopts this boundary end to end for a fixed, separately registered validation cohort; historical and SDK consumers remain unchanged.
