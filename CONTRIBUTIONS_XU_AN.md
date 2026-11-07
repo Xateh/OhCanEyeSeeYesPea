@@ -56,3 +56,8 @@ The preceding HTTP implementation did complete separately approved development p
 
 
 The SDK review repair adds bounded partial-response retention, distinct streaming-timeout outcomes, explicit encoding rejection, checked-in synthetic regression fixtures and a dedicated optional-SDK CI job. AI assistance implemented and tested this work; coordinating code review is complete and PR publication is separately authorized. This does not claim independent human/team sign-off. No further model calls or new research outcomes were produced.
+
+
+## Local P2 follow-up after PR23 merge
+
+AI assistance under Xu An's direction reproduced and locally corrected planned-cost denominator gaps, dataset pre-read bounds and legacy HTTP partial-read/redaction failures. Verification uses synthetic data and Slurm offline jobs, not model experiments. Original source/fixture/result identities are preserved or explicitly versioned for replay; no token, live call, publication or new solver is involved. This local engineering work remains subject to review and does not establish human sign-off or research conclusions.

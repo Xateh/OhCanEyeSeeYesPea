@@ -166,3 +166,13 @@ class SDKTests(unittest.TestCase):
   def handler(req):return httpx2.Response(200,stream=Broken())
   r=api.sdk_once(self.body(),20,'synthetic-sdk-key',http_transport=httpx2.MockTransport(handler))
   self.assertEqual(r[2],b'{"echo":"[CREDENTIAL_REDACTED]');self.assertTrue(r[4]);self.assertFalse(r[3])
+
+
+ def test_missing_planned_sdk_cost_is_unknown(self):
+  import responses_sdk_runner as runner
+  import test_responses_calibration as fixture
+  c=fixture.config();c.update(version=runner.VERSION,provider_revision=api.VERSION)
+  b=c['provider_binding'];c['provider_binding']=api.binding('mock-model','mock-model','mock-responses-v1','low',100,2,1,b['rates'])
+  plan,cases=runner.make_plan(fixture.specs(),c);summary=runner.summarize(plan,cases,[])
+  for arm in ['no_tools','csp']:
+   self.assertIsNone(summary['by_arm'][arm]['cost_estimate_usd']);self.assertEqual(summary['by_arm'][arm]['cost_estimate_coverage'],[0,4])

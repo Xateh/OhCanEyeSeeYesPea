@@ -43,10 +43,13 @@ def row_cost(row):
     values,complete=observed_costs(row)
     return sum(values) if complete else None
 
-def cost_summary(rows):
+def cost_summary(rows,planned_runs=None):
+    if planned_runs is None:planned_runs=len(rows)
+    if type(planned_runs) is not int or planned_runs<len(rows):
+        raise ValueError("planned cost denominator must cover received runs")
     costs=[row_cost(r) for r in rows]
-    unknown=sum(c is None for c in costs)
-    return dict(cost_usd=None if unknown else sum(costs),known_cost_usd=sum(sum(observed_costs(r)[0]) for r in rows),unknown_cost_runs=unknown,cost_coverage=[len(rows)-unknown,len(rows)])
+    unknown=sum(c is None for c in costs)+planned_runs-len(rows)
+    return dict(cost_usd=None if unknown else sum(costs),known_cost_usd=sum(sum(observed_costs(r)[0]) for r in rows),unknown_cost_runs=unknown,cost_coverage=[planned_runs-unknown,planned_runs])
 
 def validate_budget(budget,workers):
     if type(workers) is not int or workers<1:raise ValueError('positive worker count required')

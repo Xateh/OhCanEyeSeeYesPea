@@ -2,6 +2,7 @@
 from collections import Counter
 import hashlib
 import re
+import os,stat
 from itertools import combinations
 from pathlib import Path
 from development_suites_v2 import VERSION, settings, candidate, factors, canonical, sha
@@ -17,7 +18,8 @@ SOURCES={'development_suites_v2.py','development_suites_audit.py','tier_a_input_
          'surgerybench/temporal_csp.py','surgerybench/temporal_check.py','surgerybench/checker.py',
          'surgerybench/temporal_oracle.py','surgerybench/temporal_text.py'}
 BASELINE='3f20017148b3290c518483b60afc7c4a75971a9e'
-AUDIT_REVISION='seeded-v2-audit-portability-v2'
+AUDIT_REVISION='seeded-v2-audit-bounded-io-v3'
+PREVIOUS_AUDIT_SHA256='971f7d039b957467f996313ccfcc6d5e36034e28135dfad4aee2141c51f635e2'
 LEGACY_AUDIT_SHA256='1bd5d3753131cd377ab572449dcb499810f29f292485a37b086c2d9dc6a243fe'
 
 
@@ -30,11 +32,42 @@ def equal(a,b,message):
     require(canonical(a)==canonical(b),message)
 
 
-def audit(directory):
+def _read_blobs(directory,names,limit):
+    """Reject type/size/symlink errors before any payload read; pin directory FD."""
     d=Path(directory)
-    require(d.is_dir() and {p.name for p in d.iterdir()}==FILES|{'manifest.json'},'exact export file set')
-    blobs={p.name:p.read_bytes() for p in d.iterdir() if p.is_file()}
-    require(set(blobs)==FILES|{'manifest.json'} and all(len(b)<=2*1024*1024 for b in blobs.values()),'bounded regular files')
+    require(stat.S_ISDIR(d.lstat().st_mode),'regular package directory required')
+    fd=os.open(d,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
+    try:
+        found=set()
+        with os.scandir(fd) as entries:
+            for entry in entries:
+                require(len(found)<len(names),'directory entry cap')
+                found.add(entry.name)
+        require(found==names,'exact export file set')
+        for name in names:
+            info=os.stat(name,dir_fd=fd,follow_symlinks=False)
+            require(stat.S_ISREG(info.st_mode) and info.st_size<=limit,'bounded regular files')
+        blobs={}
+        for name in sorted(names):
+            child=os.open(name,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK,dir_fd=fd)
+            try:
+                info=os.fstat(child)
+                require(stat.S_ISREG(info.st_mode) and info.st_size<=limit,'bounded regular files')
+                data=bytearray()
+                while len(data)<=limit:
+                    chunk=os.read(child,min(65536,limit+1-len(data)))
+                    if not chunk:break
+                    data.extend(chunk)
+                require(len(data)<=limit,'file grew beyond bound')
+                blobs[name]=bytes(data)
+            finally:os.close(child)
+        return blobs
+    finally:os.close(fd)
+
+
+def audit(directory):
+    try:blobs=_read_blobs(directory,FILES|{'manifest.json'},2*1024*1024)
+    except OSError:raise ValueError('bounded package path/type failure') from None
     m=strict_json(blobs['manifest.json'].decode())
     require(type(m) is dict and set(m)=={'python_version','baseline_revision','version','status','source','split',
             'old_harness_compatible','oracle_revision','adapter_revision','adapter_entrypoint','adapter_limits',
@@ -48,7 +81,8 @@ def audit(directory):
     root=Path(__file__).resolve().parent
     current={p:hashlib.sha256((root/p).read_bytes()).hexdigest() for p in SOURCES}
     legacy=dict(current,**{'development_suites_audit.py':LEGACY_AUDIT_SHA256})
-    require(m['source_sha256'] in (current,legacy),'source identity drift')
+    previous=dict(current,**{'development_suites_audit.py':PREVIOUS_AUDIT_SHA256})
+    require(m['source_sha256'] in (current,previous,legacy),'source identity drift')
     if m['source_sha256']==legacy:require(m['baseline_revision']==BASELINE,'legacy snapshot provenance')
     equal(m['files'],{p:hashlib.sha256(blobs[p]).hexdigest() for p in FILES},'file hashes')
     require(type(m['python_version']) is str and bool(m['python_version']),'python identity')

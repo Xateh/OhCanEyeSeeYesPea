@@ -13,13 +13,15 @@ from tier_a_inputs import ARM
 from study.accounting import attach,known_cost
 VERSION='responses-paired-runner-v1'
 KEYS={'version','provider_revision','case_ids','repetitions','seed','shuffle_cases','order','token_limit','wall_seconds','tool_call_limit','retry_limit','estimated_cost_ceiling_usd','currency','solver_revision','solver_limits'}
-def cost_summary(receipts):
+def cost_summary(receipts,planned_runs=None):
+ if planned_runs is None:planned_runs=len(receipts)
+ require(type(planned_runs) is int and planned_runs>=len(receipts),'planned estimate denominator must cover received runs')
  amounts=[];known=[]
  for receipt in receipts:
   observations=receipt['call_accounting'];values=[x['usage'].get('cost_estimate_usd') if x['usage'] else None for x in observations]
   known.extend(x for x in values if known_cost(x))
   amounts.append(sum(values) if values and all(known_cost(x) for x in values) else None)
- return dict(cost_estimate_usd=sum(amounts) if all(x is not None for x in amounts) else None,known_cost_estimate_usd=sum(known),unknown_cost_estimate_runs=sum(x is None for x in amounts),cost_estimate_coverage=[sum(x is not None for x in amounts),len(amounts)])
+ return dict(cost_estimate_usd=sum(amounts) if planned_runs==len(amounts) and all(x is not None for x in amounts) else None,known_cost_estimate_usd=sum(known),unknown_cost_estimate_runs=sum(x is None for x in amounts)+planned_runs-len(amounts),cost_estimate_coverage=[sum(x is not None for x in amounts),planned_runs])
 
 def config(value):
  require(type(value) is dict and set(value)==KEYS|{'execution_mode','provider_binding'},'exact explicit runner configuration')
@@ -198,7 +200,7 @@ def summarize(plan,cases,receipts):
   for rep in range(c['repetitions']):
    a,b=(row_index[i,rep,arm] for arm in ('no_tools','csp'))
    bucket='incomplete' if not a['answer_complete'] or not b['answer_complete'] else 'both' if a['success'] and b['success'] else 'no_tools_only' if a['success'] else 'csp_only' if b['success'] else 'neither';pairs[bucket]+=1
- by_arm={a:dict(**group([r for r in rows if r['arm']==a]),**cost_summary([r for r in receipts if r['arm']==a])) for a in ('no_tools','csp')}
+ by_arm={a:dict(**group([r for r in rows if r['arm']==a]),**cost_summary([r for r in receipts if r['arm']==a],planned_runs=sum(r['arm']==a for r in rows))) for a in ('no_tools','csp')}
  for a in by_arm:
   received=[r for r in receipts if r['arm']==a]
   missing=by_arm[a]['planned']-len(received)

@@ -6,7 +6,7 @@ from tier_a_contract import strict_json,canonical
 from study.accounting import known_cost
 import paired_receipts as retention
 import responses_final_schema as final_schema
-VERSION='openai-responses-structured-final-v1'
+VERSION='openai-responses-structured-final-v2'
 ENDPOINT='https://api.openai.com/v1/responses'
 SERIALIZATION='responses-phase-text-structured-final-v1'
 
@@ -25,7 +25,7 @@ def binding(model,expected_model,profile,effort,max_output_tokens,call_wall_seco
  require(type(rates['source']) is str and 0<len(rates['source'])<=512,'pricing source required')
  for k in ('input_per_million','cached_input_per_million','output_per_million'):require(known_cost(rates[k]),'finite nonnegative pinned rates required')
  root=Path(__file__).resolve().parent
- return dict(version=VERSION,endpoint=ENDPOINT,model=model,expected_model=expected_model,profile=profile,reasoning_effort=effort,max_output_tokens=max_output_tokens,call_wall_seconds=call_wall_seconds,call_budget_usd=call_budget_usd,rates=deepcopy(rates),serialization=SERIALIZATION,final_schema_sha256=final_schema.SHA256,format_policy='same_strict_final_both_arms_translation_unchanged',transport_retries=0,model_fallback=False,runtime=dict(implementation=sys.implementation.name,version=sys.version),retention_policy=retention.policy(),source_sha256={n:hashlib.sha256((root/n).read_bytes()).hexdigest() for n in ('responses_structured_transport.py','responses_final_schema.py','responses_phase_transport.py','responses_transport.py','responses_credentials.py','study/prompts.py','tier_a_contract.py','study/accounting.py','paired_receipts.py')})
+ return dict(version=VERSION,endpoint=ENDPOINT,model=model,expected_model=expected_model,profile=profile,reasoning_effort=effort,max_output_tokens=max_output_tokens,call_wall_seconds=call_wall_seconds,call_budget_usd=call_budget_usd,rates=deepcopy(rates),serialization=SERIALIZATION,final_schema_sha256=final_schema.SHA256,format_policy='same_strict_final_both_arms_translation_unchanged',transport_retries=0,model_fallback=False,runtime=dict(implementation=sys.implementation.name,version=sys.version),retention_policy=retention.policy(),source_sha256={n:hashlib.sha256((root/n).read_bytes()).hexdigest() for n in ('responses_structured_transport.py','responses_final_schema.py','responses_phase_transport.py','responses_transport.py','responses_credentials.py','study/prompts.py','tier_a_contract.py','study/accounting.py','paired_receipts.py','responses_http_v2.py')})
 def validate(value):
  require(type(value) is dict,'explicit Responses binding required')
  expected=binding(*(value.get(k) for k in ('model','expected_model','profile','reasoning_effort','max_output_tokens','call_wall_seconds','call_budget_usd','rates')))
@@ -47,23 +47,9 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
  def redirect_request(self,*args,**kwargs):return None
 
 def http_once(body,timeout,key):
- """One HTTPS operation, no redirects/proxy env/SDK retries. Socket timeout is not remote cancellation."""
  require(type(key) is str and re.fullmatch(r'[A-Za-z0-9_-]{16,512}',key),'invalid credential representation')
- request=urllib.request.Request(ENDPOINT,data=canonical(body).encode(),headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'},method='POST')
- opener=urllib.request.build_opener(urllib.request.ProxyHandler({}),NoRedirect())
- try:response=opener.open(request,timeout=timeout)
- except urllib.error.HTTPError as error:response=error
- with response:
-  try:
-   raw=response.read(retention.ENVELOPE_BYTES+1);complete=len(raw)<=retention.ENVELOPE_BYTES
-  except http.client.IncompleteRead as error:
-   raw=error.partial[:retention.ENVELOPE_BYTES+1];complete=False
-  headers={k:response.headers.get(k) for k in ('x-request-id','openai-processing-ms','retry-after') if response.headers.get(k) is not None}
-  code=response.status if hasattr(response,'status') else response.code
- # A defensive credential-echo redaction precedes every retained representation.
- secret=key.encode();redacted=secret in raw;raw=raw.replace(secret,b'[CREDENTIAL_REDACTED]')
- headers={k:str(v).replace(key,'[CREDENTIAL_REDACTED]') for k,v in headers.items()}
- return code,headers,raw,complete,redacted
+ from responses_http_v2 import once
+ return once(ENDPOINT,canonical(body).encode(),timeout,key,NoRedirect(),retention.ENVELOPE_BYTES)
 
 # Separate loader is re-exported for explicit use, never invoked implicitly.
 from responses_credentials import load_key_file
@@ -135,14 +121,20 @@ class ResponsesAdapter:
    else:
     key=self.key_loader();require(type(key) is str and re.fullmatch(r'[A-Za-z0-9_-]{16,512}',key),'invalid credential representation')
     record['transport_started']=True;result=http_once(body,timeout,key)
-   require(type(result) is tuple and len(result) in (4,5),'HTTP transport contract')
+   require(type(result) is tuple and len(result) in (4,5,6),'HTTP transport contract')
    code,headers,raw,complete=result[:4]
    require(type(headers) is dict and type(complete) is bool,'HTTP metadata types')
    headers={k:v for k,v in headers.items() if k in ('x-request-id','openai-processing-ms','retry-after')}
-   record.update(http_status=code,response_headers=headers,response_complete=complete,credential_echo_redacted=bool(result[4]) if len(result)==5 else False)
+   record.update(http_status=code,response_headers=headers,response_complete=complete,credential_echo_redacted=bool(result[4]) if len(result)>=5 else False)
+   meta=result[5] if len(result)==6 else {'version':'bounded-raw-http-v2','read_error':None}
+   require(type(meta) is dict and set(meta)=={'version','read_error'} and meta['version']=='bounded-raw-http-v2' and meta['read_error'] in (None,'timeout','read_failure'),'bounded HTTP metadata')
+   record['http_read_error']=meta['read_error']
    require(type(raw) is bytes,'HTTP body bytes required')
    try:record['raw_response']=raw.decode('utf-8')
-   except UnicodeError:record['raw_response_base64']=base64.b64encode(raw).decode();raise ValueError('non-UTF8 provider response')
+   except UnicodeError:record['raw_response_base64']=base64.b64encode(raw).decode()
+   if meta['read_error']=='timeout':raise TimeoutError('HTTP read timeout; partial body retained')
+   if meta['read_error']=='read_failure':raise ValueError('HTTP read failure; partial body retained')
+   require(record['raw_response'] is not None,'non-UTF8 provider response retained')
    if not complete or len(raw)>retention.ENVELOPE_BYTES:record['resource_error']='envelope_bound';raise ValueError('incomplete/oversized HTTP body retained')
    response=strict_json(raw.decode());require(type(response) is dict,'Responses envelope object')
    matched=response.get('model')==b['expected_model'];observed=observed_usage(response.get('usage'),b['rates'],matched)
@@ -173,6 +165,9 @@ def validate_record(record,binding):
  require(record.get('endpoint')==ENDPOINT and request['model']==binding['model'] and request['tools']==[] and request['store'] is False and request['stream'] is False,'API request identity/tool isolation')
  require(request['reasoning']=={'effort':binding['reasoning_effort']} and type(request['max_output_tokens']) is int and 1<=request['max_output_tokens']<=binding['max_output_tokens'],'API setting receipt mismatch')
  require(type(record.get('response_headers',{})) is dict and set(record.get('response_headers',{}))<={'x-request-id','openai-processing-ms','retry-after'},'unapproved response-header receipt')
+ require(record.get('http_read_error') in (None,'timeout','read_failure'),'HTTP read outcome')
+ if record.get('http_read_error') is not None:
+  require(record.get('response_complete') is False and record.get('observed_usage') is None and record.get('error')==('TimeoutError' if record['http_read_error']=='timeout' else 'ValueError'),'partial HTTP outcome mismatch')
  expected=None
  if record.get('transport_started') is False:expected=dict(input_tokens=0,output_tokens=0,cached_input_tokens=0,cost_estimate_usd=0)
  elif record.get('response_complete') is True and type(record.get('raw_response')) is str:
