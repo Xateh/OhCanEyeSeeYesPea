@@ -56,3 +56,10 @@ The preceding HTTP implementation did complete separately approved development p
 
 
 The SDK review repair adds bounded partial-response retention, distinct streaming-timeout outcomes, explicit encoding rejection, checked-in synthetic regression fixtures and a dedicated optional-SDK CI job. AI assistance implemented and tested this work; coordinating code review is complete and PR publication is separately authorized. This does not claim independent human/team sign-off. No further model calls or new research outcomes were produced.
+
+
+## 7 November: local dataset/benchmark boundary follow-up
+
+Under Xu An's direction, AI assistance reproduced and corrected temporal-schema container/unknown-field validation through the explicitly selected temporal_validation_v2 boundary, preserving the frozen original modules, and made the omitted-emergency normalization explicit. It added offline boundary/invariance and intended-instance checks, retaining an oracle-infeasible/solver-UNKNOWN stratum. This local follow-up does not alter PR23, historical corpus/results or SDK calibration guards. No model calls or publication were performed. No optimization objective was invented; team agreement on that contract remains necessary. This is AI-assisted implementation/testing, not independent human review or sole solver authorship.
+
+The local continuation also connects strict v2 to a separately versioned offline validation consumer, reusing existing paired execution/accounting and the merged CSP boundary. Allan retains solver/frontier-model integration responsibilities. AI assistance implemented registration, payload isolation, strict translated-input dispatch, intended-instance final scoring and failure-denominator tests. This is software integration evidence only; the default mock abstentions and checked fixture outputs are not new LLM results. No optimality objective, teammate commitment, live run or publication is claimed.
