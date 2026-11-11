@@ -2,9 +2,11 @@
 
 This revision implements the user-approved API format. It makes no live call, chooses no model or entitlement, stores no credential and authorizes no spending. It is separate from Allan's historical Claude Code experiments and the prior CLI adapter. Do not pool their results.
 
+This document describes the legacy raw-HTTP protocol. Its current transport identity is v2 after the [P2 retention corrections](benchmark-p2-local-fixes.md); preparation-status statements below describe the original revision, not current project status. The current reviewed SDK route is documented in [OpenAI SDK integration](openai-sdk-integration-v1.md). Historical plans keep their original identities.
+
 ## Versioned boundary and ordering
 
-`responses_runner.py` (`responses-paired-runner-v1`) and `responses_transport.py` (`openai-responses-text-json-v1`) use the fixed public endpoint `https://api.openai.com/v1/responses`. Python standard-library HTTPS is used directly: no SDK, automatic retry, redirect, proxy-environment lookup, alternate endpoint, model fallback or native API tool invocation. Non-200 responses and failures are retained, not retried. No provider-specific CLI or agent harness is involved.
+`responses_runner.py` (`responses-paired-runner-v1`) and `responses_transport.py` (`openai-responses-text-json-v2`) use the fixed public endpoint `https://api.openai.com/v1/responses`. Python standard-library HTTPS is used directly: no SDK, automatic retry, redirect, proxy-environment lookup, alternate endpoint, model fallback or native API tool invocation. Non-200 responses and failures are retained, not retried. No provider-specific CLI or agent harness is involved.
 
 Initial case text remains byte-identical across arms, from the same audited registered selection. Request `instructions` holds shared/arm instructions plus the common JSON-only rule; `input` holds case text, the existing final-output/text-CSP schema and explicit earlier submitted instances/results. The common application text protocol reuses source-pinned `study.prompts.user_message('v1',...)`; it does not reuse a Claude model identity or CLI transport. Responses serialization has its own version. `tools=[]`, `store=false` and `stream=false` are explicit. Only a text `csp` request can reach the local checked CSP; native API tool output is rejected. `store=false` is a request setting, not a promise about every provider retention policy.
 

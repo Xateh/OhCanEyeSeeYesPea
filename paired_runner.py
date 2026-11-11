@@ -11,7 +11,7 @@ from tier_a_completion import well_formed
 from tier_a_input_view import SHARED
 from tier_a_inputs import ARM
 from study.accounting import attach,cost_summary,known_cost
-VERSION='paired-development-runner-v3'
+VERSION='paired-development-runner-v4'
 KEYS={'version','provider_revision','case_ids','repetitions','seed','shuffle_cases','order','token_limit','wall_seconds','tool_call_limit','retry_limit','spending_ceiling','currency','solver_revision','solver_limits'}
 def config(value):
  require(type(value) is dict and set(value) in (KEYS,KEYS|{'execution_mode','provider_binding'}),'exact explicit runner configuration')
@@ -181,7 +181,7 @@ def summarize(plan,cases,receipts):
   for rep in range(c['repetitions']):
    a,b=(row_index[i,rep,arm] for arm in ('no_tools','csp'))
    bucket='incomplete' if not a['answer_complete'] or not b['answer_complete'] else 'both' if a['success'] and b['success'] else 'no_tools_only' if a['success'] else 'csp_only' if b['success'] else 'neither';pairs[bucket]+=1
- by_arm={a:dict(**group([r for r in rows if r['arm']==a]),**cost_summary([r for r in receipts if r['arm']==a])) for a in ('no_tools','csp')}
+ by_arm={a:dict(**group([r for r in rows if r['arm']==a]),**cost_summary([r for r in receipts if r['arm']==a],planned_runs=sum(r['arm']==a for r in rows))) for a in ('no_tools','csp')}
  for a in by_arm:
   received=[r for r in receipts if r['arm']==a];known=[r['token_usage'] for r in received if r['token_usage'] is not None]
   by_arm[a].update(token_coverage=[len(known),by_arm[a]['planned']],known_tokens=sum(sum(x.values()) for x in known),tokens_total=sum(sum(x.values()) for x in known) if len(known)==by_arm[a]['planned'] else None,observed_elapsed_seconds=sum(r['elapsed_seconds'] for r in received),tool_calls=sum(len(r['tool_calls']) for r in received),solver_elapsed_seconds=sum(e['elapsed_seconds'] for r in received for e in r['solver_events']),provider_errors=sum(r['provider_error'] for r in received),tool_errors=sum(r['tool_error'] for r in received))

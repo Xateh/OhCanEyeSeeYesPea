@@ -14,6 +14,6 @@
   "solver_revision": null,
   "solver_limits": null,
   "provider_binding": null,
-  "version": "paired-development-runner-v3",
+  "version": "paired-development-runner-v4",
   "execution_mode": "fixture"
 }

@@ -17,7 +17,7 @@ def configure():
  specs=json.loads((ROOT/'datasets.json').read_text());specs[0]['directory']=str(directory);specs[0]['plan']['consumer_sha256']=hashlib.sha256(Path(registration.__file__).read_bytes()).hexdigest()
  (temp/'datasets.json').write_text(json.dumps(specs))
  for name in ['settings.json','settings-final.json']:
-  c=json.loads((ROOT/name).read_text());b=c['provider_binding'];c['provider_binding']=api.binding(*(b[k] for k in ['model','expected_model','profile','reasoning_effort','max_output_tokens','call_wall_seconds','call_budget_usd','rates']));(temp/name).write_text(json.dumps(c))
+  c=json.loads((ROOT/name).read_text());b=c['provider_binding'];c['provider_binding']=api.binding(*(b[k] for k in ['model','expected_model','profile','reasoning_effort','max_output_tokens','call_wall_seconds','call_budget_usd','rates']));c['provider_revision']=api.VERSION;(temp/name).write_text(json.dumps(c))
  (temp/'run').mkdir();(temp/'run/attempts.jsonl').write_bytes((ROOT/'abstention-projection.jsonl').read_bytes())
  comparison.PRIOR=temp
  replay.PRIOR=ROOT;replay.RECEIPT_SHA=hashlib.sha256((ROOT/'handoff-request-projection.jsonl').read_bytes()).hexdigest()
