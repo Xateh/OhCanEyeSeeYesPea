@@ -1,0 +1,15 @@
+{
+  "version": "direct-python-csp-api-v1",
+  "mode": "mock",
+  "provider": "mock",
+  "model": "fixture",
+  "effort": "high",
+  "seed": 0,
+  "max_output_tokens": 2000,
+  "call_seconds": 20,
+  "attempt_seconds": 45,
+  "attempt_token_limit": 12000,
+  "call_budget_usd": 0.2,
+  "total_budget_usd": 2.5,
+  "rates": {"input": 0, "output": 0, "cache_read": 0, "cache_write_short": 0, "cache_write_long": 0, "source": "synthetic fixture rates; not provider pricing"}
+}

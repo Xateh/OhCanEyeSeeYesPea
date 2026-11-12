@@ -1,0 +1,5 @@
+# Optional API route only. No installation performed by the benchmark.
+# Exact SDK and HTTP boundary pins; transitive environment is fingerprinted in plans.
+# This is not a complete wheel hash lock or a claim of installed-SDK validation.
+anthropic==2.8.0
+httpx2==2.16.0
