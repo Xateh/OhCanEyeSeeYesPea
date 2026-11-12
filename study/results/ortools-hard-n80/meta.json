@@ -1,0 +1,27 @@
+{
+  "arm": "csp",
+  "cohort": "hard-n80",
+  "effort": "high",
+  "model": "claude-opus-5-5",
+  "prompt": "v3",
+  "prompt_sha256": "68909cb353e8",
+  "sessions": [
+    {
+      "budget_usd": 12.0,
+      "finished_at": "2026-11-12T15:31:00",
+      "git_commit": "745c9352e42ebaa664faa5d8da51b2bcd710bb30",
+      "known_spend_usd": 0.941368,
+      "remaining_slots": 16,
+      "stopped_because": "usage_limit"
+    },
+    {
+      "budget_usd": 12.0,
+      "finished_at": "2026-11-12T15:55:58",
+      "git_commit": "b9744af78b0783ed2ca305facfb9362c637b6d7e",
+      "known_spend_usd": 6.774072,
+      "remaining_slots": 0,
+      "stopped_because": "finished"
+    }
+  ],
+  "solver": "ortools-cp-sat-v1-9.15.6755"
+}
