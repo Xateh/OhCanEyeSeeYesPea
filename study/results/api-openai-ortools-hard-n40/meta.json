@@ -1,0 +1,20 @@
+{
+  "arm": "csp",
+  "cohort": "hard-n40",
+  "effort": "high",
+  "model": "gpt-6-astra",
+  "prompt": "v3",
+  "prompt_sha256": "68909cb353e8",
+  "sessions": [
+    {
+      "budget_usd": 12.1231,
+      "finished_at": "2026-11-12T21:21:21",
+      "git_commit": "01360c79e9c268eb067b7bfd760c645bb2aa84d6",
+      "known_spend_usd": 5.993175000000001,
+      "remaining_slots": 0,
+      "stopped_because": "finished"
+    }
+  ],
+  "solver": "ortools-cp-sat-v1-9.15.6755",
+  "transport": "openai-api"
+}

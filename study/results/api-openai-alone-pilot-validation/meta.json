@@ -1,0 +1,28 @@
+{
+  "arm": "no_tools",
+  "cohort": "pilot-validation",
+  "effort": "high",
+  "model": "gpt-6-astra",
+  "prompt": "v3",
+  "prompt_sha256": "68909cb353e8",
+  "sessions": [
+    {
+      "budget_usd": 1.0,
+      "finished_at": "2026-11-12T20:48:05",
+      "git_commit": "01360c79e9c268eb067b7bfd760c645bb2aa84d6",
+      "known_spend_usd": 0.021109999999999997,
+      "remaining_slots": 6,
+      "stopped_because": "smoke_limit"
+    },
+    {
+      "budget_usd": 27.6237,
+      "finished_at": "2026-11-12T20:51:32",
+      "git_commit": "01360c79e9c268eb067b7bfd760c645bb2aa84d6",
+      "known_spend_usd": 0.0698,
+      "remaining_slots": 0,
+      "stopped_because": "finished"
+    }
+  ],
+  "solver": null,
+  "transport": "openai-api"
+}
