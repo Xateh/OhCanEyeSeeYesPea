@@ -68,3 +68,27 @@ The local continuation also connects strict v2 to a separately versioned offline
 ## Local P2 follow-up after PR23 merge
 
 AI assistance under Xu An's direction reproduced and locally corrected planned-cost denominator gaps, dataset pre-read bounds and legacy HTTP partial-read/redaction failures. Verification uses synthetic data and Slurm offline jobs, not model experiments. Original source/fixture/result identities are preserved or explicitly versioned for replay; no token, live call, publication or new solver is involved. This local engineering work remains subject to review and does not establish human sign-off or research conclusions.
+
+
+## 12 November 2026: direct Python API workflow (local revision)
+
+At the user's request, substantial AI-assisted implementation adds explicit official OpenAI/Anthropic SDK selection, retaining the historical Claude CLI separately. A new version uses one model response per arm: baseline final evidence, or model-authored CSP translation followed by checked Python solver evidence and independent original-instance evaluation. It does not ask the model for a second final. Data/IDs and historical protocols/outcomes remain unchanged. The README is rewritten for project users, with detailed implementation and validation material linked separately.
+
+This work is baseline integration/dataset-validation support; Allan's solver ownership and team protocol/analysis responsibilities are not reassigned. No optimality objective is invented. AI generated and reviewed source, tests and documentation under the user's direction; this is substantial AI assistance, not a claim of independent personal authorship or human sign-off. Tests use synthetic keys, fixtures and mocked transports. At that initial offline checkpoint, no live calls, dependency installation or publication had occurred. The subsequent SDK and live checkpoints are recorded below.
+
+
+### 12 November 2026 integration follow-up
+
+AI-assisted source integration preserves 26 additive PR26 files from merged main a8621d2, verified against 275 upstream blobs, alongside the local direct API work. This is not a Git ancestry merge or a reinterpretation of Allan's historical results. The direct backend remains bounded DFS; OR-Tools defaults are not substituted. An isolated actual Anthropic 2.8.0 SDK check passed with synthetic credentials and mocked HTTP, not a live model call. Existing team ownership, substantial AI-assistance declaration and lack of human sign-off remain applicable.
+
+
+### 12 November 2026 approved OpenAI pipeline smoke
+
+Under the user's explicit approval, AI assistance executed and assessed the bounded direct OpenAI workflow on four reused original-synthetic development cases. Astra/high Standard completed all eight slots with four independently evidence-valid results per arm, eight model calls, four checked Python DFS calls and zero post-solver model calls. Reported usage gives a US$0.16960 estimate, not verified billing. No retry, output repair, historical-result change, optimality claim or publication occurred. The separate actual Anthropic SDK check used synthetic credentials and mocked HTTP, not live Anthropic inference.
+
+AI assistance updated the user-facing README and direct-workflow guide to reflect this narrow verification. This remains baseline integration/dataset-validation work; Allan's solver ownership and team protocol/analysis roles are unchanged. These reused development cases do not establish holdout performance, general accuracy or solver superiority. Full legacy-suite verification remains incomplete. Tested code/receipt hashes are preserved; documentation-only changes have a separate review record. The substantial AI declaration and absence of human sign-off remain applicable.
+
+
+### Pre-publication saved-assessment review
+
+AI-assisted review reproduced and corrected a conditional saved-evidence join bypass, with focused offline regressions. Assessor revision direct-saved-evidence-joins-v2 rejects missing evidence and missing raw/model joins without dropping legitimate failed attempts. Generation/provider/solver functions and model requests are unchanged. The earlier live smoke remains tied to its actual tested source; the later assessor correction is not claimed as newly live-tested. Historical receipts and source pins are preserved, with a separate offline compatibility recheck. Relative links in the newly copied history document were corrected without changing historical commands/results.

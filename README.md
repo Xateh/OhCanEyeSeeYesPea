@@ -1,64 +1,69 @@
 # OhCanEyeSeeYesPea
 
-CS3263 Group 7 research prototype: compare the **same language model on identical surgery-scheduling text**, without tools versus with a CSP tool that receives the model's translated constraints. An independent checker scores the intended instance outside both arms.
+Compare a language model alone with a model whose translated surgery-scheduling constraints are executed by a checked Python CSP solver. Both arms are evaluated against the **original intended problem**. The current contract measures feasible schedules and supported infeasibility certificates, not optimality.
 
-## Current reviewed integration (7 November 2026)
+## Start without an API key
 
-The current addition provides an official OpenAI Python SDK path for model-alone versus mandatory model-plus-CSP calibration. See the [SDK usage guide](docs/openai-sdk-integration-v1.md) and [paired-runner integration guide](docs/paired-runner-integration.md). SDK v2 has offline/mock verification only: 434 distinct tests passed normally and the same 434 under optimized Python in a clean copy, including 13 SDK tests. Live SDK behavior is not yet validated. The SDK entry point currently retains the four-case calibration guard and pinned CPython 3.12/Linux environment; it does not provide arbitrary-cohort execution or optimality scoring. Historical raw-HTTP development pilots and protocols remain separate and unchanged.
-
-## Original proof-pilot status (historical)
-
-This branch contains an **original-synthetic, offline proof pilot**, originally proposed in [PR #1](https://github.com/Xateh/OhCanEyeSeeYesPea/pull/1). It is not a clinical system or a completed real-model study.
-
-- 48 controlled-language cases in 24 paired families: 24 feasible and 24 certified infeasible; 2–3 mandatory surgeries per case.
-- Family-disjoint train/validation/test splits of 32/8/8 cases, with deliberate parameter ordering rather than random IID sampling.
-- A bounded standard-library DFS CSP adapter, independent schedule/certificate checking, and a separate tiny-case Cartesian oracle.
-- A provider-neutral paired harness with a deterministic **mock** translator. No real LLM/provider is included or selected; no model-performance results are established.
-- 74 test methods plus fixture audit, regeneration and 96 mock arm runs. [Baseline PR CI for head 38c34bbb](https://github.com/Xateh/OhCanEyeSeeYesPea/actions/runs/39037869399) passed on Python 3.10–3.14 using GitHub's PR merge checkout. Consult current PR checks for later commits.
-
-The larger historical corpus is not in this repository. No source-derived/IHTC data is included, and its redistribution rights remain unresolved. OR-Tools integration, broader dataset coverage/difficulty validation, prompts, matched evaluation budgets and real-model experiments are still planned.
-
-## Quick start
-
-Use Python 3.10 or newer from this repository's root on `feat/arrival-deadline-pilot`. Runtime and tests use only the standard library; no installation, API key or model download is required.
+Run from the repository root with Python 3.10 or newer. The deterministic demonstration needs only the standard library and makes no network calls. Choose a new output directory; existing results are never overwritten.
 
 ```bash
-git clone --branch feat/arrival-deadline-pilot https://github.com/Xateh/OhCanEyeSeeYesPea.git
-cd OhCanEyeSeeYesPea
-python3 -m unittest discover -s tests -v
-python3 -m scripts.verify_package
+python3 tools/run_direct_benchmark.py --demo --config docs/direct-api-settings.example.json --out runs/direct-demo
+python3 tools/run_direct_benchmark.py --assess runs/direct-demo
 ```
 
-To retain a mock run, choose a new output path:
+This is a **mock demonstration, not model performance**: its baseline deliberately returns UNKNOWN; its assisted response is a deterministic translation. The fixture data is the checked-in duplicate in `fixtures/responses-offline-v1/seeded-v2/`.
+
+## Choose a provider
+
+| Choice | Entry point | Dependency |
+| --- | --- | --- |
+| OpenAI API | `tools/run_direct_benchmark.py`, `provider: openai_api` | Official OpenAI SDK; existing pinned CPython 3.12/Linux environment described in [SDK setup](docs/openai-sdk-integration-v1.md) |
+| Claude API | Same direct entry point, `provider: anthropic_api` | Official Anthropic SDK; [setup and exact protocol](docs/direct-api-workflow-v1.md) |
+| Claude CLI | Existing `tools/run_paired.py` with the explicit CLI adapter configuration | Claude CLI; [legacy paired guide](docs/paired-runner-integration.md) |
+
+The CLI remains a separate historical workflow, not an automatic fallback. Selecting an API never invokes the CLI. On 12 November 2026, a bounded OpenAI Astra/high Standard smoke check completed all eight slots on four reused synthetic development cases: four evidence-valid results per arm, eight model calls, four Python DFS calls and zero post-solver model calls. The usage-based estimate was US$0.16960, not verified billing. Claude API has an installed-SDK offline/mock compatibility check only, not live validation. See the [verification scope and receipts](docs/direct-api-workflow-v1.md#verified-smoke-check).
+
+## Inputs and configuration
+
+The direct runner retains the existing **four-case, one-repetition calibration registration**, not arbitrary-corpus execution. On the project server its unchanged source directory is `/home/t/tehxa/cs3263-review/seeded-development-v2-96-20261105/`. The same four cases run once in each arm, with balanced starting-arm order.
+
+Prepare a fresh registration against that existing directory; this reads and validates data but does not generate or modify cases:
 
 ```bash
-python3 -m surgerybench.temporal_benchmark \
-  --model fixtures/arrival-deadline-v1/model.jsonl \
-  --gold fixtures/arrival-deadline-v1/gold.jsonl \
-  --out runs/mock.jsonl
+python3 tools/run_direct_benchmark.py --prepare-datasets /home/t/tehxa/cs3263-review/seeded-development-v2-96-20261105 --write-spec direct-datasets.json
 ```
 
-The mock no-tools arm deliberately returns UNKNOWN. Its assisted arm exercises translation/tool/checker integration. These outputs **do not compare actual LLM ability**. Commands refuse to overwrite existing output files.
+Copy `docs/direct-api-settings.example.json` to your own configuration. For live use, set `mode` to `live`, select `openai_api` / `gpt-6-astra` or `anthropic_api` / `claude-opus-5-5`, and supply current Standard-tier per-million-token rates and their source. Zero placeholder rates fail closed in live mode. The verified OpenAI smoke allocation used `max_output_tokens: 1700`; the 2,000-token template default exceeded the per-call reserve for these inputs at the checked rates. High reasoning and conservative limits are explicit; these are provisional settings, not an agreed research protocol. See the [configuration contract](docs/direct-api-workflow-v1.md).
 
-## Documentation
+Keep the existing key in a separate owner-only, Git-ignored file: `OPENAI_API_KEY=...` for OpenAI or `ANTHROPIC_API_KEY=...` for Claude. Templates: [.env.example](.env.example) and [Claude template](docs/anthropic.env.example). Do not put secrets in settings, command arguments or results. Credential setup and paid execution need appropriate account authorization; a ChatGPT/Claude subscription alone does not establish API entitlement.
 
-- [Pilot runbook and validation boundaries](PILOT.md)
-- [Architecture and code-module map](docs/architecture.md)
-- [Dataset, schema and scheduling semantics](docs/data-and-semantics.md)
-- [Provider/tool contracts, scoring and experiment workflow](docs/benchmarking.md)
-- [Shared evaluation framework](docs/evaluation-framework.md)
-- [Roadmap and team review gates](docs/roadmap.md)
-- [Provenance and publication exclusions](PROVENANCE.md)
-- [Open work](https://github.com/Xateh/OhCanEyeSeeYesPea/issues)
+Once the account, key use and bounded run are authorized:
 
-## Research scope and team interfaces
+```bash
+python3 tools/run_direct_benchmark.py --datasets direct-datasets.json --config direct-settings.json --out runs/direct-live --allow-live --allow-key-file --key-file .env.anthropic
+python3 tools/run_direct_benchmark.py --assess runs/direct-live
+```
 
-The original proposal concerned university timetabling; the post-consultation prototype focuses on abstract surgery scheduling. Each surgery has a fixed surgeon, nonpreemptive deterministic duration, arrival/completion bounds and eligible operating rooms. Calendars, daily minute budgets and resource gaps are explicit. Priority/emergency metadata does not imply an optimization objective or clinical priority policy.
+For OpenAI select its provider/model in the settings and use the corresponding key file. The command above is a credential-dependent usage example, **not a live Claude run performed here**. No API fallback or retry occurs. Software spend reserves are estimates, not a guaranteed billing cap.
 
-The [proposal and progress document](https://docs.google.com/document/d/1A1CfuLvvGqqFIVxMyThe0pkc4jgBMG6oruXJizW-Nsw/edit) records Xu An's problem/dataset role, later expanded to benchmark tooling; Allan's OR-Tools framework role; and Benjamin's prompting, experimental analysis and Responsible AI role. Integration and final scope need team agreement. Issue role suggestions are discussion context, not new assignments.
+## What each arm does
 
-## Safe development
+- **Model alone:** Python sends one composed user prompt; the model returns a strict JSON final answer; the independent checker evaluates it. No solver is exposed or dispatched.
+- **Model + CSP:** Python sends one composed user prompt; the model returns a JSON CSP instance; Python validates and invokes the existing checked solver at most once, then evaluates the solver evidence against the original problem. There is **no second model call**.
 
-Keep model-facing text separate from gold instances, labels and evidence. Never expose gold/scoring to a model or silently repair a translation with it. Add regression tests when changing constraints, proof semantics or adapters. Preserve original fixtures/provenance and use new output paths. Do not infer INFEASIBLE from a timeout or unsupported proof.
+The prompt contains the unchanged case text plus shared semantics and arm-specific JSON-format instructions. It is not merely the raw problem text. There is no separate system message or native API tool registration. The assisted workflow is a separately versioned treatment from earlier model-after-solver protocols.
 
-Before real runs, agree the provider/model revision, prompts, budgets, retry limits, logging/privacy and spend authorization. No clinical use or real patient data is supported. See [LICENSE](LICENSE) and [PROVENANCE.md](PROVENANCE.md); the original-code/synthetic-data license does not grant rights over excluded third-party material.
+## Results
+
+Each new output directory contains `plan.json` (frozen selection, settings and source identities), `attempts.jsonl` (responses, usage and stage receipts) and `summary.json` (all eight planned slots, including missing/failed ones). Assessment reads saved evidence without calling a model or rerunning the solver. Source or dataset drift is rejected.
+
+FEASIBLE requires a valid schedule; INFEASIBLE requires a supported certificate. UNKNOWN is an abstention, not proof of infeasibility. Format validity and semantic evidence success are distinct. The direct solver is the existing bounded DFS adapter. The separately imported [historical OR-Tools workflow/results](docs/ortools-results.md) use the Claude CLI and a post-solver model final; they are not this direct API workflow. Its default eight-worker/ten-second solver is not enabled here. The assisted arm includes local solver compute, so this is a workflow comparison rather than matched total compute.
+
+## Other workflows and references
+
+- [Strict offline schema/round-trip benchmark](docs/strict-temporal-consumer-v1.md)
+- [Direct API prompts, limits and accounting](docs/direct-api-workflow-v1.md)
+- [Earlier SDK integration](docs/openai-sdk-integration-v1.md)
+- [Historical project notes](docs/project-history-through-20261107.md), [contribution and AI-use record](CONTRIBUTIONS_XU_AN.md)
+
+Development fixtures and selected historical pilots do not establish general accuracy or a clean holdout. Source-derived material remains excluded while redistribution rights are unresolved. Report/video submission is a separate team deliverable.
