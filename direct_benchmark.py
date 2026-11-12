@@ -14,10 +14,18 @@ from surgerybench.temporal_csp import TOOL
 from responses_sdk_runner import IDS,DIRECTORY,MANIFEST
 from direct_api_providers import APIProvider,body,estimate_reserve,RATE_KEYS
 VERSION='direct-python-csp-api-v1'
-ASSESSMENT_VERSION='direct-saved-evidence-joins-v2'
+ASSESSMENT_VERSION='direct-saved-evidence-joins-v3'
 TRANSLATE='Return exactly one JSON object and no prose or fences: {"type":"tool_call","name":"csp","arguments":{"instance":INSTANCE}}. Translate every stated hard constraint into schema 1.1 using the actual IDs. This is a translation response; Python executes the supplied instance. Do not return a final answer, history or another invocation. Instance schema: '
 ROOT=Path(__file__).resolve().parent
 KEYS={'version','mode','provider','model','effort','seed','max_output_tokens','call_seconds','attempt_seconds','attempt_token_limit','call_budget_usd','total_budget_usd','rates'}
+def model_json(raw):
+ answer=strict_json(raw);pending=[(answer,0)]
+ while pending:
+  node,depth=pending.pop();require(depth<=64,'bounded model JSON depth')
+  if type(node) is dict:pending.extend((v,depth+1) for v in node.values())
+  elif type(node) is list:pending.extend((v,depth+1) for v in node)
+ return answer
+
 def config(value):
  require(type(value) is dict and set(value)==KEYS,'explicit direct settings fields')
  c=deepcopy(value);require(c['version']==VERSION and c['mode'] in ('mock','live'),'version/mode')
@@ -85,7 +93,7 @@ def attempt(slot,g,c,provider,solver_factory=MergedSolver):
   call=provider.call(prompt(g['text'],slot['arm']),c['call_budget_usd']);row['provider_calls']=[call]
   require(not call.get('error') and call.get('response_complete') and type(call.get('raw_model_text')) is str,'provider response failure')
   row['stage']='model_format_error'
-  raw=call['raw_model_text'];require(len(raw.encode())<=65536,'model text cap');answer=strict_json(raw);row['model_output']=answer
+  raw=call['raw_model_text'];require(len(raw.encode())<=65536,'model text cap');answer=model_json(raw);row['model_output']=answer
   if slot['arm']=='no_tools':
    require(type(answer) is dict and set(answer)=={'type','output'} and answer['type']=='final','baseline final envelope')
    row['final_output']=answer['output'];row['stage']='final'
@@ -126,8 +134,11 @@ def summarize(plan,cases,receipts):
   g=cases[slot['case_id']]
   if row['provider_calls']:
    call=row['provider_calls'][0]
+   fixture=plan['config']['mode']=='mock' and call.get('fixture_not_model') is True
+   require(fixture or call.get('request')==body(plan['config']['provider'],prompt(g['text'],slot['arm']),plan['config']),'required planned API request')
+   require(fixture or row['model_output'] is None or type(call.get('raw_response_base64')) is str,'credited API output requires raw bytes')
    if 'request' in call:require(call['request']==body(plan['config']['provider'],prompt(g['text'],slot['arm']),plan['config']),'model-visible request join')
-   if not call.get('fixture_not_model') and call.get('raw_response_base64') is not None:
+   if not fixture and call.get('raw_response_base64') is not None:
     import base64
     from direct_api_providers import usage,extract
     raw=base64.b64decode(call['raw_response_base64'],validate=True)
@@ -138,13 +149,14 @@ def summarize(plan,cases,receipts):
      except (ValueError,UnicodeError):
       require(call['error'] is not None and call['usage'] is None and call['raw_model_text'] is None,'malformed envelope remains failed/unknown');envelope=None
      if envelope is not None:require(call['usage']==usage(plan['config']['provider'],envelope,plan['config']['rates']),'usage/raw receipt join')
+     if call['raw_model_text'] is not None:require(call['http_status']==200 and envelope.get('model')==plan['config']['model'],'saved HTTP/model identity')
      if call['raw_model_text'] is not None:require(call['raw_model_text']==extract(plan['config']['provider'],envelope),'model/raw receipt join')
    raw_text=call.get('raw_model_text')
    try:bounded_text=type(raw_text) is str and len(raw_text.encode())<=65536
    except UnicodeError:bounded_text=False
    if not call.get('error') and call.get('response_complete') and bounded_text:
-    try:parsed=strict_json(raw_text)
-    except ValueError:require(row['model_output'] is None,'malformed model output/raw join')
+    try:parsed=model_json(raw_text)
+    except (ValueError,RecursionError):require(row['model_output'] is None,'malformed model output/raw join')
     else:require(type(parsed) is type(row['model_output']) and parsed==row['model_output'],'model output/raw join')
    else:require(row['model_output'] is None,'parsed model output without eligible raw response')
   if row['solver_output'] is not None:

@@ -53,7 +53,7 @@ def _in_process(body,timeout,key,*,http_transport=None,sdk_module=None,budget_us
    require(request.method=='POST' and str(request.url)==ENDPOINT,'fixed Anthropic endpoint only')
    require(json.loads(request.content)==body and len(request.content)<=7500,'SDK request identity/byte cap')
    if budget_usd is not None:
-    require(type(rates) is dict and ((len(request.content)+256)*max(rates[k] for k in ('input','cache_write_short','cache_write_long'))+body['max_tokens']*rates['output'])/1000000<=budget_usd,'wire reserve insufficient')
+    require(type(rates) is dict and ((len(request.content)+256)*max(rates[k] for k in ('input','cache_read','cache_write_short','cache_write_long'))+body['max_tokens']*rates['output'])/1000000<=budget_usd,'wire reserve insufficient')
    wire.update(request_bytes=len(request.content),request_sha256=hashlib.sha256(request.content).hexdigest())
    response=inner.handle_request(request);wire['encoding_supported']=response.headers.get('content-encoding','identity') in ('','identity')
    h=dict(response.headers);h.pop('content-encoding',None)

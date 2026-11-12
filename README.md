@@ -7,6 +7,7 @@ Compare a language model alone with a model whose translated surgery-scheduling 
 Run from the repository root with Python 3.10 or newer. The deterministic demonstration needs only the standard library and makes no network calls. Choose a new output directory; existing results are never overwritten.
 
 ```bash
+mkdir -p runs
 python3 tools/run_direct_benchmark.py --demo --config docs/direct-api-settings.example.json --out runs/direct-demo
 python3 tools/run_direct_benchmark.py --assess runs/direct-demo
 ```
@@ -40,6 +41,7 @@ Keep the existing key in a separate owner-only, Git-ignored file: `OPENAI_API_KE
 Once the account, key use and bounded run are authorized:
 
 ```bash
+mkdir -p runs
 python3 tools/run_direct_benchmark.py --datasets direct-datasets.json --config direct-settings.json --out runs/direct-live --allow-live --allow-key-file --key-file .env.anthropic
 python3 tools/run_direct_benchmark.py --assess runs/direct-live
 ```

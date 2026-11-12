@@ -13,7 +13,7 @@ def body(provider,prompt,c):
  raise ValueError('explicit supported API provider required')
 
 def estimate_reserve(request,c):
- rates=c['rates'];return ((len(canonical(request).encode())+256)*max(rates[k] for k in ('input','cache_write_short','cache_write_long'))+c['max_output_tokens']*rates['output'])/1000000
+ rates=c['rates'];return ((len(canonical(request).encode())+256)*max(rates[k] for k in ('input','cache_read','cache_write_short','cache_write_long'))+c['max_output_tokens']*rates['output'])/1000000
 
 def usage(provider,envelope,rates):
  u=envelope.get('usage');out={'input_tokens':None,'output_tokens':None,'cost_estimate_usd':None,'reported':deepcopy(u),'returned_tier':None}
@@ -48,6 +48,7 @@ def usage(provider,envelope,rates):
 def extract(provider,envelope):
  if provider=='openai_api':
   require(envelope.get('status')=='completed' and not envelope.get('error') and not envelope.get('incomplete_details'),'incomplete/error response')
+  require(type(envelope.get('output')) is list and all(type(i) is dict and i.get('type') in ('reasoning','message') for i in envelope['output']),'unsupported native output item')
   blocks=[b for item in envelope.get('output',[]) if item.get('type')=='message' and item.get('role')=='assistant' for b in item.get('content',[])]
   require(len(blocks)==1 and blocks[0].get('type')=='output_text' and type(blocks[0].get('text')) is str,'one text answer; no refusal/native tool')
  else:
@@ -71,7 +72,7 @@ class APIProvider:
     key=self.key_loader()
     if c['provider']=='openai_api':
      from openai_sdk_client import sdk_once
-     result=sdk_once(request,c['call_seconds'],key,budget_usd=budget,rates={'input_per_million':c['rates']['input'],'cache_write_30m_per_million':max(c['rates']['cache_write_short'],c['rates']['cache_write_long']),'output_per_million':c['rates']['output']})
+     result=sdk_once(request,c['call_seconds'],key,budget_usd=budget,rates={'input_per_million':c['rates']['input'],'cache_write_30m_per_million':max(c['rates']['cache_read'],c['rates']['cache_write_short'],c['rates']['cache_write_long']),'output_per_million':c['rates']['output']})
     else:
      from anthropic_sdk_client import once
      result=once(request,c['call_seconds'],key,budget_usd=budget,rates=c['rates'])
