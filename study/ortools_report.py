@@ -27,11 +27,16 @@ def paired(alone, with_solver):
     return paired_buckets(tag(alone, 'no_tools') + tag(with_solver, 'csp'))
 
 
-def ortools_rows(cohort, gold):
+def cohort_rows(folder, cohort, gold, arm='csp'):
+    """Re-scored rows of one runner folder, refusing to report until every planned slot is present."""
     _, field, value, repetitions = COHORTS[cohort]
-    rows = rescore(read_jsonl(RESULTS / f'ortools-{cohort}' / 'runs.jsonl'), gold)
+    rows = rescore(read_jsonl(RESULTS / folder / 'runs.jsonl'), gold)
     ids = sorted(g['id'] for g in gold.values() if str(g[field]) == str(value))
-    return require_planned(rows, len(ids) * repetitions, expected_slots(ids, ('csp',), repetitions))
+    return require_planned(rows, len(ids) * repetitions, expected_slots(ids, (arm,), repetitions))
+
+
+def ortools_rows(cohort, gold):
+    return cohort_rows(f'ortools-{cohort}', cohort, gold)
 
 
 def hard_claude_alone(gold):

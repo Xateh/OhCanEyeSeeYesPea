@@ -81,12 +81,15 @@ def execute(name, folder, budget_usd, workers, evaluator=evaluate, limit=None):
     return len(slots) - len(done) - position, spent, reason
 
 
-def record_session(folder, name, budget_usd, remaining, spent, reason):
-    from .ortools_solver import REVISION
+def record_session(folder, name, budget_usd, remaining, spent, reason, setup=None):
+    """Append one session to meta.json; setup describes the run the first time and defaults to Claude + OR-Tools."""
+    if setup is None:
+        from .ortools_solver import REVISION
+        setup = {'arm': 'csp', 'solver': REVISION}
     meta_path = folder / 'meta.json'
     meta = json.loads(meta_path.read_text()) if meta_path.exists() else {
-        'cohort': name, 'arm': 'csp', 'model': MODEL, 'effort': EFFORT, 'prompt': PROMPT,
-        'prompt_sha256': prompt_sha256(PROMPT), 'solver': REVISION, 'sessions': []}
+        'cohort': name, 'model': MODEL, 'effort': EFFORT, 'prompt': PROMPT,
+        'prompt_sha256': prompt_sha256(PROMPT), **setup, 'sessions': []}
     session = {'finished_at': datetime.now().isoformat(timespec='seconds'), 'budget_usd': budget_usd, 'known_spend_usd': spent,
                'stopped_because': reason, 'remaining_slots': remaining,
                'git_commit': subprocess.run(['git', 'rev-parse', 'HEAD'], capture_output=True, text=True).stdout.strip()}
