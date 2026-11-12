@@ -1,0 +1,19 @@
+{
+  "arm": "csp",
+  "cohort": "pilot-validation",
+  "effort": "high",
+  "model": "claude-opus-5-5",
+  "prompt": "v3",
+  "prompt_sha256": "68909cb353e8",
+  "sessions": [
+    {
+      "budget_usd": 2.0,
+      "finished_at": "2026-11-12T15:20:00",
+      "git_commit": "3a1f32ae18a70db40fa444955874e26109d220d3",
+      "known_spend_usd": 0.418144,
+      "remaining_slots": 0,
+      "stopped_because": "finished"
+    }
+  ],
+  "solver": "ortools-cp-sat-v1-9.15.6755"
+}
