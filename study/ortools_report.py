@@ -14,7 +14,7 @@ from .report import FIGURES, INK, MUTED, RESULTS, SURFACE, tune
 from .run_ortools import COHORTS
 
 PILOT_SPLITS = ('train', 'validation', 'test')
-COLORS = {'Claude alone': '#2a78d6', 'Claude + OR-Tools': '#eb6834'}
+COLORS = {'Claude alone': '#2a78d6', 'Claude alone (with reruns)': '#2a78d6', 'Claude + OR-Tools': '#eb6834'}
 ROWS = (('Evidence-backed success', 'evidence_backed_success'), ('Feasible-schedule success', 'feasible_schedule_success'),
         ('Certified-infeasible success', 'certified_infeasible_success'), ('Status agreement', 'status_agreement'),
         ('UNKNOWN', 'unknown'), ('Parse errors', 'parse_errors'), ('Timeouts', 'timeouts'),
@@ -22,8 +22,9 @@ ROWS = (('Evidence-backed success', 'evidence_backed_success'), ('Feasible-sched
 
 
 def paired(alone, with_solver):
-    """Pair two arms on (case, repetition) without changing either list."""
-    return paired_buckets([{**r, 'arm': 'no_tools'} for r in alone] + [{**r, 'arm': 'csp'} for r in with_solver])
+    """Pair two arms on (case, repetition) without changing either list. Older single-run receipts are repetition 0."""
+    tag = lambda rows, arm: [{**r, 'repetition': r.get('repetition', 0), 'arm': arm} for r in rows]
+    return paired_buckets(tag(alone, 'no_tools') + tag(with_solver, 'csp'))
 
 
 def ortools_rows(cohort, gold):
@@ -62,23 +63,25 @@ def size_table(alone_first, alone_rerun, with_solver, solver_gold):
 
 def chart_success(plt, alone, with_solver):
     figure, axis = plt.subplots(figsize=(8, 3.6))
-    for offset, (name, data) in zip((-0.18, 0.18), (('Claude alone', alone), ('Claude + OR-Tools', with_solver))):
+    for offset, (name, data) in zip((-0.18, 0.18), (('Claude alone (with reruns)', alone), ('Claude + OR-Tools', with_solver))):
         values = [100 * summarize(data[size])['evidence_backed_success'][0] / len(data[size]) for size in SIZES]
         bars = axis.bar([x + offset for x in range(len(SIZES))], values, width=0.34, color=COLORS[name], label=name,
                         edgecolor=SURFACE, linewidth=2)
         axis.bar_label(bars, fmt='%.0f', color=INK, fontsize=9, padding=2)
     tune(axis)
     axis.set_ylim(0, 112)
-    axis.set_xticks(range(len(SIZES)), [f'{size} surgeries' for size in SIZES])
+    labels = [f'{size} surgeries' for size in SIZES[:-1]] + [f'{SIZES[-1]} surgeries\n(4 + OR-Tools runs hit usage limit)']
+    axis.set_xticks(range(len(SIZES)), labels)
     axis.set_ylabel('Correct with valid evidence (%)', color=MUTED, fontsize=9)
-    axis.set_title('Harder problems: correct answers with checked evidence', loc='left', color=INK, fontsize=12)
-    axis.legend(frameon=False, loc='lower left', labelcolor=INK, fontsize=9)
+    axis.set_title('Harder problems: correct answers with checked evidence', loc='left', color=INK, fontsize=12, pad=28)
+    axis.legend(frameon=False, loc='lower left', bbox_to_anchor=(0, 1.0), ncol=2, labelcolor=INK, fontsize=9)
+
     return figure
 
 
 def chart_time(plt, alone, with_solver):
     figure, axis = plt.subplots(figsize=(8, 3.6))
-    for name, data, marker in (('Claude alone', alone, 'o'), ('Claude + OR-Tools', with_solver, 's')):
+    for name, data, marker in (('Claude alone (with reruns)', alone, 'o'), ('Claude + OR-Tools', with_solver, 's')):
         values = [summarize(data[size])['mean_seconds'] for size in SIZES]
         axis.plot(range(len(SIZES)), values, color=COLORS[name], marker=marker, markersize=8, linewidth=2,
                   markeredgecolor='white', label=name)
