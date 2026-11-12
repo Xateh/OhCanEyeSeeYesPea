@@ -1,0 +1,317 @@
+{
+  "compared": {
+    "pilot/alone": {
+      "api": {
+        "certified_infeasible_success": [
+          32,
+          32
+        ],
+        "cost_coverage": [
+          64,
+          64
+        ],
+        "cost_usd": 0.81008,
+        "estimated_cost_usd": 0.81008,
+        "evidence_backed_success": [
+          64,
+          64
+        ],
+        "evidence_precision": [
+          64,
+          64
+        ],
+        "f1": 1.0,
+        "feasible_claim_precision": [
+          32,
+          32
+        ],
+        "feasible_schedule_success": [
+          32,
+          32
+        ],
+        "infeasible_decision": [
+          32,
+          32
+        ],
+        "known_cost_usd": 0.81008,
+        "mean_csp_calls": 0,
+        "mean_input_tokens": 726.0625,
+        "mean_output_tokens": 107.9375,
+        "mean_seconds": 4.095740309228859,
+        "mean_solver_seconds": 0,
+        "mean_tokens": 834,
+        "median_seconds": 4.0686153954593465,
+        "outcomes": {
+          "correct": 64
+        },
+        "parse_errors": [
+          0,
+          64
+        ],
+        "provider_errors": [
+          0,
+          64
+        ],
+        "runs_with_tokens": 64,
+        "status_agreement": [
+          64,
+          64
+        ],
+        "timeouts": [
+          0,
+          64
+        ],
+        "tool_errors": [
+          0,
+          64
+        ],
+        "unknown": [
+          0,
+          64
+        ],
+        "unknown_cost_runs": 0
+      },
+      "claude_cli": {
+        "certified_infeasible_success": [
+          32,
+          32
+        ],
+        "cost_coverage": [
+          64,
+          64
+        ],
+        "cost_usd": 0.7433960000000001,
+        "estimated_cost_usd": 0.7433960000000001,
+        "evidence_backed_success": [
+          64,
+          64
+        ],
+        "evidence_precision": [
+          64,
+          64
+        ],
+        "f1": 1.0,
+        "feasible_claim_precision": [
+          32,
+          32
+        ],
+        "feasible_schedule_success": [
+          32,
+          32
+        ],
+        "infeasible_decision": [
+          32,
+          32
+        ],
+        "known_cost_usd": 0.7433960000000001,
+        "mean_csp_calls": 0,
+        "mean_input_tokens": 1744.765625,
+        "mean_output_tokens": 290.578125,
+        "mean_seconds": 4.490710752672385,
+        "mean_solver_seconds": 0,
+        "mean_tokens": 2035.34375,
+        "median_seconds": 4.411301999993157,
+        "outcomes": {
+          "correct": 64
+        },
+        "parse_errors": [
+          0,
+          64
+        ],
+        "provider_errors": [
+          0,
+          64
+        ],
+        "runs_with_tokens": 64,
+        "status_agreement": [
+          64,
+          64
+        ],
+        "timeouts": [
+          0,
+          64
+        ],
+        "tool_errors": [
+          0,
+          64
+        ],
+        "unknown": [
+          0,
+          64
+        ],
+        "unknown_cost_runs": 0
+      },
+      "pairs": {
+        "api_only": 0,
+        "both": 64,
+        "claude_cli_only": 0,
+        "incomplete": 0,
+        "neither": 0
+      }
+    },
+    "pilot/ortools": {
+      "api": {
+        "certified_infeasible_success": [
+          32,
+          32
+        ],
+        "cost_coverage": [
+          64,
+          64
+        ],
+        "cost_usd": 3.233068,
+        "estimated_cost_usd": 3.233068,
+        "evidence_backed_success": [
+          64,
+          64
+        ],
+        "evidence_precision": [
+          64,
+          64
+        ],
+        "f1": 1.0,
+        "feasible_claim_precision": [
+          32,
+          32
+        ],
+        "feasible_schedule_success": [
+          32,
+          32
+        ],
+        "infeasible_decision": [
+          32,
+          32
+        ],
+        "known_cost_usd": 3.233068,
+        "mean_csp_calls": 1,
+        "mean_input_tokens": 2735.0625,
+        "mean_output_tokens": 482.578125,
+        "mean_seconds": 11.673116549540282,
+        "mean_solver_seconds": 0.004973699811671395,
+        "mean_tokens": 3217.640625,
+        "median_seconds": 11.421131937531754,
+        "outcomes": {
+          "correct": 64
+        },
+        "parse_errors": [
+          0,
+          64
+        ],
+        "provider_errors": [
+          0,
+          64
+        ],
+        "runs_with_tokens": 64,
+        "status_agreement": [
+          64,
+          64
+        ],
+        "timeouts": [
+          0,
+          64
+        ],
+        "tool_errors": [
+          0,
+          64
+        ],
+        "unknown": [
+          0,
+          64
+        ],
+        "unknown_cost_runs": 0
+      },
+      "claude_cli": {
+        "certified_infeasible_success": [
+          32,
+          32
+        ],
+        "cost_coverage": [
+          64,
+          64
+        ],
+        "cost_usd": 3.002296,
+        "estimated_cost_usd": 3.002296,
+        "evidence_backed_success": [
+          64,
+          64
+        ],
+        "evidence_precision": [
+          64,
+          64
+        ],
+        "f1": 1.0,
+        "feasible_claim_precision": [
+          32,
+          32
+        ],
+        "feasible_schedule_success": [
+          32,
+          32
+        ],
+        "infeasible_decision": [
+          32,
+          32
+        ],
+        "known_cost_usd": 3.002296,
+        "mean_csp_calls": 1,
+        "mean_input_tokens": 5316.625,
+        "mean_output_tokens": 678.796875,
+        "mean_seconds": 9.549509449931065,
+        "mean_solver_seconds": 0.005202851505600847,
+        "mean_tokens": 5995.421875,
+        "median_seconds": 9.478667062474415,
+        "outcomes": {
+          "correct": 64
+        },
+        "parse_errors": [
+          0,
+          64
+        ],
+        "provider_errors": [
+          0,
+          64
+        ],
+        "runs_with_tokens": 64,
+        "status_agreement": [
+          64,
+          64
+        ],
+        "timeouts": [
+          0,
+          64
+        ],
+        "tool_errors": [
+          0,
+          64
+        ],
+        "unknown": [
+          0,
+          64
+        ],
+        "unknown_cost_runs": 0
+      },
+      "pairs": {
+        "api_only": 0,
+        "both": 64,
+        "claude_cli_only": 0,
+        "incomplete": 0,
+        "neither": 0
+      }
+    },
+    "pilot/solver_effect": {
+      "alone_only": 0,
+      "both": 64,
+      "incomplete": 0,
+      "neither": 0,
+      "ortools_only": 0
+    }
+  },
+  "not_ready": {
+    "hard/alone": [
+      "planned 20, found 4: every planned run must stay in the denominator"
+    ],
+    "hard/ortools": [
+      "hard-n80"
+    ]
+  }
+}

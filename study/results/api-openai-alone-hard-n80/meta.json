@@ -1,0 +1,20 @@
+{
+  "arm": "no_tools",
+  "cohort": "hard-n80",
+  "effort": "high",
+  "model": "gpt-6-astra",
+  "prompt": "v3",
+  "prompt_sha256": "68909cb353e8",
+  "sessions": [
+    {
+      "budget_usd": 6.1299,
+      "finished_at": "2026-11-12T21:36:24",
+      "git_commit": "01360c79e9c268eb067b7bfd760c645bb2aa84d6",
+      "known_spend_usd": 0.951715,
+      "remaining_slots": 16,
+      "stopped_because": "unknown_cost"
+    }
+  ],
+  "solver": null,
+  "transport": "openai-api"
+}
