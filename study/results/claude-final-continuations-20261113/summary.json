@@ -1,0 +1,1078 @@
+{
+  "planned": 4,
+  "attempted": 4,
+  "missing": 0,
+  "valid": 3,
+  "results": [
+    {
+      "case_id": "hard-n80-00-a752c44c58",
+      "kind": "final-stage-continuations-not-fresh-workflows",
+      "stage": "final",
+      "output": {
+        "status": "FEASIBLE",
+        "schedule": [
+          {
+            "patient": "P104",
+            "day": 1,
+            "start": 515,
+            "room": "r06"
+          },
+          {
+            "patient": "P119",
+            "day": 0,
+            "start": 575,
+            "room": "r06"
+          },
+          {
+            "patient": "P135",
+            "day": 0,
+            "start": 940,
+            "room": "r00"
+          },
+          {
+            "patient": "P147",
+            "day": 0,
+            "start": 480,
+            "room": "r05"
+          },
+          {
+            "patient": "P148",
+            "day": 0,
+            "start": 537,
+            "room": "r05"
+          },
+          {
+            "patient": "P175",
+            "day": 1,
+            "start": 629,
+            "room": "r00"
+          },
+          {
+            "patient": "P191",
+            "day": 0,
+            "start": 999,
+            "room": "r01"
+          },
+          {
+            "patient": "P199",
+            "day": 1,
+            "start": 821,
+            "room": "r02"
+          },
+          {
+            "patient": "P208",
+            "day": 1,
+            "start": 987,
+            "room": "r00"
+          },
+          {
+            "patient": "P214",
+            "day": 1,
+            "start": 836,
+            "room": "r05"
+          },
+          {
+            "patient": "P224",
+            "day": 0,
+            "start": 825,
+            "room": "r05"
+          },
+          {
+            "patient": "P226",
+            "day": 1,
+            "start": 676,
+            "room": "r06"
+          },
+          {
+            "patient": "P239",
+            "day": 1,
+            "start": 480,
+            "room": "r01"
+          },
+          {
+            "patient": "P274",
+            "day": 1,
+            "start": 750,
+            "room": "r06"
+          },
+          {
+            "patient": "P282",
+            "day": 1,
+            "start": 750,
+            "room": "r05"
+          },
+          {
+            "patient": "P288",
+            "day": 0,
+            "start": 750,
+            "room": "r06"
+          },
+          {
+            "patient": "P314",
+            "day": 0,
+            "start": 957,
+            "room": "r03"
+          },
+          {
+            "patient": "P341",
+            "day": 1,
+            "start": 559,
+            "room": "r05"
+          },
+          {
+            "patient": "P352",
+            "day": 0,
+            "start": 750,
+            "room": "r04"
+          },
+          {
+            "patient": "P375",
+            "day": 0,
+            "start": 563,
+            "room": "r00"
+          },
+          {
+            "patient": "P426",
+            "day": 1,
+            "start": 1020,
+            "room": "r05"
+          },
+          {
+            "patient": "P434",
+            "day": 0,
+            "start": 534,
+            "room": "r06"
+          },
+          {
+            "patient": "P435",
+            "day": 0,
+            "start": 750,
+            "room": "r03"
+          },
+          {
+            "patient": "P477",
+            "day": 1,
+            "start": 930,
+            "room": "r03"
+          },
+          {
+            "patient": "P488",
+            "day": 1,
+            "start": 946,
+            "room": "r06"
+          },
+          {
+            "patient": "P500",
+            "day": 0,
+            "start": 617,
+            "room": "r04"
+          },
+          {
+            "patient": "P517",
+            "day": 0,
+            "start": 656,
+            "room": "r04"
+          },
+          {
+            "patient": "P519",
+            "day": 0,
+            "start": 583,
+            "room": "r04"
+          },
+          {
+            "patient": "P535",
+            "day": 0,
+            "start": 480,
+            "room": "r00"
+          },
+          {
+            "patient": "P540",
+            "day": 1,
+            "start": 859,
+            "room": "r01"
+          },
+          {
+            "patient": "P543",
+            "day": 1,
+            "start": 841,
+            "room": "r04"
+          },
+          {
+            "patient": "P548",
+            "day": 1,
+            "start": 507,
+            "room": "r03"
+          },
+          {
+            "patient": "P554",
+            "day": 0,
+            "start": 750,
+            "room": "r00"
+          },
+          {
+            "patient": "P560",
+            "day": 0,
+            "start": 665,
+            "room": "r06"
+          },
+          {
+            "patient": "P567",
+            "day": 0,
+            "start": 755,
+            "room": "r01"
+          },
+          {
+            "patient": "P568",
+            "day": 0,
+            "start": 961,
+            "room": "r06"
+          },
+          {
+            "patient": "P578",
+            "day": 1,
+            "start": 480,
+            "room": "r00"
+          },
+          {
+            "patient": "P583",
+            "day": 0,
+            "start": 663,
+            "room": "r01"
+          },
+          {
+            "patient": "P587",
+            "day": 0,
+            "start": 480,
+            "room": "r02"
+          },
+          {
+            "patient": "P591",
+            "day": 1,
+            "start": 914,
+            "room": "r05"
+          },
+          {
+            "patient": "P597",
+            "day": 0,
+            "start": 480,
+            "room": "r03"
+          },
+          {
+            "patient": "P608",
+            "day": 0,
+            "start": 971,
+            "room": "r05"
+          },
+          {
+            "patient": "P614",
+            "day": 0,
+            "start": 485,
+            "room": "r01"
+          },
+          {
+            "patient": "P633",
+            "day": 1,
+            "start": 750,
+            "room": "r03"
+          },
+          {
+            "patient": "P634",
+            "day": 1,
+            "start": 671,
+            "room": "r00"
+          },
+          {
+            "patient": "P654",
+            "day": 1,
+            "start": 750,
+            "room": "r00"
+          },
+          {
+            "patient": "P658",
+            "day": 1,
+            "start": 750,
+            "room": "r02"
+          },
+          {
+            "patient": "P661",
+            "day": 0,
+            "start": 614,
+            "room": "r01"
+          },
+          {
+            "patient": "P662",
+            "day": 1,
+            "start": 982,
+            "room": "r04"
+          },
+          {
+            "patient": "P664",
+            "day": 1,
+            "start": 562,
+            "room": "r04"
+          },
+          {
+            "patient": "P674",
+            "day": 1,
+            "start": 618,
+            "room": "r04"
+          },
+          {
+            "patient": "P675",
+            "day": 1,
+            "start": 882,
+            "room": "r00"
+          },
+          {
+            "patient": "P697",
+            "day": 0,
+            "start": 944,
+            "room": "r04"
+          },
+          {
+            "patient": "P728",
+            "day": 1,
+            "start": 622,
+            "room": "r06"
+          },
+          {
+            "patient": "P747",
+            "day": 1,
+            "start": 480,
+            "room": "r05"
+          },
+          {
+            "patient": "P752",
+            "day": 0,
+            "start": 594,
+            "room": "r03"
+          },
+          {
+            "patient": "P753",
+            "day": 1,
+            "start": 937,
+            "room": "r00"
+          },
+          {
+            "patient": "P770",
+            "day": 0,
+            "start": 799,
+            "room": "r03"
+          },
+          {
+            "patient": "P775",
+            "day": 0,
+            "start": 480,
+            "room": "r04"
+          },
+          {
+            "patient": "P778",
+            "day": 1,
+            "start": 631,
+            "room": "r03"
+          },
+          {
+            "patient": "P780",
+            "day": 1,
+            "start": 565,
+            "room": "r02"
+          },
+          {
+            "patient": "P791",
+            "day": 1,
+            "start": 608,
+            "room": "r01"
+          },
+          {
+            "patient": "P795",
+            "day": 1,
+            "start": 888,
+            "room": "r03"
+          },
+          {
+            "patient": "P799",
+            "day": 1,
+            "start": 1012,
+            "room": "r04"
+          },
+          {
+            "patient": "P832",
+            "day": 1,
+            "start": 602,
+            "room": "r05"
+          },
+          {
+            "patient": "P833",
+            "day": 0,
+            "start": 750,
+            "room": "r05"
+          },
+          {
+            "patient": "P836",
+            "day": 0,
+            "start": 881,
+            "room": "r06"
+          },
+          {
+            "patient": "P858",
+            "day": 0,
+            "start": 908,
+            "room": "r01"
+          },
+          {
+            "patient": "P863",
+            "day": 1,
+            "start": 660,
+            "room": "r01"
+          },
+          {
+            "patient": "P870",
+            "day": 0,
+            "start": 660,
+            "room": "r05"
+          },
+          {
+            "patient": "P897",
+            "day": 1,
+            "start": 763,
+            "room": "r01"
+          },
+          {
+            "patient": "P916",
+            "day": 0,
+            "start": 867,
+            "room": "r04"
+          },
+          {
+            "patient": "P929",
+            "day": 1,
+            "start": 837,
+            "room": "r06"
+          },
+          {
+            "patient": "P936",
+            "day": 0,
+            "start": 750,
+            "room": "r02"
+          },
+          {
+            "patient": "P939",
+            "day": 0,
+            "start": 886,
+            "room": "r02"
+          },
+          {
+            "patient": "P955",
+            "day": 1,
+            "start": 750,
+            "room": "r04"
+          },
+          {
+            "patient": "P973",
+            "day": 0,
+            "start": 597,
+            "room": "r02"
+          },
+          {
+            "patient": "P976",
+            "day": 1,
+            "start": 1025,
+            "room": "r03"
+          },
+          {
+            "patient": "P984",
+            "day": 0,
+            "start": 916,
+            "room": "r03"
+          }
+        ]
+      },
+      "score": {
+        "valid": false,
+        "violations": [
+          "P986: missing mandatory patient"
+        ],
+        "feasible_schedule_success": false,
+        "infeasible_decision_correct": null,
+        "infeasible_certified_success": null,
+        "unknown": false,
+        "output_error": false
+      },
+      "usage": {
+        "input_tokens": 21498,
+        "output_tokens": 2195,
+        "cost_usd": 0.215876
+      },
+      "returncode": 0,
+      "seconds": 20.25643599400064
+    },
+    {
+      "case_id": "hard-n80-00-7ccccc0b7a",
+      "kind": "final-stage-continuations-not-fresh-workflows",
+      "stage": "final",
+      "output": {
+        "status": "INFEASIBLE",
+        "certificate": {
+          "kind": "pair_order_impossible",
+          "patients": [
+            "P119",
+            "P517"
+          ]
+        }
+      },
+      "score": {
+        "valid": true,
+        "violations": [],
+        "feasible_schedule_success": null,
+        "infeasible_decision_correct": true,
+        "infeasible_certified_success": true,
+        "unknown": false,
+        "output_error": false
+      },
+      "usage": {
+        "input_tokens": 19236,
+        "output_tokens": 218,
+        "cost_usd": 0.15824000000000002
+      },
+      "returncode": 0,
+      "seconds": 6.754062456951942
+    },
+    {
+      "case_id": "hard-n80-01-96994a70f6",
+      "kind": "final-stage-continuations-not-fresh-workflows",
+      "stage": "final",
+      "output": {
+        "status": "FEASIBLE",
+        "schedule": [
+          {
+            "patient": "P124",
+            "day": 1,
+            "start": 750,
+            "room": "r04"
+          },
+          {
+            "patient": "P127",
+            "day": 0,
+            "start": 750,
+            "room": "r06"
+          },
+          {
+            "patient": "P135",
+            "day": 1,
+            "start": 634,
+            "room": "r03"
+          },
+          {
+            "patient": "P138",
+            "day": 1,
+            "start": 750,
+            "room": "r00"
+          },
+          {
+            "patient": "P150",
+            "day": 0,
+            "start": 750,
+            "room": "r02"
+          },
+          {
+            "patient": "P158",
+            "day": 0,
+            "start": 586,
+            "room": "r03"
+          },
+          {
+            "patient": "P168",
+            "day": 1,
+            "start": 581,
+            "room": "r05"
+          },
+          {
+            "patient": "P195",
+            "day": 0,
+            "start": 598,
+            "room": "r01"
+          },
+          {
+            "patient": "P201",
+            "day": 0,
+            "start": 480,
+            "room": "r00"
+          },
+          {
+            "patient": "P207",
+            "day": 0,
+            "start": 568,
+            "room": "r05"
+          },
+          {
+            "patient": "P212",
+            "day": 1,
+            "start": 750,
+            "room": "r03"
+          },
+          {
+            "patient": "P220",
+            "day": 1,
+            "start": 935,
+            "room": "r01"
+          },
+          {
+            "patient": "P239",
+            "day": 0,
+            "start": 750,
+            "room": "r04"
+          },
+          {
+            "patient": "P245",
+            "day": 0,
+            "start": 578,
+            "room": "r01"
+          },
+          {
+            "patient": "P249",
+            "day": 0,
+            "start": 676,
+            "room": "r04"
+          },
+          {
+            "patient": "P251",
+            "day": 0,
+            "start": 782,
+            "room": "r01"
+          },
+          {
+            "patient": "P261",
+            "day": 1,
+            "start": 750,
+            "room": "r06"
+          },
+          {
+            "patient": "P270",
+            "day": 1,
+            "start": 825,
+            "room": "r04"
+          },
+          {
+            "patient": "P306",
+            "day": 1,
+            "start": 750,
+            "room": "r05"
+          },
+          {
+            "patient": "P314",
+            "day": 1,
+            "start": 950,
+            "room": "r03"
+          },
+          {
+            "patient": "P318",
+            "day": 0,
+            "start": 946,
+            "room": "r05"
+          },
+          {
+            "patient": "P330",
+            "day": 1,
+            "start": 567,
+            "room": "r01"
+          },
+          {
+            "patient": "P356",
+            "day": 0,
+            "start": 695,
+            "room": "r01"
+          },
+          {
+            "patient": "P361",
+            "day": 0,
+            "start": 605,
+            "room": "r04"
+          },
+          {
+            "patient": "P382",
+            "day": 0,
+            "start": 750,
+            "room": "r05"
+          },
+          {
+            "patient": "P388",
+            "day": 0,
+            "start": 634,
+            "room": "r04"
+          },
+          {
+            "patient": "P401",
+            "day": 1,
+            "start": 1000,
+            "room": "r01"
+          },
+          {
+            "patient": "P402",
+            "day": 1,
+            "start": 632,
+            "room": "r01"
+          },
+          {
+            "patient": "P410",
+            "day": 1,
+            "start": 1029,
+            "room": "r04"
+          },
+          {
+            "patient": "P411",
+            "day": 1,
+            "start": 501,
+            "room": "r06"
+          },
+          {
+            "patient": "P419",
+            "day": 0,
+            "start": 1019,
+            "room": "r04"
+          },
+          {
+            "patient": "P426",
+            "day": 1,
+            "start": 952,
+            "room": "r05"
+          },
+          {
+            "patient": "P435",
+            "day": 0,
+            "start": 886,
+            "room": "r05"
+          },
+          {
+            "patient": "P436",
+            "day": 0,
+            "start": 828,
+            "room": "r04"
+          },
+          {
+            "patient": "P443",
+            "day": 0,
+            "start": 878,
+            "room": "r00"
+          },
+          {
+            "patient": "P446",
+            "day": 1,
+            "start": 576,
+            "room": "r00"
+          },
+          {
+            "patient": "P473",
+            "day": 0,
+            "start": 628,
+            "room": "r03"
+          },
+          {
+            "patient": "P475",
+            "day": 1,
+            "start": 480,
+            "room": "r06"
+          },
+          {
+            "patient": "P482",
+            "day": 1,
+            "start": 602,
+            "room": "r06"
+          },
+          {
+            "patient": "P487",
+            "day": 1,
+            "start": 480,
+            "room": "r04"
+          },
+          {
+            "patient": "P498",
+            "day": 0,
+            "start": 878,
+            "room": "r01"
+          },
+          {
+            "patient": "P508",
+            "day": 1,
+            "start": 815,
+            "room": "r02"
+          },
+          {
+            "patient": "P539",
+            "day": 0,
+            "start": 480,
+            "room": "r02"
+          },
+          {
+            "patient": "P541",
+            "day": 0,
+            "start": 480,
+            "room": "r04"
+          },
+          {
+            "patient": "P546",
+            "day": 0,
+            "start": 563,
+            "room": "r00"
+          },
+          {
+            "patient": "P552",
+            "day": 1,
+            "start": 665,
+            "room": "r06"
+          },
+          {
+            "patient": "P561",
+            "day": 1,
+            "start": 480,
+            "room": "r00"
+          },
+          {
+            "patient": "P582",
+            "day": 0,
+            "start": 940,
+            "room": "r02"
+          },
+          {
+            "patient": "P635",
+            "day": 1,
+            "start": 687,
+            "room": "r02"
+          },
+          {
+            "patient": "P639",
+            "day": 1,
+            "start": 634,
+            "room": "r00"
+          },
+          {
+            "patient": "P646",
+            "day": 0,
+            "start": 947,
+            "room": "r01"
+          },
+          {
+            "patient": "P656",
+            "day": 1,
+            "start": 872,
+            "room": "r05"
+          },
+          {
+            "patient": "P675",
+            "day": 1,
+            "start": 623,
+            "room": "r06"
+          },
+          {
+            "patient": "P679",
+            "day": 0,
+            "start": 480,
+            "room": "r06"
+          },
+          {
+            "patient": "P685",
+            "day": 0,
+            "start": 506,
+            "room": "r01"
+          },
+          {
+            "patient": "P697",
+            "day": 1,
+            "start": 951,
+            "room": "r02"
+          },
+          {
+            "patient": "P710",
+            "day": 0,
+            "start": 945,
+            "room": "r04"
+          },
+          {
+            "patient": "P718",
+            "day": 0,
+            "start": 528,
+            "room": "r02"
+          },
+          {
+            "patient": "P726",
+            "day": 1,
+            "start": 608,
+            "room": "r03"
+          },
+          {
+            "patient": "P730",
+            "day": 0,
+            "start": 675,
+            "room": "r06"
+          },
+          {
+            "patient": "P742",
+            "day": 1,
+            "start": 626,
+            "room": "r02"
+          },
+          {
+            "patient": "P758",
+            "day": 0,
+            "start": 750,
+            "room": "r03"
+          },
+          {
+            "patient": "P771",
+            "day": 1,
+            "start": 750,
+            "room": "r02"
+          },
+          {
+            "patient": "P786",
+            "day": 1,
+            "start": 561,
+            "room": "r02"
+          },
+          {
+            "patient": "P805",
+            "day": 1,
+            "start": 519,
+            "room": "r05"
+          },
+          {
+            "patient": "P815",
+            "day": 0,
+            "start": 750,
+            "room": "r00"
+          },
+          {
+            "patient": "P854",
+            "day": 0,
+            "start": 896,
+            "room": "r03"
+          },
+          {
+            "patient": "P856",
+            "day": 0,
+            "start": 658,
+            "room": "r01"
+          },
+          {
+            "patient": "P857",
+            "day": 0,
+            "start": 539,
+            "room": "r04"
+          },
+          {
+            "patient": "P867",
+            "day": 1,
+            "start": 496,
+            "room": "r02"
+          },
+          {
+            "patient": "P885",
+            "day": 1,
+            "start": 793,
+            "room": "r05"
+          },
+          {
+            "patient": "P906",
+            "day": 0,
+            "start": 568,
+            "room": "r04"
+          },
+          {
+            "patient": "P917",
+            "day": 0,
+            "start": 905,
+            "room": "r04"
+          },
+          {
+            "patient": "P918",
+            "day": 0,
+            "start": 508,
+            "room": "r05"
+          },
+          {
+            "patient": "P931",
+            "day": 1,
+            "start": 485,
+            "room": "r03"
+          },
+          {
+            "patient": "P932",
+            "day": 1,
+            "start": 555,
+            "room": "r03"
+          },
+          {
+            "patient": "P951",
+            "day": 1,
+            "start": 676,
+            "room": "r03"
+          },
+          {
+            "patient": "P960",
+            "day": 0,
+            "start": 665,
+            "room": "r05"
+          },
+          {
+            "patient": "P971",
+            "day": 0,
+            "start": 507,
+            "room": "r03"
+          },
+          {
+            "patient": "P987",
+            "day": 0,
+            "start": 576,
+            "room": "r02"
+          }
+        ]
+      },
+      "score": {
+        "valid": true,
+        "violations": [],
+        "feasible_schedule_success": true,
+        "infeasible_decision_correct": null,
+        "infeasible_certified_success": null,
+        "unknown": false,
+        "output_error": false
+      },
+      "usage": {
+        "input_tokens": 21603,
+        "output_tokens": 2230,
+        "cost_usd": 0.217416
+      },
+      "returncode": 0,
+      "seconds": 17.743397690996062
+    },
+    {
+      "case_id": "hard-n80-01-5d6b1565f2",
+      "kind": "final-stage-continuations-not-fresh-workflows",
+      "stage": "final",
+      "output": {
+        "status": "INFEASIBLE",
+        "certificate": {
+          "kind": "pair_order_impossible",
+          "patients": [
+            "P679",
+            "P960"
+          ]
+        }
+      },
+      "score": {
+        "valid": true,
+        "violations": [],
+        "feasible_schedule_success": null,
+        "infeasible_decision_correct": true,
+        "infeasible_certified_success": true,
+        "unknown": false,
+        "output_error": false
+      },
+      "usage": {
+        "input_tokens": 19311,
+        "output_tokens": 244,
+        "cost_usd": 0.15936
+      },
+      "returncode": 0,
+      "seconds": 6.0002894179779105
+    }
+  ]
+}

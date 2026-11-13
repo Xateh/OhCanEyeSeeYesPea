@@ -1,0 +1,62 @@
+{
+  "type": "result",
+  "subtype": "success",
+  "is_error": false,
+  "result": "{\"type\":\"final\",\"output\":{\"status\":\"FEASIBLE\",\"schedule\":[{\"patient\":\"P104\",\"day\":1,\"start\":515,\"room\":\"r06\"},{\"patient\":\"P119\",\"day\":0,\"start\":575,\"room\":\"r06\"},{\"patient\":\"P135\",\"day\":0,\"start\":940,\"room\":\"r00\"},{\"patient\":\"P147\",\"day\":0,\"start\":480,\"room\":\"r05\"},{\"patient\":\"P148\",\"day\":0,\"start\":537,\"room\":\"r05\"},{\"patient\":\"P175\",\"day\":1,\"start\":629,\"room\":\"r00\"},{\"patient\":\"P191\",\"day\":0,\"start\":999,\"room\":\"r01\"},{\"patient\":\"P199\",\"day\":1,\"start\":821,\"room\":\"r02\"},{\"patient\":\"P208\",\"day\":1,\"start\":987,\"room\":\"r00\"},{\"patient\":\"P214\",\"day\":1,\"start\":836,\"room\":\"r05\"},{\"patient\":\"P224\",\"day\":0,\"start\":825,\"room\":\"r05\"},{\"patient\":\"P226\",\"day\":1,\"start\":676,\"room\":\"r06\"},{\"patient\":\"P239\",\"day\":1,\"start\":480,\"room\":\"r01\"},{\"patient\":\"P274\",\"day\":1,\"start\":750,\"room\":\"r06\"},{\"patient\":\"P282\",\"day\":1,\"start\":750,\"room\":\"r05\"},{\"patient\":\"P288\",\"day\":0,\"start\":750,\"room\":\"r06\"},{\"patient\":\"P314\",\"day\":0,\"start\":957,\"room\":\"r03\"},{\"patient\":\"P341\",\"day\":1,\"start\":559,\"room\":\"r05\"},{\"patient\":\"P352\",\"day\":0,\"start\":750,\"room\":\"r04\"},{\"patient\":\"P375\",\"day\":0,\"start\":563,\"room\":\"r00\"},{\"patient\":\"P426\",\"day\":1,\"start\":1020,\"room\":\"r05\"},{\"patient\":\"P434\",\"day\":0,\"start\":534,\"room\":\"r06\"},{\"patient\":\"P435\",\"day\":0,\"start\":750,\"room\":\"r03\"},{\"patient\":\"P477\",\"day\":1,\"start\":930,\"room\":\"r03\"},{\"patient\":\"P488\",\"day\":1,\"start\":946,\"room\":\"r06\"},{\"patient\":\"P500\",\"day\":0,\"start\":617,\"room\":\"r04\"},{\"patient\":\"P517\",\"day\":0,\"start\":656,\"room\":\"r04\"},{\"patient\":\"P519\",\"day\":0,\"start\":583,\"room\":\"r04\"},{\"patient\":\"P535\",\"day\":0,\"start\":480,\"room\":\"r00\"},{\"patient\":\"P540\",\"day\":1,\"start\":859,\"room\":\"r01\"},{\"patient\":\"P543\",\"day\":1,\"start\":841,\"room\":\"r04\"},{\"patient\":\"P548\",\"day\":1,\"start\":507,\"room\":\"r03\"},{\"patient\":\"P554\",\"day\":0,\"start\":750,\"room\":\"r00\"},{\"patient\":\"P560\",\"day\":0,\"start\":665,\"room\":\"r06\"},{\"patient\":\"P567\",\"day\":0,\"start\":755,\"room\":\"r01\"},{\"patient\":\"P568\",\"day\":0,\"start\":961,\"room\":\"r06\"},{\"patient\":\"P578\",\"day\":1,\"start\":480,\"room\":\"r00\"},{\"patient\":\"P583\",\"day\":0,\"start\":663,\"room\":\"r01\"},{\"patient\":\"P587\",\"day\":0,\"start\":480,\"room\":\"r02\"},{\"patient\":\"P591\",\"day\":1,\"start\":914,\"room\":\"r05\"},{\"patient\":\"P597\",\"day\":0,\"start\":480,\"room\":\"r03\"},{\"patient\":\"P608\",\"day\":0,\"start\":971,\"room\":\"r05\"},{\"patient\":\"P614\",\"day\":0,\"start\":485,\"room\":\"r01\"},{\"patient\":\"P633\",\"day\":1,\"start\":750,\"room\":\"r03\"},{\"patient\":\"P634\",\"day\":1,\"start\":671,\"room\":\"r00\"},{\"patient\":\"P654\",\"day\":1,\"start\":750,\"room\":\"r00\"},{\"patient\":\"P658\",\"day\":1,\"start\":750,\"room\":\"r02\"},{\"patient\":\"P661\",\"day\":0,\"start\":614,\"room\":\"r01\"},{\"patient\":\"P662\",\"day\":1,\"start\":982,\"room\":\"r04\"},{\"patient\":\"P664\",\"day\":1,\"start\":562,\"room\":\"r04\"},{\"patient\":\"P674\",\"day\":1,\"start\":618,\"room\":\"r04\"},{\"patient\":\"P675\",\"day\":1,\"start\":882,\"room\":\"r00\"},{\"patient\":\"P697\",\"day\":0,\"start\":944,\"room\":\"r04\"},{\"patient\":\"P728\",\"day\":1,\"start\":622,\"room\":\"r06\"},{\"patient\":\"P747\",\"day\":1,\"start\":480,\"room\":\"r05\"},{\"patient\":\"P752\",\"day\":0,\"start\":594,\"room\":\"r03\"},{\"patient\":\"P753\",\"day\":1,\"start\":937,\"room\":\"r00\"},{\"patient\":\"P770\",\"day\":0,\"start\":799,\"room\":\"r03\"},{\"patient\":\"P775\",\"day\":0,\"start\":480,\"room\":\"r04\"},{\"patient\":\"P778\",\"day\":1,\"start\":631,\"room\":\"r03\"},{\"patient\":\"P780\",\"day\":1,\"start\":565,\"room\":\"r02\"},{\"patient\":\"P791\",\"day\":1,\"start\":608,\"room\":\"r01\"},{\"patient\":\"P795\",\"day\":1,\"start\":888,\"room\":\"r03\"},{\"patient\":\"P799\",\"day\":1,\"start\":1012,\"room\":\"r04\"},{\"patient\":\"P832\",\"day\":1,\"start\":602,\"room\":\"r05\"},{\"patient\":\"P833\",\"day\":0,\"start\":750,\"room\":\"r05\"},{\"patient\":\"P836\",\"day\":0,\"start\":881,\"room\":\"r06\"},{\"patient\":\"P858\",\"day\":0,\"start\":908,\"room\":\"r01\"},{\"patient\":\"P863\",\"day\":1,\"start\":660,\"room\":\"r01\"},{\"patient\":\"P870\",\"day\":0,\"start\":660,\"room\":\"r05\"},{\"patient\":\"P897\",\"day\":1,\"start\":763,\"room\":\"r01\"},{\"patient\":\"P916\",\"day\":0,\"start\":867,\"room\":\"r04\"},{\"patient\":\"P929\",\"day\":1,\"start\":837,\"room\":\"r06\"},{\"patient\":\"P936\",\"day\":0,\"start\":750,\"room\":\"r02\"},{\"patient\":\"P939\",\"day\":0,\"start\":886,\"room\":\"r02\"},{\"patient\":\"P955\",\"day\":1,\"start\":750,\"room\":\"r04\"},{\"patient\":\"P973\",\"day\":0,\"start\":597,\"room\":\"r02\"},{\"patient\":\"P976\",\"day\":1,\"start\":1025,\"room\":\"r03\"},{\"patient\":\"P984\",\"day\":0,\"start\":916,\"room\":\"r03\"}]}}",
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 2,
+      "outputTokens": 2195,
+      "cacheReadInputTokens": 0,
+      "cacheCreationInputTokens": 21496,
+      "webSearchRequests": 0,
+      "costUSD": 0.215876,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 106,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 21496,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "usage": {
+    "input_tokens": 2,
+    "cache_creation_input_tokens": 21496,
+    "cache_read_input_tokens": 0,
+    "output_tokens": 2195,
+    "output_tokens_details": {
+      "thinking_tokens": 106
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 21496,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 2195,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 21496,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 21496
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "total_cost_usd": 0.215876,
+  "duration_ms": 16922,
+  "duration_api_ms": 16354,
+  "num_turns": 1
+}
