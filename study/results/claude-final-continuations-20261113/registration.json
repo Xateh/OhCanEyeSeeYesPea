@@ -1,0 +1,39 @@
+{
+  "kind": "final-stage-continuations-not-fresh-workflows",
+  "model": "claude-opus-5-5",
+  "effort": "high",
+  "prompt": "v3",
+  "cli": "2.1.311",
+  "max_calls": 4,
+  "solver_calls": 0,
+  "per_call_outer_seconds": 60,
+  "original_provider_timeout_seconds": 300,
+  "requests": [
+    {
+      "case_id": "hard-n80-00-a752c44c58",
+      "sha256": "e17d274af2b2abafda6e9d46b26eb9c61b8d37902fbe4e073a1490514a143b47",
+      "history_sha256": "1e68df71f1a38db8ff3ac4d9b260fdde7082a499ec1b6655803c2e7f87a2aed1"
+    },
+    {
+      "case_id": "hard-n80-00-7ccccc0b7a",
+      "sha256": "401c8168fe7b25479e48eed1e545b3dab8187897f9448f89b3eb8d3bbc29576d",
+      "history_sha256": "7c45df0361f39291eb11af1370c37ffa457cb214721291eabf8df42bbbf1ad28"
+    },
+    {
+      "case_id": "hard-n80-01-96994a70f6",
+      "sha256": "3a1bbd2e2938a1cb03cf81b178f6e97e1e22c24acd624170b304778fa2008c99",
+      "history_sha256": "3d1942bb15de3c4d03ae1378db3f541d93b7635140d03c7c5a3d5a89898c078f"
+    },
+    {
+      "case_id": "hard-n80-01-5d6b1565f2",
+      "sha256": "d76c3f7df1c3c6094bcd8a701d1245f4a33e8403ba3fc2bff63bccad53322a28",
+      "history_sha256": "f96a0a541b75816f94f0d0c2a6eb7ea8531a0450ad03b0f87ba3ea0c47cc04ef"
+    }
+  ],
+  "source_sha256": {
+    "study/prompts.py": "b9bdc650dc8c884a34366ab9ce8bf5065e45b583e94752832972e5c20bde92e2",
+    "study/claude_provider.py": "1659def0b9b590d676db35baaf6bc01d0e3c0f22ebe3e45f592ee56132026d87",
+    "surgerybench/temporal_benchmark.py": "4ec0cd9e78f805c89a22fcdb6151ffa24836a7d67595930d968253e26f259bcd",
+    "surgerybench/temporal_check.py": "fc12e3ce7c8bf99abfadf7510629d54233def322f0c9b4f1d202cb29eab72b96"
+  }
+}
