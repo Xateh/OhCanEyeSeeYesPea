@@ -40,7 +40,7 @@ A run stops early at the `--budget`, at a rate or quota limit, or when a cost is
 
 It prints the SDK model next to the Claude CLI for each dataset and arm, and the solver effect within the SDK model. It writes `study/results/api-openai-vs-claude-cli-summary.json`, and reports only complete cohorts.
 
-**Claude CLI side:** Claude alone on the harder set uses the complete view with reruns (98/100), because 36 first attempts never reached the model.
+**Claude CLI side:** Claude alone on the harder set uses the view with reruns (98/100). On first attempts, 36 runs (16 at 40 surgeries, 20 at 80) were refused by the Claude account's 5-hour usage limit, each in about 2 s with no reply recorded.
 
 ## Limits
 
